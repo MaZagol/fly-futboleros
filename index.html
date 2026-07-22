@@ -32,7 +32,6 @@
             --whatsapp: #25D366;
             --efectivo: #ff9100;
             --transferencia: #00a859;
-            --glow-cyan: 0 0 30px rgba(0, 229, 255, 0.15);
         }
 
         * {
@@ -52,7 +51,6 @@
             color: var(--text-light);
             min-height: 100vh;
             padding: 16px 16px 0 16px;
-            /* Fondo Opción 1: Cancha con líneas de neón */
             background-image: 
                 radial-gradient(ellipse at 20% 50%, rgba(0, 229, 255, 0.04) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 50%, rgba(0, 229, 255, 0.03) 0%, transparent 50%),
@@ -193,9 +191,9 @@
             display: flex;
             align-items: center;
             gap: 12px;
+            cursor: pointer;
         }
 
-        /* LOGO FUTURISTA - OPCIÓN 3 */
         .logo-badge {
             width: 44px;
             height: 44px;
@@ -350,31 +348,19 @@
             box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
         }
 
-        .btn-nav-admin {
-            border: 2px solid var(--accent-cyan) !important;
-            padding: 5px 14px !important;
-            color: var(--accent-cyan) !important;
-            transition: all 0.3s ease !important;
-        }
-
-        .btn-nav-admin::after {
-            display: none !important;
-        }
-
-        .btn-nav-admin:hover {
-            background: var(--accent-cyan) !important;
-            color: var(--bg-dark) !important;
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
-        }
-
+        /* ============================================================
+           MENÚ HAMBURGUESA - CORREGIDO
+           ============================================================ */
         .hamburger-btn {
             display: none;
             background: transparent;
             border: none;
             color: var(--accent-cyan);
-            font-size: 24px;
+            font-size: 28px;
             cursor: pointer;
-            padding: 5px;
+            padding: 8px 12px;
+            z-index: 60;
+            position: relative;
         }
 
         .mobile-menu {
@@ -383,12 +369,14 @@
             top: 100%;
             left: 0;
             width: 100%;
-            background: rgba(18, 18, 26, 0.95);
+            background: rgba(18, 18, 26, 0.98);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border-top: 2px solid var(--accent-cyan);
             box-shadow: 0 20px 40px rgba(0,0,0,0.9);
             z-index: 100;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         .mobile-menu.active {
@@ -408,7 +396,7 @@
 
         .mobile-menu ul li a {
             display: block;
-            padding: 12px 20px;
+            padding: 14px 20px;
             color: var(--text-light);
             text-decoration: none;
             font-weight: 700;
@@ -421,7 +409,7 @@
         .mobile-menu ul li a:hover {
             background: rgba(0, 229, 255, 0.08);
             color: var(--accent-cyan);
-            padding-left: 26px;
+            padding-left: 28px;
         }
 
         .mobile-menu ul li a.whatsapp-link {
@@ -876,7 +864,6 @@
         .forma-pago-option.active-transferencia i { color: var(--transferencia); }
         .forma-pago-option.active-transferencia .label { color: var(--transferencia); }
 
-        /* CAMPO COMPROBANTE (se oculta/muestra según forma de pago) */
         .campo-comprobante {
             transition: all 0.3s ease;
         }
@@ -1228,9 +1215,8 @@
         }
 
         /* ============================================================
-           RESPONSIVE COMPLETO
+           RESPONSIVE
            ============================================================ */
-
         @media (max-width: 1024px) {
             .hero-layout {
                 grid-template-columns: 1fr 280px;
@@ -1464,11 +1450,6 @@
                 height: 28px;
                 font-size: 14px;
             }
-            .btn-nav-admin,
-            .btn-nav-whatsapp {
-                font-size: 10px;
-                padding: 4px 10px !important;
-            }
             .mobile-menu ul li a {
                 font-size: 12px;
                 padding: 10px 16px;
@@ -1552,10 +1533,9 @@
             .desktop-nav a::after {
                 display: none;
             }
-            .btn-nav-whatsapp:hover,
-            .btn-nav-admin:hover {
+            .btn-nav-whatsapp:hover {
                 background: transparent !important;
-                color: var(--accent-cyan) !important;
+                color: var(--whatsapp) !important;
             }
             .logo-badge:hover .icono {
                 transform: none;
@@ -1629,7 +1609,6 @@
                 <li><a href="#quienes-somos">Quiénes Somos</a></li>
                 <li><a href="#planes">Planes</a></li>
                 <li><a href="#reglas" id="btnReglasNav">Reglas</a></li>
-                <li><a href="panel-socios.html" class="btn-nav-admin"><i class="fas fa-user-shield"></i> Panel</a></li>
                 <li>
                     <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
                        target="_blank" 
@@ -1650,7 +1629,6 @@
                     <li><a href="#quienes-somos" class="mobile-link">Quiénes Somos</a></li>
                     <li><a href="#planes" class="mobile-link">Planes</a></li>
                     <li><a href="#reglas" class="mobile-link" id="btnReglasMobile">Reglas</a></li>
-                    <li><a href="panel-socios.html" class="mobile-link" style="color: var(--accent-cyan);"><i class="fas fa-user-shield"></i> Panel</a></li>
                     <li>
                         <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
                            target="_blank" 
@@ -1713,9 +1691,7 @@
                         📋 Ver Reglas del Grupo
                     </button>
 
-                    <!-- ================================================
-                       FORMULARIO DE SUSCRIPCIÓN
-                       ================================================ -->
+                    <!-- FORMULARIO DE SUSCRIPCIÓN -->
                     <div class="form-suscripcion" id="formSuscripcion">
                         <h3>
                             <i class="fas fa-pen-fancy"></i> 
@@ -1729,7 +1705,6 @@
                             Precio: <strong id="planInfoPrecio">20.000 Gs/mes</strong>
                         </div>
 
-                        <!-- DATOS BANCARIOS -->
                         <div class="datos-bancarios" id="datosBancarios">
                             <h4><i class="fas fa-university"></i> Datos para la transferencia</h4>
                             <div class="banco-row">
@@ -1761,7 +1736,6 @@
                             </div>
                         </div>
 
-                        <!-- FORMA DE PAGO -->
                         <div class="forma-pago-grid" id="formaPagoGrid">
                             <div class="forma-pago-option active-transferencia" id="pagoTransferencia" onclick="seleccionarFormaPago('transferencia')">
                                 <i class="fas fa-university"></i>
@@ -1797,7 +1771,6 @@
                                     <option value="Comodin">🔄 Comodín (todas)</option>
                                 </select>
                             </div>
-                            <!-- CAMPO COMPROBANTE - SOLO PARA TRANSFERENCIA -->
                             <div class="form-group campo-comprobante" id="campoComprobante">
                                 <label for="socioComprobante">Comprobante de transferencia *</label>
                                 <input type="file" id="socioComprobante" accept="image/*,.pdf" />
@@ -1805,7 +1778,6 @@
                                     <i class="fas fa-info-circle"></i> Adjuntá captura o foto del comprobante de transferencia
                                 </div>
                             </div>
-                            <!-- MENSAJE PARA EFECTIVO (se muestra cuando se selecciona efectivo) -->
                             <div class="form-group" id="mensajeEfectivo" style="display: none;">
                                 <div style="background: rgba(255, 145, 0, 0.08); border: 1px solid var(--efectivo); padding: 10px 12px; border-radius: 2px; color: var(--text-gray); font-size: 13px;">
                                     <i class="fas fa-check-circle" style="color: var(--efectivo);"></i>
@@ -2021,10 +1993,8 @@
             
             if (tipo === 'transferencia') {
                 elTransferencia.classList.add('active-transferencia');
-                // Mostrar campo comprobante, ocultar mensaje efectivo
                 campoComprobante.classList.remove('oculto');
                 mensajeEfectivo.style.display = 'none';
-                // Cambiar botón
                 btnSuscribir.className = 'btn-suscribir transferencia';
                 btnSuscribir.innerHTML = `
                     <span class="btn-text">
@@ -2033,14 +2003,11 @@
                     </span>
                     <span class="spinner"></span>
                 `;
-                // Hacer obligatorio el comprobante
                 document.getElementById('socioComprobante').required = true;
             } else {
                 elEfectivo.classList.add('active-efectivo');
-                // Ocultar campo comprobante, mostrar mensaje efectivo
                 campoComprobante.classList.add('oculto');
                 mensajeEfectivo.style.display = 'block';
-                // Cambiar botón
                 btnSuscribir.className = 'btn-suscribir efectivo';
                 btnSuscribir.innerHTML = `
                     <span class="btn-text">
@@ -2049,7 +2016,6 @@
                     </span>
                     <span class="spinner"></span>
                 `;
-                // No obligatorio
                 document.getElementById('socioComprobante').required = false;
                 document.getElementById('socioComprobante').value = '';
             }
@@ -2064,18 +2030,82 @@
         });
 
         // ============================================================
-        //  CONTROL DEL MENÚ HAMBURGUESA
+        //  CONTROL DEL MENÚ HAMBURGUESA - CORREGIDO
         // ============================================================
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
-        mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('active')));
+        // Abrir/cerrar menú
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            mobileMenu.classList.toggle('active');
+            // Cambiar icono
+            const icon = this.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
 
-        document.addEventListener('click', (e) => {
+        // Cerrar menú al hacer clic en un enlace
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            });
+        });
+
+        // Cerrar menú al hacer clic fuera
+        document.addEventListener('click', function(e) {
             if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
                 mobileMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // Cerrar menú al hacer scroll
+        window.addEventListener('scroll', function() {
+            if (mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                const icon = hamburgerBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+            }
+        });
+
+        // ============================================================
+        //  ACCESO SECRETO AL PANEL DE SOCIOS (Doble clic en el logo)
+        // ============================================================
+        let clickCount = 0;
+        let clickTimer = null;
+
+        document.querySelector('.logo-container').addEventListener('click', function(e) {
+            clickCount++;
+            
+            if (clickTimer) {
+                clearTimeout(clickTimer);
+                clickTimer = null;
+            }
+            
+            clickTimer = setTimeout(() => {
+                if (clickCount >= 2) {
+                    // Redirigir al panel (que tiene protección)
+                    window.location.href = 'panel-socios.html';
+                    clickCount = 0;
+                } else {
+                    clickCount = 0;
+                }
+            }, 500);
+        });
+
+        // Acceso con teclado: Ctrl + Shift + P
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
+                e.preventDefault();
+                window.location.href = 'panel-socios.html';
             }
         });
 
@@ -2134,7 +2164,6 @@
             formSuscripcion.classList.toggle('visible');
             
             if (formSuscripcion.classList.contains('visible')) {
-                // Resetear a transferencia por defecto
                 seleccionarFormaPago('transferencia');
                 setTimeout(() => {
                     formSuscripcion.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2177,7 +2206,6 @@
                 hasError = true;
             }
 
-            // Validar comprobante solo si es transferencia
             if (formaPagoSeleccionada === 'transferencia' && comprobante.files.length === 0) {
                 showToast('⚠️ Debes adjuntar el comprobante de transferencia', 'warning');
                 hasError = true;
@@ -2217,7 +2245,6 @@
                 let comprobanteData = null;
                 let comprobanteNombre = null;
 
-                // Solo leer comprobante si es transferencia
                 if (formaPagoSeleccionada === 'transferencia' && comprobante.files.length > 0) {
                     const file = comprobante.files[0];
                     comprobanteNombre = file.name;
@@ -2238,7 +2265,6 @@
                     fechaSuscripcion: new Date().toISOString().slice(0, 10),
                     comprobanteNombre: comprobanteNombre,
                     comprobanteData: comprobanteData,
-                    // Si es efectivo → activo, si es transferencia → pendiente
                     estado: formaPagoSeleccionada === 'efectivo' ? 'activo' : 'pendiente',
                     pagoConfirmado: formaPagoSeleccionada === 'efectivo' ? true : false,
                     fechaPago: formaPagoSeleccionada === 'efectivo' ? new Date().toISOString().slice(0, 10) : null
@@ -2309,7 +2335,6 @@
         // ============================================================
         //  INICIALIZAR
         // ============================================================
-        // Inicializar con transferencia por defecto
         seleccionarFormaPago('transferencia');
 
         if (!sessionStorage.getItem('welcome_shown')) {
