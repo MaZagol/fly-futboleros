@@ -5,15 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
     <title>FLY FUTBOLEROS · Gestión de Socios</title>
 
-    <!-- Fuentes modernas -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-
-    <!-- Font Awesome 6 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- AOS - Animaciones -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
@@ -31,6 +26,9 @@
             --whatsapp: #25D366;
             --efectivo: #ff9100;
             --transferencia: #00a859;
+            --inactivo: #ff1744;
+            --sabatero: #00e5ff;
+            --finder: #ff9100;
         }
 
         * {
@@ -184,6 +182,13 @@
             color: var(--accent-cyan);
         }
 
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
         .btn-volver {
             color: var(--text-light);
             text-decoration: none;
@@ -202,6 +207,32 @@
             box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
         }
 
+        .btn-cerrar-sesion {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 4px 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .btn-cerrar-sesion:hover {
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .badge-admin {
+            font-size: 11px;
+            color: var(--text-gray);
+            background: rgba(0, 229, 255, 0.1);
+            padding: 4px 10px;
+            border-radius: 2px;
+            border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+
         /* ============================================================
            MAIN CARD
            ============================================================ */
@@ -210,8 +241,8 @@
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.05);
-            padding: 28px 24px;
-            margin-bottom: 24px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
             position: relative;
             overflow: hidden;
             box-shadow: 0 8px 40px rgba(0,0,0,0.4);
@@ -225,7 +256,7 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 0 100px 100px 0;
+            border-width: 0 80px 80px 0;
             border-color: transparent var(--accent-cyan) transparent transparent;
             opacity: 0.06;
             pointer-events: none;
@@ -234,13 +265,79 @@
         .titulo-seccion {
             text-transform: uppercase;
             font-weight: 900;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: var(--accent-cyan);
-            font-size: 22px;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .titulo-seccion .sub {
+            font-size: 12px;
+            color: var(--text-gray);
+            font-weight: 400;
         }
 
         /* ============================================================
-           STATS GRID
+           DASHBOARD FINANCIERO
+           ============================================================ */
+        .finanzas-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .finanza-box {
+            background: rgba(10, 10, 14, 0.8);
+            padding: 14px 16px;
+            border-left: 3px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .finanza-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .finanza-box .numero {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .finanza-box .label {
+            font-size: 10px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .finanza-box .moneda {
+            font-size: 14px;
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .finanza-box.mensual { border-left-color: var(--accent-cyan); }
+        .finanza-box.mensual .moneda { color: var(--accent-cyan); }
+
+        .finanza-box.sabado { border-left-color: var(--finder); }
+        .finanza-box.sabado .moneda { color: var(--finder); }
+
+        .finanza-box.sabatero { border-left-color: var(--sabatero); }
+        .finanza-box.sabatero .numero { color: var(--sabatero); }
+
+        .finanza-box.finder { border-left-color: var(--finder); }
+        .finanza-box.finder .numero { color: var(--finder); }
+
+        .finanza-box.inactivos { border-left-color: var(--inactivo); }
+        .finanza-box.inactivos .numero { color: var(--inactivo); }
+
+        /* ============================================================
+           STATS GRID (Socios)
            ============================================================ */
         .stats-grid {
             display: grid;
@@ -280,8 +377,8 @@
         .stat-box.efectivo .stat-number { color: var(--efectivo); }
         .stat-box.transferencia { border-left-color: var(--transferencia); }
         .stat-box.transferencia .stat-number { color: var(--transferencia); }
-        .stat-box.moroso { border-left-color: var(--error); }
-        .stat-box.moroso .stat-number { color: var(--error); }
+        .stat-box.inactivos { border-left-color: var(--inactivo); }
+        .stat-box.inactivos .stat-number { color: var(--inactivo); }
 
         /* ============================================================
            BARRA DE BÚSQUEDA Y FILTROS
@@ -305,7 +402,7 @@
             font-family: inherit;
             font-size: 13px;
             flex: 1;
-            min-width: 130px;
+            min-width: 120px;
             border-radius: 2px;
         }
 
@@ -356,7 +453,7 @@
             font-family: inherit;
             font-size: 13px;
             flex: 1;
-            min-width: 130px;
+            min-width: 120px;
             border-radius: 2px;
             transition: border-color 0.3s ease;
         }
@@ -411,17 +508,17 @@
         .tabla-socios {
             width: 100%;
             border-collapse: collapse;
-            font-size: 13px;
+            font-size: 12px;
             text-align: left;
         }
 
         .tabla-socios th {
             background: rgba(10, 10, 14, 0.9);
             color: var(--accent-cyan);
-            padding: 10px 12px;
+            padding: 8px 10px;
             text-transform: uppercase;
             font-weight: 800;
-            font-size: 11px;
+            font-size: 10px;
             border-bottom: 2px solid var(--accent-cyan);
             position: sticky;
             top: 0;
@@ -430,7 +527,7 @@
         }
 
         .tabla-socios td {
-            padding: 10px 12px;
+            padding: 8px 10px;
             border-bottom: 1px solid var(--border-color);
             background: rgba(18, 18, 26, 0.6);
             transition: background 0.3s ease;
@@ -445,14 +542,23 @@
             animation: fadeInRow 0.3s ease;
         }
 
+        .tabla-socios tr.inactivo td {
+            opacity: 0.6;
+        }
+
+        .tabla-socios tr.inactivo td .badge-status {
+            background: rgba(255, 23, 68, 0.15);
+            color: var(--inactivo);
+        }
+
         @keyframes fadeInRow {
             from { opacity: 0; transform: translateX(-10px); }
             to { opacity: 1; transform: translateX(0); }
         }
 
         .badge-status {
-            padding: 3px 10px;
-            font-size: 10px;
+            padding: 2px 8px;
+            font-size: 9px;
             font-weight: 800;
             text-transform: uppercase;
             border-radius: 2px;
@@ -471,10 +577,14 @@
             background: rgba(255, 145, 0, 0.15);
             color: var(--pending);
         }
+        .badge-status.inactivo {
+            background: rgba(255, 23, 68, 0.15);
+            color: var(--inactivo);
+        }
 
         .badge-forma-pago {
             padding: 2px 8px;
-            font-size: 9px;
+            font-size: 8px;
             font-weight: 700;
             text-transform: uppercase;
             border-radius: 2px;
@@ -495,8 +605,8 @@
             border: none;
             color: var(--text-gray);
             cursor: pointer;
-            font-size: 14px;
-            padding: 4px 6px;
+            font-size: 13px;
+            padding: 3px 5px;
             transition: all 0.3s ease;
         }
 
@@ -556,7 +666,7 @@
             border: 2px solid var(--accent-cyan);
             max-width: 800px;
             width: 100%;
-            padding: 24px;
+            padding: 20px;
             max-height: 90vh;
             overflow-y: auto;
             animation: slideUp 0.3s ease;
@@ -571,15 +681,15 @@
         .modal-content.comprobante-modal h3 {
             color: var(--accent-cyan);
             text-transform: uppercase;
-            font-size: 18px;
+            font-size: 17px;
             margin-bottom: 4px;
         }
 
         .modal-content.comprobante-modal .socio-info {
             color: var(--text-gray);
-            font-size: 13px;
-            margin-bottom: 14px;
-            padding-bottom: 10px;
+            font-size: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -601,7 +711,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 60px 20px;
+            padding: 40px 20px;
             background: #0a0a0c;
             border: 2px dashed var(--border-color);
             border-radius: 4px;
@@ -609,27 +719,29 @@
         }
 
         .modal-content.comprobante-modal .comprobante-placeholder i {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 40px;
+            margin-bottom: 10px;
             opacity: 0.3;
         }
 
         .modal-actions {
             display: flex;
             gap: 10px;
-            margin-top: 18px;
+            margin-top: 14px;
             flex-wrap: wrap;
         }
 
         .modal-actions .btn-cyan {
             flex: 1;
-            min-width: 120px;
+            min-width: 100px;
+            padding: 10px 16px;
+            font-size: 12px;
         }
 
         .modal-actions .btn-outline-modal {
             flex: 1;
-            min-width: 120px;
-            padding: 10px 18px;
+            min-width: 100px;
+            padding: 10px 16px;
             background: transparent;
             border: 2px solid var(--border-color);
             color: var(--text-gray);
@@ -672,15 +784,15 @@
             justify-content: center;
             align-items: center;
             gap: 8px;
-            margin-top: 18px;
-            padding: 8px 0;
+            margin-top: 14px;
+            padding: 6px 0;
         }
 
         .pagination button {
             background: rgba(10, 10, 14, 0.8);
             border: 1px solid var(--border-color);
             color: var(--text-gray);
-            padding: 6px 12px;
+            padding: 5px 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
@@ -708,8 +820,8 @@
 
         .pagination .info {
             color: var(--text-gray);
-            font-size: 12px;
-            padding: 0 10px;
+            font-size: 11px;
+            padding: 0 8px;
         }
 
         /* ============================================================
@@ -717,19 +829,19 @@
            ============================================================ */
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             color: var(--text-gray);
         }
 
         .empty-state i {
-            font-size: 48px;
-            margin-bottom: 15px;
+            font-size: 40px;
+            margin-bottom: 10px;
             opacity: 0.3;
         }
 
         .empty-state h3 {
-            font-size: 18px;
-            margin-bottom: 8px;
+            font-size: 16px;
+            margin-bottom: 6px;
             color: var(--text-light);
         }
 
@@ -737,6 +849,9 @@
            RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
+            .finanzas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
             .stats-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
@@ -744,20 +859,27 @@
 
         @media (max-width: 768px) {
             body {
-                padding: 12px;
+                padding: 10px;
             }
             .main-card {
-                padding: 20px 16px;
+                padding: 16px 12px;
+            }
+            .finanzas-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .finanza-box .numero {
+                font-size: 22px;
             }
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
+                gap: 8px;
             }
             .stat-number {
                 font-size: 20px;
             }
             .titulo-seccion {
-                font-size: 18px;
+                font-size: 17px;
             }
             .form-socio,
             .search-bar {
@@ -771,11 +893,11 @@
             }
             .navbar {
                 flex-wrap: wrap;
-                gap: 10px;
-                padding: 10px 14px;
+                gap: 8px;
+                padding: 10px 12px;
             }
             .modal-content.comprobante-modal {
-                padding: 16px;
+                padding: 14px;
                 margin: 10px;
             }
             .modal-actions {
@@ -787,11 +909,11 @@
                 width: 100%;
             }
             .tabla-socios {
-                font-size: 12px;
+                font-size: 11px;
             }
             .tabla-socios th,
             .tabla-socios td {
-                padding: 8px 10px;
+                padding: 6px 8px;
             }
             .logo-text {
                 font-size: 16px;
@@ -801,21 +923,41 @@
                 height: 34px;
                 font-size: 15px;
             }
+            .badge-admin {
+                font-size: 9px;
+                padding: 2px 8px;
+            }
         }
 
         @media (max-width: 480px) {
-            .stats-grid {
+            .finanzas-grid {
                 grid-template-columns: 1fr 1fr;
-                gap: 8px;
+                gap: 6px;
             }
-            .stat-box {
+            .finanza-box {
                 padding: 10px 12px;
             }
-            .stat-number {
+            .finanza-box .numero {
                 font-size: 18px;
             }
+            .finanza-box .label {
+                font-size: 8px;
+            }
+            .finanza-box .moneda {
+                font-size: 12px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .stat-box {
+                padding: 8px 10px;
+            }
+            .stat-number {
+                font-size: 16px;
+            }
             .stat-label {
-                font-size: 9px;
+                font-size: 8px;
             }
             .btn-volver {
                 font-size: 10px;
@@ -836,21 +978,24 @@
         }
 
         @media (max-width: 360px) {
-            .stats-grid {
+            .finanzas-grid {
                 grid-template-columns: 1fr;
             }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
             .tabla-socios {
-                font-size: 11px;
+                font-size: 10px;
             }
             .tabla-socios th,
             .tabla-socios td {
-                padding: 6px 8px;
+                padding: 4px 6px;
             }
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
             background: var(--bg-dark);
@@ -867,6 +1012,38 @@
 <body>
 
     <!-- ============================================================
+       🔐 PROTECCIÓN DEL PANEL
+       ============================================================ -->
+    <script>
+        const ADMIN_PASSWORD = 'fly2026';
+        
+        if (sessionStorage.getItem('admin_auth') !== 'true') {
+            const password = prompt('🔐 Ingresá la contraseña del administrador:');
+            if (password === ADMIN_PASSWORD) {
+                sessionStorage.setItem('admin_auth', 'true');
+            } else {
+                alert('❌ Contraseña incorrecta. Acceso denegado.');
+                window.location.href = 'index.html';
+            }
+        }
+        
+        let inactivityTimer;
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                sessionStorage.removeItem('admin_auth');
+                alert('⏰ Sesión expirada por inactividad.');
+                window.location.href = 'index.html';
+            }, 1800000);
+        }
+        
+        document.addEventListener('click', resetInactivityTimer);
+        document.addEventListener('keypress', resetInactivityTimer);
+        document.addEventListener('scroll', resetInactivityTimer);
+        resetInactivityTimer();
+    </script>
+
+    <!-- ============================================================
        TOAST CONTAINER
        ============================================================ -->
     <div class="toast-container" id="toastContainer"></div>
@@ -881,16 +1058,48 @@
                 <div class="logo-badge">⚡</div>
                 <div class="logo-text">FLY <span>FUTBOLEROS</span></div>
             </div>
-            <a href="index.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
+            <div class="nav-actions">
+                <span class="badge-admin"><i class="fas fa-user-shield"></i> Admin</span>
+                <a href="index.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
+                <button class="btn-cerrar-sesion" onclick="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Salir</button>
+            </div>
         </header>
 
         <!-- ============================================================
-           PANEL DE SOCIOS
+           DASHBOARD FINANCIERO
            ============================================================ -->
         <section class="main-card" data-aos="fade-up">
-            <h2 class="titulo-seccion">📊 Panel de Socios</h2>
+            <h2 class="titulo-seccion">
+                💰 Resumen Financiero
+                <span class="sub">(Mes actual)</span>
+            </h2>
 
-            <!-- Stats -->
+            <div class="finanzas-grid">
+                <div class="finanza-box mensual" data-aos="fade-up" data-aos-delay="100">
+                    <div class="numero"><span id="totalMes">0</span> <span class="moneda">Gs.</span></div>
+                    <div class="label">📅 Total Recaudado (Mes)</div>
+                </div>
+                <div class="finanza-box sabado" data-aos="fade-up" data-aos-delay="150">
+                    <div class="numero"><span id="totalSabado">0</span> <span class="moneda">Gs.</span></div>
+                    <div class="label">⚽ Total por Sábado</div>
+                </div>
+                <div class="finanza-box sabatero" data-aos="fade-up" data-aos-delay="200">
+                    <div class="numero" id="sabateroActivos">0</div>
+                    <div class="label">👥 Sábatero Activos</div>
+                </div>
+                <div class="finanza-box finder" data-aos="fade-up" data-aos-delay="250">
+                    <div class="numero" id="finderActivos">0</div>
+                    <div class="label">👥 Finder Activos</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+           ESTADÍSTICAS DE SOCIOS
+           ============================================================ -->
+        <section class="main-card" data-aos="fade-up">
+            <h2 class="titulo-seccion">📊 Estado de Socios</h2>
+
             <div class="stats-grid">
                 <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
                     <div class="stat-number" id="totalSocios">0</div>
@@ -900,28 +1109,33 @@
                     <div class="stat-number" style="color: var(--accent-cyan);" id="activosSocios">0</div>
                     <div class="stat-label">✅ Activos</div>
                 </div>
-                <div class="stat-box pendiente" data-aos="fade-up" data-aos-delay="200">
+                <div class="stat-box inactivos" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number" id="inactivosSocios">0</div>
+                    <div class="stat-label">⚠️ Inactivos</div>
+                </div>
+                <div class="stat-box pendiente" data-aos="fade-up" data-aos-delay="250">
                     <div class="stat-number" id="pendientesSocios">0</div>
                     <div class="stat-label">⏳ Pendientes</div>
                 </div>
-                <div class="stat-box transferencia" data-aos="fade-up" data-aos-delay="250">
+                <div class="stat-box transferencia" data-aos="fade-up" data-aos-delay="300">
                     <div class="stat-number" id="transferenciaSocios">0</div>
                     <div class="stat-label">🏦 Transferencia</div>
                 </div>
-                <div class="stat-box efectivo" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-number" id="efectivoSocios">0</div>
-                    <div class="stat-label">💵 Efectivo</div>
-                </div>
             </div>
+        </section>
 
-            <!-- Barra de búsqueda y filtros -->
+        <!-- ============================================================
+           BÚSQUEDA Y FILTROS
+           ============================================================ -->
+        <section class="main-card" data-aos="fade-up">
             <div class="search-bar">
                 <input type="text" id="buscarSocio" placeholder="🔍 Buscar socio..." />
                 <select id="filtroEstado">
                     <option value="todos">Todos los estados</option>
                     <option value="activo">✅ Activos</option>
+                    <option value="inactivo">⚠️ Inactivos</option>
                     <option value="pendiente">⏳ Pendientes</option>
-                    <option value="moroso">⚠️ Morosos</option>
+                    <option value="moroso">⛔ Morosos</option>
                 </select>
                 <select id="filtroFormaPago">
                     <option value="todos">Todas las formas de pago</option>
@@ -936,7 +1150,7 @@
                 <button class="btn-cyan-outline" id="btnExportar"><i class="fas fa-download"></i> Exportar</button>
             </div>
 
-            <!-- Formulario de alta -->
+            <!-- FORMULARIO DE ALTA -->
             <div class="form-socio" id="formSocio">
                 <input type="text" id="nombreSocio" placeholder="Nombre completo del jugador" />
                 <select id="planSocio">
@@ -949,13 +1163,14 @@
                 </select>
                 <select id="estadoSocio">
                     <option value="activo">✅ Activo</option>
+                    <option value="inactivo">⚠️ Inactivo</option>
                     <option value="pendiente">⏳ Pendiente</option>
-                    <option value="moroso">⚠️ Moroso</option>
+                    <option value="moroso">⛔ Moroso</option>
                 </select>
                 <button class="btn-cyan btn-cyan-sm" id="btnAgregar">+ AGREGAR</button>
             </div>
 
-            <!-- Tabla -->
+            <!-- TABLA -->
             <div class="tabla-wrapper">
                 <table class="tabla-socios">
                     <thead>
@@ -975,7 +1190,7 @@
                 </table>
             </div>
 
-            <!-- Paginación -->
+            <!-- PAGINACIÓN -->
             <div class="pagination" id="pagination">
                 <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
                 <span class="info" id="pageInfo">Página 1</span>
@@ -1002,7 +1217,7 @@
             </div>
             <div class="modal-actions" id="comprobanteActions">
                 <button class="btn-cyan approve" id="btnAprobarPago">
-                    <i class="fas fa-check"></i> APROBAR PAGO
+                    <i class="fas fa-check"></i> APROBAR
                 </button>
                 <button class="btn-cyan reject" id="btnRechazarPago">
                     <i class="fas fa-times"></i> RECHAZAR
@@ -1020,12 +1235,22 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================================
-        //  INICIALIZAR AOS
+        //  INICIALIZAR
         // ============================================================
-        AOS.init({ once: true, offset: 30, duration: 500 });
+        AOS.init({ once: true, offset: 30, duration: 400 });
 
         // ============================================================
-        //  TOAST NOTIFICATIONS
+        //  CERRAR SESIÓN
+        // ============================================================
+        function cerrarSesion() {
+            if (confirm('¿Cerrar sesión?')) {
+                sessionStorage.removeItem('admin_auth');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // ============================================================
+        //  TOAST
         // ============================================================
         function showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
@@ -1043,9 +1268,7 @@
                 <span class="toast-message">${message}</span>
                 <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
             `;
-            
             container.appendChild(toast);
-            
             setTimeout(() => {
                 toast.style.animation = 'slideOutRight 0.3s ease forwards';
                 setTimeout(() => toast.remove(), 300);
@@ -1055,7 +1278,6 @@
         // ============================================================
         //  LÓGICA DE SOCIOS
         // ============================================================
-
         let socios = [];
         let currentPage = 1;
         const perPage = 10;
@@ -1067,10 +1289,11 @@
                 if (data) {
                     socios = JSON.parse(data);
                 } else {
+                    const hoy = new Date().toISOString().slice(0, 10);
                     socios = [
-                        { id: 1, nombre: 'Juan Pérez', telefono: '0981 123 456', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', posicion: 'Delantero', fechaSuscripcion: '2024-01-01' },
-                        { id: 2, nombre: 'Carlos Gómez', telefono: '0981 654 321', plan: 'Finder', estado: 'moroso', formaPago: 'efectivo', posicion: 'Defensor', fechaSuscripcion: '2024-01-01' },
-                        { id: 3, nombre: 'Luis Martínez', telefono: '0981 789 123', plan: 'Sábatero', estado: 'pendiente', formaPago: 'transferencia', posicion: 'Arquero', fechaSuscripcion: '2024-01-01', comprobanteData: null }
+                        { id: 1, nombre: 'Juan Pérez', telefono: '0981 123 456', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', posicion: 'Delantero', fechaSuscripcion: hoy, fechaUltimoPago: hoy, pagos: 12 },
+                        { id: 2, nombre: 'Carlos Gómez', telefono: '0981 654 321', plan: 'Finder', estado: 'inactivo', formaPago: 'efectivo', posicion: 'Defensor', fechaSuscripcion: '2023-12-01', fechaUltimoPago: '2024-05-15', pagos: 2 },
+                        { id: 3, nombre: 'Luis Martínez', telefono: '0981 789 123', plan: 'Sábatero', estado: 'pendiente', formaPago: 'transferencia', posicion: 'Arquero', fechaSuscripcion: hoy, fechaUltimoPago: null, pagos: 0, comprobanteData: null }
                     ];
                     localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 }
@@ -1089,6 +1312,53 @@
             }
         }
 
+        // ============================================================
+        //  CÁLCULOS FINANCIEROS
+        // ============================================================
+        function calcularFinanzas() {
+            const hoy = new Date();
+            const mesActual = hoy.getMonth();
+            const añoActual = hoy.getFullYear();
+            const sabadoActual = hoy.getDate();
+
+            let totalMes = 0;
+            let totalSabado = 0;
+            let sabateroActivos = 0;
+            let finderActivos = 0;
+
+            socios.forEach(s => {
+                if (s.estado === 'activo' || s.estado === 'pendiente') {
+                    if (s.plan === 'Sábatero') {
+                        sabateroActivos++;
+                        // 20.000 Gs por mes
+                        if (s.estado === 'activo') {
+                            totalMes += 20000;
+                            totalSabado += 20000;
+                        }
+                    } else if (s.plan === 'Finder') {
+                        finderActivos++;
+                        // 5.000 Gs por sábado
+                        if (s.estado === 'activo') {
+                            totalSabado += 5000;
+                            // Finder solo suma al mes si tiene pagos registrados
+                            if (s.pagos && s.pagos > 0) {
+                                totalMes += 5000 * s.pagos;
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Redondear y formatear
+            document.getElementById('totalMes').textContent = totalMes.toLocaleString('es-PY');
+            document.getElementById('totalSabado').textContent = totalSabado.toLocaleString('es-PY');
+            document.getElementById('sabateroActivos').textContent = sabateroActivos;
+            document.getElementById('finderActivos').textContent = finderActivos;
+        }
+
+        // ============================================================
+        //  FILTRADO Y PAGINACIÓN
+        // ============================================================
         function getFilteredSocios() {
             const busqueda = document.getElementById('buscarSocio').value.toLowerCase().trim();
             const filtroEstado = document.getElementById('filtroEstado').value;
@@ -1120,16 +1390,15 @@
             const filtered = getFilteredSocios();
             const total = filtered.length;
             const totalPages = Math.ceil(total / perPage);
-            
             if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
-            
             const start = (currentPage - 1) * perPage;
             const end = Math.min(start + perPage, total);
-            const paginated = filtered.slice(start, end);
-
-            return { socios: paginated, total, totalPages, start, end };
+            return { socios: filtered.slice(start, end), total, totalPages, start, end };
         }
 
+        // ============================================================
+        //  RENDER TABLA
+        // ============================================================
         function renderTabla() {
             const tbody = document.getElementById('tablaBody');
             const { socios: paginated, total, totalPages, start, end } = getPaginatedSocios();
@@ -1143,7 +1412,7 @@
                             <div class="empty-state">
                                 <i class="fas fa-users-slash"></i>
                                 <h3>No hay socios</h3>
-                                <p>Agregá tu primer socio usando el formulario arriba</p>
+                                <p>Agregá tu primer socio usando el formulario</p>
                             </div>
                         </td>
                     </tr>
@@ -1152,30 +1421,25 @@
                 paginated.forEach((socio, index) => {
                     const tr = document.createElement('tr');
                     tr.className = 'anim-enter';
-                    const realIndex = start + index;
+                    if (socio.estado === 'inactivo') {
+                        tr.classList.add('inactivo');
+                    }
                     
+                    const realIndex = start + index;
                     const tieneComprobante = socio.comprobanteData && socio.comprobanteData.length > 100;
                     const esPendiente = socio.estado === 'pendiente';
                     const esTransferencia = socio.formaPago === 'transferencia';
 
                     let acciones = '';
 
-                    // Botón ver comprobante (solo si es transferencia y tiene comprobante)
                     if (esTransferencia && tieneComprobante) {
                         acciones += `
                             <button class="btn-accion view" onclick="verComprobante(${socio.id})" title="Ver comprobante">
                                 <i class="fas fa-image"></i>
                             </button>
                         `;
-                    } else if (esTransferencia && esPendiente && !tieneComprobante) {
-                        acciones += `
-                            <button class="btn-accion view" disabled title="Sin comprobante">
-                                <i class="fas fa-image" style="opacity:0.3;"></i>
-                            </button>
-                        `;
                     }
 
-                    // Botón aprobar (solo si está pendiente y es transferencia)
                     if (esPendiente && esTransferencia && tieneComprobante) {
                         acciones += `
                             <button class="btn-accion approve" onclick="aprobarPago(${socio.id})" title="Aprobar pago">
@@ -1184,14 +1448,13 @@
                         `;
                     }
 
-                    // Botón eliminar (siempre)
                     acciones += `
                         <button class="btn-accion delete" onclick="eliminarSocio(${socio.id})" title="Eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
                     `;
 
-                    const badgeClass = socio.estado === 'pendiente' ? 'pendiente' : socio.estado;
+                    const badgeClass = socio.estado === 'inactivo' ? 'inactivo' : socio.estado;
                     const formaPagoLabel = socio.formaPago === 'efectivo' ? '💵 Efectivo' : '🏦 Transferencia';
                     const formaPagoClass = socio.formaPago === 'efectivo' ? 'efectivo' : 'transferencia';
                     
@@ -1210,20 +1473,23 @@
                 });
             }
 
-            // Actualizar stats
+            // Stats
             const totalSocios = socios.length;
             const activos = socios.filter(s => s.estado === 'activo').length;
+            const inactivos = socios.filter(s => s.estado === 'inactivo').length;
             const pendientes = socios.filter(s => s.estado === 'pendiente').length;
             const transferencia = socios.filter(s => s.formaPago === 'transferencia').length;
-            const efectivo = socios.filter(s => s.formaPago === 'efectivo').length;
 
             document.getElementById('totalSocios').textContent = totalSocios;
             document.getElementById('activosSocios').textContent = activos;
+            document.getElementById('inactivosSocios').textContent = inactivos;
             document.getElementById('pendientesSocios').textContent = pendientes;
             document.getElementById('transferenciaSocios').textContent = transferencia;
-            document.getElementById('efectivoSocios').textContent = efectivo;
 
-            // Actualizar paginación
+            // Finanzas
+            calcularFinanzas();
+
+            // Paginación
             const filteredTotal = getFilteredSocios().length;
             document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${totalPages || 1} (${filteredTotal} socios)`;
             document.getElementById('prevPage').disabled = currentPage <= 1;
@@ -1242,7 +1508,7 @@
 
             if (!nombre || nombre.length < 2) {
                 input.classList.add('error');
-                showToast('Por favor, ingresá un nombre válido', 'error');
+                showToast('Ingresá un nombre válido', 'error');
                 return;
             }
 
@@ -1254,6 +1520,7 @@
                 return;
             }
 
+            const hoy = new Date().toISOString().slice(0, 10);
             socios.push({
                 id: Date.now(),
                 nombre: nombre,
@@ -1262,14 +1529,16 @@
                 estado: estado,
                 telefono: 'N/A',
                 posicion: 'No especificada',
-                fechaSuscripcion: new Date().toISOString().slice(0, 10),
+                fechaSuscripcion: hoy,
+                fechaUltimoPago: estado === 'activo' ? hoy : null,
+                pagos: 0,
                 comprobanteData: null
             });
 
             saveSocios();
             renderTabla();
             input.value = '';
-            showToast(`✅ Socio "${nombre}" agregado correctamente`, 'success');
+            showToast(`✅ Socio "${nombre}" agregado`, 'success');
         });
 
         document.getElementById('nombreSocio').addEventListener('input', function() {
@@ -1288,8 +1557,7 @@
         window.eliminarSocio = function(id) {
             const socio = socios.find(s => s.id === id);
             if (!socio) return;
-
-            if (confirm(`¿Estás seguro de eliminar a "${socio.nombre}"?`)) {
+            if (confirm(`¿Eliminar a "${socio.nombre}"?`)) {
                 socios = socios.filter(s => s.id !== id);
                 saveSocios();
                 renderTabla();
@@ -1307,13 +1575,7 @@
                 return;
             }
 
-            if (socio.formaPago !== 'transferencia') {
-                showToast('Este socio no tiene comprobante porque pagó en efectivo', 'warning');
-                return;
-            }
-
             viewingSocioId = id;
-
             document.getElementById('compSocioNombre').textContent = socio.nombre || 'Sin nombre';
             document.getElementById('compSocioPlan').textContent = socio.plan || 'N/A';
             document.getElementById('compSocioFecha').textContent = socio.fechaSuscripcion || 'N/A';
@@ -1322,33 +1584,18 @@
             const container = document.getElementById('comprobanteContainer');
             
             if (socio.comprobanteData && socio.comprobanteData.length > 100) {
-                const isImage = socio.comprobanteData.startsWith('data:image');
-                const isPDF = socio.comprobanteData.startsWith('data:application/pdf');
-
-                if (isImage) {
-                    container.innerHTML = `
-                        <img src="${socio.comprobanteData}" class="comprobante-img" alt="Comprobante de ${socio.nombre}" />
-                    `;
-                } else if (isPDF) {
-                    container.innerHTML = `
-                        <embed src="${socio.comprobanteData}" type="application/pdf" style="width:100%; height:500px;" />
-                    `;
-                } else {
-                    container.innerHTML = `
-                        <img src="${socio.comprobanteData}" class="comprobante-img" alt="Comprobante de ${socio.nombre}" onerror="this.parentElement.innerHTML='<div class=\\'comprobante-placeholder\\'><i class=\\'fas fa-file-image\\'></i><p>No se pudo cargar la imagen del comprobante</p></div>'" />
-                    `;
-                }
+                container.innerHTML = `
+                    <img src="${socio.comprobanteData}" class="comprobante-img" alt="Comprobante" onerror="this.parentElement.innerHTML='<div class=\\'comprobante-placeholder\\'><i class=\\'fas fa-file-image\\'></i><p>Error al cargar la imagen</p></div>'" />
+                `;
             } else {
                 container.innerHTML = `
                     <div class="comprobante-placeholder">
                         <i class="fas fa-file-image"></i>
-                        <p>No hay comprobante disponible para este socio</p>
-                        <p style="font-size: 12px; margin-top: 5px;">El socio no adjuntó ningún archivo</p>
+                        <p>No hay comprobante disponible</p>
                     </div>
                 `;
             }
 
-            // Mostrar/ocultar botones según estado y forma de pago
             const btnAprobar = document.getElementById('btnAprobarPago');
             const btnRechazar = document.getElementById('btnRechazarPago');
             
@@ -1367,49 +1614,38 @@
         // ============================================================
         //  APROBAR PAGO
         // ============================================================
-        document.getElementById('btnAprobarPago').addEventListener('click', () => {
-            if (!viewingSocioId) return;
-            
-            if (confirm('¿Confirmar que el pago fue realizado correctamente?')) {
-                aprobarPago(viewingSocioId);
-                document.getElementById('modalComprobante').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
         window.aprobarPago = function(id) {
             const socio = socios.find(s => s.id === id);
-            if (!socio) {
-                showToast('Socio no encontrado', 'error');
-                return;
-            }
-
-            if (socio.formaPago === 'efectivo') {
-                showToast('Este socio pagó en efectivo, ya está activo', 'warning');
-                return;
-            }
-
+            if (!socio) return;
             socio.estado = 'activo';
             socio.pagoConfirmado = true;
             socio.fechaPago = new Date().toISOString().slice(0, 10);
+            socio.fechaUltimoPago = new Date().toISOString().slice(0, 10);
+            socio.pagos = (socio.pagos || 0) + 1;
             saveSocios();
             renderTabla();
             showToast(`✅ Pago aprobado para ${socio.nombre}`, 'success');
         };
+
+        document.getElementById('btnAprobarPago').addEventListener('click', () => {
+            if (!viewingSocioId) return;
+            aprobarPago(viewingSocioId);
+            document.getElementById('modalComprobante').classList.remove('active');
+            document.body.style.overflow = '';
+        });
 
         // ============================================================
         //  RECHAZAR PAGO
         // ============================================================
         document.getElementById('btnRechazarPago').addEventListener('click', () => {
             if (!viewingSocioId) return;
-            
-            if (confirm('¿Rechazar el comprobante de pago? El socio será eliminado.')) {
+            if (confirm('¿Rechazar y eliminar el socio?')) {
                 const socio = socios.find(s => s.id === viewingSocioId);
                 if (socio) {
                     socios = socios.filter(s => s.id !== viewingSocioId);
                     saveSocios();
                     renderTabla();
-                    showToast(`❌ Comprobante rechazado - Socio "${socio.nombre}" eliminado`, 'error');
+                    showToast(`❌ Socio "${socio.nombre}" eliminado`, 'error');
                 }
                 document.getElementById('modalComprobante').classList.remove('active');
                 document.body.style.overflow = '';
@@ -1417,7 +1653,7 @@
         });
 
         // ============================================================
-        //  CERRAR MODAL DE COMPROBANTE
+        //  CERRAR MODAL
         // ============================================================
         document.getElementById('btnCerrarComprobante').addEventListener('click', () => {
             document.getElementById('modalComprobante').classList.remove('active');
@@ -1439,61 +1675,39 @@
         });
 
         // ============================================================
-        //  BÚSQUEDA Y FILTROS
+        //  FILTROS Y BÚSQUEDA
         // ============================================================
-        document.getElementById('buscarSocio').addEventListener('input', () => {
-            currentPage = 1;
-            renderTabla();
-        });
-
-        document.getElementById('filtroEstado').addEventListener('change', () => {
-            currentPage = 1;
-            renderTabla();
-        });
-
-        document.getElementById('filtroFormaPago').addEventListener('change', () => {
-            currentPage = 1;
-            renderTabla();
-        });
-
-        document.getElementById('filtroPlan').addEventListener('change', () => {
-            currentPage = 1;
-            renderTabla();
-        });
+        document.getElementById('buscarSocio').addEventListener('input', () => { currentPage = 1; renderTabla(); });
+        document.getElementById('filtroEstado').addEventListener('change', () => { currentPage = 1; renderTabla(); });
+        document.getElementById('filtroFormaPago').addEventListener('change', () => { currentPage = 1; renderTabla(); });
+        document.getElementById('filtroPlan').addEventListener('change', () => { currentPage = 1; renderTabla(); });
 
         // ============================================================
         //  PAGINACIÓN
         // ============================================================
         document.getElementById('prevPage').addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                renderTabla();
-            }
+            if (currentPage > 1) { currentPage--; renderTabla(); }
         });
 
         document.getElementById('nextPage').addEventListener('click', () => {
             const { totalPages } = getPaginatedSocios();
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderTabla();
-            }
+            if (currentPage < totalPages) { currentPage++; renderTabla(); }
         });
 
         // ============================================================
-        //  EXPORTAR DATOS
+        //  EXPORTAR
         // ============================================================
         document.getElementById('btnExportar').addEventListener('click', () => {
             const filtered = getFilteredSocios();
-            
             if (filtered.length === 0) {
                 showToast('No hay datos para exportar', 'warning');
                 return;
             }
 
-            let csv = '#,Nombre,Teléfono,Plan,Forma de Pago,Estado,Fecha\n';
+            let csv = '#,Nombre,Teléfono,Plan,Forma de Pago,Estado,Fecha,Último Pago\n';
             filtered.forEach((s, i) => {
                 const formaPago = s.formaPago === 'efectivo' ? 'Efectivo' : 'Transferencia';
-                csv += `${i + 1},"${s.nombre || ''}","${s.telefono || ''}",${s.plan || ''},${formaPago},${s.estado || ''},${s.fechaSuscripcion || ''}\n`;
+                csv += `${i + 1},"${s.nombre || ''}","${s.telefono || ''}",${s.plan || ''},${formaPago},${s.estado || ''},${s.fechaSuscripcion || ''},${s.fechaUltimoPago || ''}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1502,7 +1716,6 @@
             link.download = `socios_fly_futboleros_${new Date().toISOString().slice(0,10)}.csv`;
             link.click();
             URL.revokeObjectURL(link.href);
-
             showToast(`📥 Exportados ${filtered.length} socios`, 'success');
         });
 
@@ -1514,12 +1727,12 @@
 
         if (!sessionStorage.getItem('panel_welcome')) {
             setTimeout(() => {
-                const pendientes = socios.filter(s => s.estado === 'pendiente' && s.formaPago === 'transferencia').length;
-                if (pendientes > 0) {
-                    showToast(`⏳ Hay ${pendientes} socios pendientes de verificación por transferencia`, 'pending');
-                } else {
-                    showToast(`👋 ${socios.length} socios registrados`, 'success');
-                }
+                const pendientes = socios.filter(s => s.estado === 'pendiente').length;
+                const inactivos = socios.filter(s => s.estado === 'inactivo').length;
+                let msg = `👋 ${socios.length} socios registrados`;
+                if (pendientes > 0) msg += ` · ⏳ ${pendientes} pendientes`;
+                if (inactivos > 0) msg += ` · ⚠️ ${inactivos} inactivos`;
+                showToast(msg, pendientes > 0 ? 'pending' : 'success');
                 sessionStorage.setItem('panel_welcome', 'true');
             }, 800);
         }
