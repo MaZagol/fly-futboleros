@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>FLY FUTBOLEROS · Tu fútbol sin vueltas</title>
+    
+    <!-- Fuentes modernas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- AOS - Animaciones -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-dark: #0a0a0e;
+            --card-bg: #12121a;
+            --accent-cyan: #00e5ff;
+            --accent-cyan-dark: #008ba3;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a8;
+            --border-color: #1e1e2a;
+            --success: #00e676;
+            --error: #ff1744;
+            --warning: #ffea00;
+            --pending: #ff9100;
+            --whatsapp: #25D366;
+            --efectivo: #ff9100;
+            --transferencia: #00a859;
+            --glow-cyan: 0 0 30px rgba(0, 229, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: "Montserrat", "Inter", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 16px 16px 0 16px;
+            /* Fondo Opción 1: Cancha con líneas de neón */
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 229, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 229, 255, 0.03) 0%, transparent 50%),
+                linear-gradient(90deg, transparent 48%, rgba(0, 229, 255, 0.02) 48%, rgba(0, 229, 255, 0.02) 52%, transparent 52%),
+                linear-gradient(0deg, transparent 48%, rgba(0, 229, 255, 0.02) 48%, rgba(0, 229, 255, 0.02) 52%, transparent 52%),
+                radial-gradient(circle at 50% 50%, transparent 48%, rgba(0, 229, 255, 0.02) 48%, rgba(0, 229, 255, 0.02) 52%, transparent 52%),
+                linear-gradient(180deg, #08080c 0%, #0f0f18 50%, #08080c 100%);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 60% 60%, 100% 100%;
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            background: 
+                linear-gradient(0deg, transparent 45%, rgba(0, 229, 255, 0.03) 45%, rgba(0, 229, 255, 0.03) 55%, transparent 55%),
+                linear-gradient(0deg, transparent 45%, rgba(0, 229, 255, 0.03) 45%, rgba(0, 229, 255, 0.03) 55%, transparent 55%),
+                radial-gradient(ellipse at 50% 50%, rgba(0, 229, 255, 0.02) 0%, transparent 70%);
+            background-size: 100% 100%, 100% 100%, 100% 100%;
+            background-position: 10% 0%, 90% 0%, 50% 50%;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================================
+           TOAST NOTIFICATIONS
+           ============================================================ */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            padding: 15px 25px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            animation: slideInRight 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 250px;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--error); }
+        .toast.warning { border-left-color: var(--warning); }
+        .toast.pending { border-left-color: var(--pending); }
+
+        .toast i { font-size: 20px; }
+        .toast.success i { color: var(--success); }
+        .toast.error i { color: var(--error); }
+        .toast.warning i { color: var(--warning); }
+        .toast.pending i { color: var(--pending); }
+
+        .toast-message {
+            font-size: 13px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .toast-close:hover { color: #fff; }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* ============================================================
+           PATRONES DECORATIVOS
+           ============================================================ */
+        .pattern-dots {
+            display: grid;
+            grid-template-columns: repeat(5, 6px);
+            gap: 6px;
+            opacity: 0.2;
+        }
+        .pattern-dots div {
+            width: 4px;
+            height: 4px;
+            background-color: var(--accent-cyan);
+            border-radius: 50%;
+        }
+
+        /* ============================================================
+           NAVEGACIÓN
+           ============================================================ */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--accent-cyan);
+            margin-bottom: 24px;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 12px) 100%, 0 100%);
+            z-index: 50;
+            box-shadow: 0 4px 30px rgba(0, 229, 255, 0.08);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* LOGO FUTURISTA - OPCIÓN 3 */
+        .logo-badge {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .logo-badge .icono {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .logo-badge .icono i {
+            filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .logo-ring-1 {
+            position: absolute;
+            inset: -4px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin-ring 4s linear infinite;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .logo-ring-2 {
+            position: absolute;
+            inset: -8px;
+            border: 1.5px solid rgba(0, 229, 255, 0.25);
+            border-radius: 50%;
+            animation: spin-ring 6s linear infinite reverse;
+            pointer-events: none;
+        }
+
+        .logo-ring-3 {
+            position: absolute;
+            inset: 0px;
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            border-radius: 50%;
+            animation: spin-ring 3s linear infinite;
+            pointer-events: none;
+            border-left-color: transparent;
+        }
+
+        .logo-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 3s ease-in-out infinite;
+        }
+
+        .logo-particle:nth-child(4) { top: -6px; left: 50%; animation-delay: 0s; }
+        .logo-particle:nth-child(5) { bottom: -6px; left: 30%; animation-delay: 1s; }
+        .logo-particle:nth-child(6) { top: 50%; right: -6px; animation-delay: 2s; }
+        .logo-particle:nth-child(7) { top: 30%; left: -6px; animation-delay: 0.5s; }
+
+        @keyframes spin-ring {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes particle-float {
+            0%, 100% { opacity: 0.2; transform: scale(0.5); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .logo-badge:hover .icono {
+            box-shadow: 0 0 50px rgba(0, 229, 255, 0.6);
+            transform: scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            list-style: none;
+        }
+
+        .desktop-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 4px 0;
+        }
+
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
+
+        .desktop-nav a:hover::after {
+            width: 100%;
+        }
+
+        .desktop-nav a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .btn-nav-whatsapp {
+            border: 2px solid var(--whatsapp) !important;
+            padding: 5px 14px !important;
+            color: var(--whatsapp) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-nav-whatsapp::after {
+            display: none !important;
+        }
+
+        .btn-nav-whatsapp:hover {
+            background: var(--whatsapp) !important;
+            color: #fff !important;
+            box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-nav-admin {
+            border: 2px solid var(--accent-cyan) !important;
+            padding: 5px 14px !important;
+            color: var(--accent-cyan) !important;
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-nav-admin::after {
+            display: none !important;
+        }
+
+        .btn-nav-admin:hover {
+            background: var(--accent-cyan) !important;
+            color: var(--bg-dark) !important;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+        }
+
+        .hamburger-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--accent-cyan);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 18, 26, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 2px solid var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+            z-index: 100;
+        }
+
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 8px 0;
+        }
+
+        .mobile-menu ul li a {
+            display: block;
+            padding: 12px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu ul li a:hover {
+            background: rgba(0, 229, 255, 0.08);
+            color: var(--accent-cyan);
+            padding-left: 26px;
+        }
+
+        .mobile-menu ul li a.whatsapp-link {
+            color: var(--whatsapp);
+        }
+
+        .mobile-menu ul li a.whatsapp-link:hover {
+            background: rgba(37, 211, 102, 0.12);
+            color: var(--whatsapp);
+        }
+
+        /* ============================================================
+           ESTRUCTURA TARJETAS
+           ============================================================ */
+        .main-card {
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            padding: 32px 28px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+        }
+
+        .main-card:hover {
+            box-shadow: 0 8px 40px rgba(0, 229, 255, 0.05);
+        }
+
+        .main-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 100px 100px 0;
+            border-color: transparent var(--accent-cyan) transparent transparent;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        /* ============================================================
+           HERO SECTION
+           ============================================================ */
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .titulo-principal {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+
+        .titulo-principal .accent {
+            color: var(--accent-cyan);
+            display: block;
+            text-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+        }
+
+        .subtitulo {
+            color: var(--text-gray);
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.7;
+            max-width: 90%;
+        }
+
+        .image-frame-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 8px;
+        }
+
+        .image-frame {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            background: linear-gradient(180deg, rgba(10, 10, 14, 0.2) 0%, rgba(10, 10, 14, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=900&auto=format&fit=crop') center/cover no-repeat;
+            clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%);
+            border: 2px solid var(--accent-cyan);
+            filter: contrast(115%) brightness(95%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.15), 0 0 40px rgba(0, 229, 255, 0.05);
+            will-change: transform, filter;
+        }
+
+        .image-frame-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0px;
+            border: 2px solid var(--accent-cyan);
+            clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%);
+            opacity: 0.2;
+            transform: translate(-6px, 6px);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .image-frame-wrapper:hover .image-frame {
+            filter: contrast(125%) brightness(110%);
+            transform: scale(1.02);
+            box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.25), 0 0 60px rgba(0, 229, 255, 0.1);
+        }
+
+        .image-frame-wrapper:hover::before {
+            opacity: 0.6;
+            transform: translate(-10px, 10px);
+        }
+
+        .image-frame .fallback-text {
+            display: none;
+            position: absolute;
+            inset: 0;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-gray);
+            font-weight: 700;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .image-frame.img-error .fallback-text {
+            display: flex;
+        }
+
+        .image-frame.img-error {
+            background: var(--bg-dark);
+        }
+
+        /* ============================================================
+           PLANES DE SUSCRIPCIÓN
+           ============================================================ */
+        .planes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .plan-card {
+            background: rgba(10, 10, 14, 0.8);
+            border: 2px solid var(--border-color);
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(0, 229, 255, 0.3);
+        }
+
+        .plan-card.active {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.06);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.08);
+        }
+
+        .plan-card .check-mark {
+            display: none;
+            position: absolute;
+            top: 6px;
+            right: 10px;
+            color: var(--accent-cyan);
+            font-size: 14px;
+        }
+
+        .plan-card.active .check-mark {
+            display: block;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+            padding-right: 18px;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .plan-title {
+            font-weight: 800;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        .plan-price {
+            color: var(--accent-cyan);
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .plan-price small {
+            font-size: 10px;
+            color: var(--text-gray);
+        }
+
+        .plan-desc {
+            font-size: 11px;
+            color: var(--text-gray);
+            line-height: 1.4;
+        }
+
+        .plan-radio {
+            display: none;
+        }
+
+        /* ============================================================
+           FORMULARIO DE SUSCRIPCIÓN
+           ============================================================ */
+        .form-suscripcion {
+            background: rgba(10, 10, 14, 0.9);
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            margin-top: 18px;
+            display: none;
+            animation: slideDown 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .form-suscripcion.visible {
+            display: block;
+        }
+
+        .form-suscripcion h3 {
+            color: var(--accent-cyan);
+            font-size: 15px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .form-suscripcion .plan-selected {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.12);
+            color: var(--accent-cyan);
+            padding: 3px 12px;
+            font-weight: 700;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+
+        .form-suscripcion .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-suscripcion .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .form-suscripcion .form-group label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            letter-spacing: 0.5px;
+        }
+
+        .form-suscripcion .form-group input,
+        .form-suscripcion .form-group select {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 9px 12px;
+            font-family: inherit;
+            font-size: 13px;
+            transition: border-color 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .form-suscripcion .form-group input:focus,
+        .form-suscripcion .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+
+        .form-suscripcion .form-group input.error {
+            border-color: var(--error);
+        }
+
+        .form-suscripcion .form-group input[type="file"] {
+            padding: 6px 8px;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .form-suscripcion .form-group input[type="file"]::file-selector-button {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            border: none;
+            padding: 5px 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            transition: background 0.3s;
+            border-radius: 2px;
+        }
+
+        .form-suscripcion .form-group input[type="file"]::file-selector-button:hover {
+            background: #5cffff;
+        }
+
+        .form-suscripcion .plan-info {
+            background: rgba(0, 229, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: var(--text-gray);
+            border-radius: 2px;
+        }
+
+        .form-suscripcion .plan-info strong {
+            color: var(--accent-cyan);
+        }
+
+        /* DATOS BANCARIOS */
+        .datos-bancarios {
+            background: rgba(0, 229, 255, 0.04);
+            border: 2px solid rgba(0, 229, 255, 0.15);
+            padding: 14px;
+            margin-bottom: 14px;
+            border-radius: 2px;
+        }
+
+        .datos-bancarios h4 {
+            color: var(--accent-cyan);
+            font-size: 12px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .datos-bancarios .banco-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+
+        .datos-bancarios .banco-row .label {
+            color: var(--text-gray);
+        }
+
+        .datos-bancarios .banco-row .value {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .datos-bancarios .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 2px 8px;
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.3s;
+            margin-left: 6px;
+        }
+
+        .datos-bancarios .copy-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* FORMA DE PAGO */
+        .forma-pago-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .forma-pago-option {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid var(--border-color);
+            padding: 10px 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .forma-pago-option:hover {
+            border-color: var(--text-gray);
+        }
+
+        .forma-pago-option.active-efectivo {
+            border-color: var(--efectivo);
+            background: rgba(255, 145, 0, 0.08);
+        }
+
+        .forma-pago-option.active-transferencia {
+            border-color: var(--transferencia);
+            background: rgba(0, 168, 89, 0.08);
+        }
+
+        .forma-pago-option i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .forma-pago-option .label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .forma-pago-option .sub {
+            font-size: 9px;
+            color: var(--text-gray);
+        }
+
+        .forma-pago-option.active-efectivo i { color: var(--efectivo); }
+        .forma-pago-option.active-efectivo .label { color: var(--efectivo); }
+        .forma-pago-option.active-transferencia i { color: var(--transferencia); }
+        .forma-pago-option.active-transferencia .label { color: var(--transferencia); }
+
+        /* CAMPO COMPROBANTE (se oculta/muestra según forma de pago) */
+        .campo-comprobante {
+            transition: all 0.3s ease;
+        }
+
+        .campo-comprobante.oculto {
+            display: none;
+        }
+
+        .campo-comprobante .comprobante-info {
+            font-size: 11px;
+            color: var(--text-gray);
+            margin-top: 4px;
+        }
+
+        .campo-comprobante .comprobante-info i {
+            margin-right: 4px;
+        }
+
+        .form-suscripcion .btn-suscribir {
+            width: 100%;
+            padding: 14px;
+            margin-top: 4px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+        }
+
+        .form-suscripcion .btn-suscribir:hover {
+            background: #5cffff;
+        }
+
+        .form-suscripcion .btn-suscribir.efectivo {
+            background: var(--efectivo);
+        }
+
+        .form-suscripcion .btn-suscribir.efectivo:hover {
+            background: #ffa726;
+        }
+
+        .form-suscripcion .btn-suscribir.transferencia {
+            background: var(--transferencia);
+        }
+
+        .form-suscripcion .btn-suscribir.transferencia:hover {
+            background: #00c96e;
+        }
+
+        .form-suscripcion .btn-cancelar {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-top: 6px;
+            width: 100%;
+            border-radius: 2px;
+        }
+
+        .form-suscripcion .btn-cancelar:hover {
+            border-color: var(--text-light);
+            color: var(--text-light);
+        }
+
+        /* ============================================================
+           SECCIÓN QUIÉNES SOMOS
+           ============================================================ */
+        .about-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .about-box {
+            background: rgba(10, 10, 14, 0.8);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 16px 18px;
+            transition: all 0.3s ease;
+        }
+
+        .about-box:hover {
+            transform: translateX(4px);
+            border-color: var(--accent-cyan);
+        }
+
+        .about-box h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .about-box p {
+            font-size: 12px;
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           BOTONES
+           ============================================================ */
+        .btn-cyan {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 20px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            font-weight: 900;
+            font-size: 15px;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-cyan::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .btn-cyan:hover::after {
+            transform: translateX(100%);
+        }
+
+        .btn-cyan:hover {
+            background: #5cffff;
+            transform: translateX(4px);
+        }
+
+        .btn-cyan:active {
+            transform: scale(0.98);
+        }
+
+        .btn-cyan:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-cyan .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--bg-dark);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+
+        .btn-cyan.loading .spinner {
+            display: block;
+        }
+
+        .btn-cyan.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-outline {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        .btn-whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--whatsapp);
+            color: #fff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            text-decoration: none;
+            box-shadow: 0 4px 30px rgba(37, 211, 102, 0.35);
+            z-index: 100;
+            transition: all 0.3s ease;
+            animation: pulse-whatsapp 2.5s infinite;
+        }
+
+        .btn-whatsapp-float:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 40px rgba(37, 211, 102, 0.5);
+        }
+
+        @keyframes pulse-whatsapp {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.3); }
+            70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ============================================================
+           MODAL
+           ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-cyan);
+            max-width: 500px;
+            width: 100%;
+            padding: 28px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-content h3 {
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .modal-content p {
+            font-size: 13px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        /* ============================================================
+           PIE DE PÁGINA
+           ============================================================ */
+        .footer {
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 2px solid var(--border-color);
+            padding: 20px 16px;
+            margin-top: 32px;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 11px;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+        }
+
+        .footer span {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .footer .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 8px;
+        }
+
+        .footer .social-links a {
+            color: var(--text-gray);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .footer .social-links a:hover {
+            color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+
+        .footer .social-links a.whatsapp-icon:hover {
+            color: var(--whatsapp);
+        }
+
+        /* ============================================================
+           RESPONSIVE COMPLETO
+           ============================================================ */
+
+        @media (max-width: 1024px) {
+            .hero-layout {
+                grid-template-columns: 1fr 280px;
+                gap: 20px;
+            }
+            .titulo-principal {
+                font-size: 38px;
+            }
+            .image-frame {
+                height: 280px;
+            }
+            .form-suscripcion .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px 12px 0 12px;
+            }
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .image-frame-wrapper {
+                display: none;
+            }
+            .desktop-nav {
+                display: none;
+            }
+            .hamburger-btn {
+                display: block;
+            }
+            .titulo-principal {
+                font-size: 32px;
+            }
+            .subtitulo {
+                max-width: 100%;
+                font-size: 13px;
+            }
+            .planes-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .main-card {
+                padding: 20px 16px;
+            }
+            .form-suscripcion .form-row {
+                grid-template-columns: 1fr;
+            }
+            .form-suscripcion {
+                padding: 14px;
+            }
+            .datos-bancarios .banco-row {
+                flex-direction: column;
+                gap: 2px;
+                padding: 4px 0;
+            }
+            .forma-pago-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .toast {
+                min-width: 200px;
+                max-width: 300px;
+                font-size: 12px;
+                padding: 12px 16px;
+            }
+            .btn-whatsapp-float {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+                bottom: 16px;
+                right: 16px;
+            }
+            .logo-text {
+                font-size: 18px;
+            }
+            .logo-badge {
+                width: 38px;
+                height: 38px;
+            }
+            .logo-badge .icono {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px 8px 0 8px;
+            }
+            .navbar {
+                padding: 10px 14px;
+                margin-bottom: 16px;
+            }
+            .titulo-principal {
+                font-size: 26px;
+            }
+            .titulo-principal .accent {
+                font-size: 22px;
+            }
+            .planes-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .plan-card {
+                padding: 12px 14px;
+            }
+            .plan-title {
+                font-size: 14px;
+            }
+            .plan-price {
+                font-size: 16px;
+            }
+            .plan-desc {
+                font-size: 11px;
+            }
+            .btn-cyan {
+                padding: 14px 16px;
+                font-size: 14px;
+            }
+            .btn-outline {
+                padding: 10px;
+                font-size: 11px;
+            }
+            .main-card {
+                padding: 16px 12px;
+                margin-bottom: 14px;
+            }
+            .form-suscripcion {
+                padding: 12px;
+            }
+            .form-suscripcion h3 {
+                font-size: 14px;
+            }
+            .form-suscripcion .form-group input,
+            .form-suscripcion .form-group select {
+                padding: 8px 10px;
+                font-size: 12px;
+            }
+            .form-suscripcion .form-group label {
+                font-size: 9px;
+            }
+            .form-suscripcion .plan-info {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+            .datos-bancarios {
+                padding: 10px;
+            }
+            .datos-bancarios .banco-row {
+                font-size: 11px;
+                padding: 3px 0;
+            }
+            .forma-pago-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 6px;
+            }
+            .forma-pago-option {
+                padding: 8px;
+            }
+            .forma-pago-option i {
+                font-size: 16px;
+            }
+            .forma-pago-option .label {
+                font-size: 10px;
+            }
+            .forma-pago-option .sub {
+                font-size: 8px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .about-box {
+                padding: 12px 14px;
+            }
+            .about-box h3 {
+                font-size: 13px;
+            }
+            .about-box p {
+                font-size: 11px;
+            }
+            .footer {
+                padding: 14px 12px;
+            }
+            .footer p {
+                font-size: 10px;
+            }
+            .footer .social-links a {
+                font-size: 14px;
+            }
+            .modal-content {
+                padding: 16px;
+            }
+            .modal-content h3 {
+                font-size: 16px;
+            }
+            .modal-content p {
+                font-size: 12px;
+            }
+            .toast {
+                min-width: 160px;
+                max-width: 250px;
+                font-size: 11px;
+                padding: 10px 14px;
+            }
+            .toast i {
+                font-size: 16px;
+            }
+            .btn-whatsapp-float {
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
+                bottom: 12px;
+                right: 12px;
+            }
+            .logo-text {
+                font-size: 15px;
+            }
+            .logo-badge {
+                width: 34px;
+                height: 34px;
+            }
+            .logo-badge .icono {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+            .btn-nav-admin,
+            .btn-nav-whatsapp {
+                font-size: 10px;
+                padding: 4px 10px !important;
+            }
+            .mobile-menu ul li a {
+                font-size: 12px;
+                padding: 10px 16px;
+            }
+            .plan-card .check-mark {
+                font-size: 12px;
+                top: 4px;
+                right: 8px;
+            }
+            .plan-header {
+                padding-right: 14px;
+            }
+            .logo-ring-1 { inset: -2px; }
+            .logo-ring-2 { inset: -5px; }
+            .logo-ring-3 { inset: 0px; }
+        }
+
+        @media (max-width: 320px) {
+            .titulo-principal {
+                font-size: 20px;
+            }
+            .titulo-principal .accent {
+                font-size: 18px;
+            }
+            .logo-text {
+                font-size: 13px;
+            }
+            .logo-badge {
+                width: 30px;
+                height: 30px;
+            }
+            .logo-badge .icono {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+            }
+            .btn-cyan {
+                font-size: 12px;
+                padding: 12px 14px;
+            }
+            .forma-pago-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .forma-pago-option {
+                padding: 6px;
+            }
+            .forma-pago-option i {
+                font-size: 14px;
+            }
+            .forma-pago-option .label {
+                font-size: 9px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+            .hero-layout {
+                grid-template-columns: 1fr 240px;
+            }
+            .image-frame {
+                height: 240px;
+            }
+            .titulo-principal {
+                font-size: 34px;
+            }
+        }
+
+        @media (hover: none) {
+            .btn-cyan:hover {
+                transform: none;
+                background: var(--accent-cyan);
+            }
+            .btn-cyan:active {
+                transform: scale(0.97);
+            }
+            .plan-card:hover {
+                transform: none;
+            }
+            .plan-card:active {
+                transform: scale(0.98);
+            }
+            .desktop-nav a::after {
+                display: none;
+            }
+            .btn-nav-whatsapp:hover,
+            .btn-nav-admin:hover {
+                background: transparent !important;
+                color: var(--accent-cyan) !important;
+            }
+            .logo-badge:hover .icono {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            input, select, textarea, button {
+                font-size: 16px !important;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+       TOAST CONTAINER
+       ============================================================ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- ============================================================
+       BOTÓN FLOTANTE DE WHATSAPP
+       ============================================================ -->
+    <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
+       class="btn-whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       aria-label="Contactar por WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <div class="container">
+
+        <!-- ============================================================
+           BARRA DE NAVEGACIÓN
+           ============================================================ -->
+        <header class="navbar">
+            <div class="logo-container">
+                <div class="logo-badge">
+                    <span class="logo-ring-1"></span>
+                    <span class="logo-ring-2"></span>
+                    <span class="logo-ring-3"></span>
+                    <span class="logo-particle"></span>
+                    <span class="logo-particle"></span>
+                    <span class="logo-particle"></span>
+                    <span class="logo-particle"></span>
+                    <div class="icono">
+                        <i class="fas fa-futbol"></i>
+                    </div>
+                </div>
+                <div class="logo-text">FLY <span>FUTBOLEROS</span></div>
+            </div>
+
+            <ul class="desktop-nav">
+                <li><a href="#inicio">Home</a></li>
+                <li><a href="#quienes-somos">Quiénes Somos</a></li>
+                <li><a href="#planes">Planes</a></li>
+                <li><a href="#reglas" id="btnReglasNav">Reglas</a></li>
+                <li><a href="panel-socios.html" class="btn-nav-admin"><i class="fas fa-user-shield"></i> Panel</a></li>
+                <li>
+                    <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="btn-nav-whatsapp">
+                        <i class="fab fa-whatsapp"></i> Grupo
+                    </a>
+                </li>
+            </ul>
+
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <nav class="mobile-menu" id="mobileMenu">
+                <ul>
+                    <li><a href="#inicio" class="mobile-link">Home</a></li>
+                    <li><a href="#quienes-somos" class="mobile-link">Quiénes Somos</a></li>
+                    <li><a href="#planes" class="mobile-link">Planes</a></li>
+                    <li><a href="#reglas" class="mobile-link" id="btnReglasMobile">Reglas</a></li>
+                    <li><a href="panel-socios.html" class="mobile-link" style="color: var(--accent-cyan);"><i class="fas fa-user-shield"></i> Panel</a></li>
+                    <li>
+                        <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           class="mobile-link whatsapp-link">
+                            <i class="fab fa-whatsapp"></i> Grupo WhatsApp
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- ============================================================
+           HERO CARD PRINCIPAL
+           ============================================================ -->
+        <main class="main-card" id="inicio" data-aos="fade-up" data-aos-duration="800">
+            
+            <div style="position: absolute; bottom: 16px; left: 30%;" class="pattern-dots">
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+
+            <div class="hero-layout">
+                <div class="hero-content">
+                    <h1 class="titulo-principal">
+                        FLY
+                        <span class="accent">FUTBOLEROS</span>
+                    </h1>
+                    
+                    <p class="subtitulo">
+                        Sumate a la comunidad de futboleros. Elegí tu modalidad, asegurá tu lugar en la cancha y jugá todos los fines de semana.
+                    </p>
+
+                    <div class="planes-grid" id="planes">
+                        <label class="plan-card active" data-plan="Sábatero" data-price="20.000">
+                            <input type="radio" name="plan" class="plan-radio" checked>
+                            <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                            <div class="plan-header">
+                                <span class="plan-title">Sábatero</span>
+                                <span class="plan-price">20.000 <small>Gs/mes</small></span>
+                            </div>
+                            <p class="plan-desc">Acceso total a todos los sábados del mes.</p>
+                        </label>
+
+                        <label class="plan-card" data-plan="Finder" data-price="5.000">
+                            <input type="radio" name="plan" class="plan-radio">
+                            <span class="check-mark"><i class="fas fa-check-circle"></i></span>
+                            <div class="plan-header">
+                                <span class="plan-title">Finder</span>
+                                <span class="plan-price">5.000 <small>Gs/sáb</small></span>
+                            </div>
+                            <p class="plan-desc">Ideal si venís de forma ocasional. Pagás por fecha jugada.</p>
+                        </label>
+                    </div>
+
+                    <button class="btn-cyan" id="btnUnirme">
+                        🔥 QUIERO SER SOCIO
+                    </button>
+                    <button class="btn-outline" id="btnVerReglas">
+                        📋 Ver Reglas del Grupo
+                    </button>
+
+                    <!-- ================================================
+                       FORMULARIO DE SUSCRIPCIÓN
+                       ================================================ -->
+                    <div class="form-suscripcion" id="formSuscripcion">
+                        <h3>
+                            <i class="fas fa-pen-fancy"></i> 
+                            Completá tus datos
+                            <span class="plan-selected" id="planSeleccionado">Sábatero</span>
+                        </h3>
+
+                        <div class="plan-info" id="planInfo">
+                            <i class="fas fa-info-circle"></i> 
+                            Plan seleccionado: <strong id="planInfoNombre">Sábatero</strong> · 
+                            Precio: <strong id="planInfoPrecio">20.000 Gs/mes</strong>
+                        </div>
+
+                        <!-- DATOS BANCARIOS -->
+                        <div class="datos-bancarios" id="datosBancarios">
+                            <h4><i class="fas fa-university"></i> Datos para la transferencia</h4>
+                            <div class="banco-row">
+                                <span class="label">Banco</span>
+                                <span class="value">Banco Nacional de Fomento</span>
+                            </div>
+                            <div class="banco-row">
+                                <span class="label">Tipo de cuenta</span>
+                                <span class="value">Cuenta Corriente</span>
+                            </div>
+                            <div class="banco-row">
+                                <span class="label">N° de cuenta</span>
+                                <span class="value" id="cuentaBanco">1234567890 <button class="copy-btn" onclick="copiarTexto('cuentaBanco')"><i class="fas fa-copy"></i></button></span>
+                            </div>
+                            <div class="banco-row">
+                                <span class="label">Titular</span>
+                                <span class="value" id="titularCuenta">Fly Futboleros - Asociación</span>
+                            </div>
+                            <div class="banco-row">
+                                <span class="label">Cédula / RUC</span>
+                                <span class="value" id="rucCuenta">1234567-8</span>
+                            </div>
+                            <div class="banco-row" style="border-bottom: none; margin-top: 4px;">
+                                <span class="label">Monto a pagar</span>
+                                <span class="value" style="color: var(--accent-cyan); font-size: 16px;" id="montoPago">20.000 Gs.</span>
+                            </div>
+                            <div style="margin-top: 6px; font-size: 11px; color: var(--text-gray);">
+                                <i class="fas fa-info-circle"></i> Si pagás en efectivo, seleccioná "Efectivo" abajo.
+                            </div>
+                        </div>
+
+                        <!-- FORMA DE PAGO -->
+                        <div class="forma-pago-grid" id="formaPagoGrid">
+                            <div class="forma-pago-option active-transferencia" id="pagoTransferencia" onclick="seleccionarFormaPago('transferencia')">
+                                <i class="fas fa-university"></i>
+                                <div class="label">Transferencia</div>
+                                <div class="sub">Depósito bancario</div>
+                            </div>
+                            <div class="forma-pago-option" id="pagoEfectivo" onclick="seleccionarFormaPago('efectivo')">
+                                <i class="fas fa-money-bill-wave"></i>
+                                <div class="label">Efectivo</div>
+                                <div class="sub">Pago en persona</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="socioNombre">Nombre completo *</label>
+                                <input type="text" id="socioNombre" placeholder="Ej: Juan Pérez" />
+                            </div>
+                            <div class="form-group">
+                                <label for="socioTelefono">Teléfono *</label>
+                                <input type="tel" id="socioTelefono" placeholder="0981 123 456" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="socioPosicion">Posición preferida</label>
+                                <select id="socioPosicion">
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Arquero">🧤 Arquero</option>
+                                    <option value="Defensor">🛡️ Defensor</option>
+                                    <option value="Mediocampista">⚡ Mediocampista</option>
+                                    <option value="Delantero">⚽ Delantero</option>
+                                    <option value="Comodin">🔄 Comodín (todas)</option>
+                                </select>
+                            </div>
+                            <!-- CAMPO COMPROBANTE - SOLO PARA TRANSFERENCIA -->
+                            <div class="form-group campo-comprobante" id="campoComprobante">
+                                <label for="socioComprobante">Comprobante de transferencia *</label>
+                                <input type="file" id="socioComprobante" accept="image/*,.pdf" />
+                                <div class="comprobante-info">
+                                    <i class="fas fa-info-circle"></i> Adjuntá captura o foto del comprobante de transferencia
+                                </div>
+                            </div>
+                            <!-- MENSAJE PARA EFECTIVO (se muestra cuando se selecciona efectivo) -->
+                            <div class="form-group" id="mensajeEfectivo" style="display: none;">
+                                <div style="background: rgba(255, 145, 0, 0.08); border: 1px solid var(--efectivo); padding: 10px 12px; border-radius: 2px; color: var(--text-gray); font-size: 13px;">
+                                    <i class="fas fa-check-circle" style="color: var(--efectivo);"></i>
+                                    <strong style="color: var(--text-light);">Pago en efectivo</strong><br />
+                                    No necesitas adjuntar comprobante. El registro se realizará automáticamente.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" id="socioTerminos" style="width: auto; margin-right: 8px;" />
+                                    Acepto los términos y condiciones *
+                                </label>
+                            </div>
+                        </div>
+
+                        <button class="btn-suscribir transferencia" id="btnSuscribir">
+                            <span class="btn-text">
+                                <i class="fas fa-upload"></i> 
+                                ENVIAR COMPROBANTE
+                            </span>
+                            <span class="spinner"></span>
+                        </button>
+                        <button class="btn-cancelar" id="btnCancelarSuscripcion">
+                            ✕ Cancelar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="image-frame-wrapper">
+                    <div class="image-frame" id="heroImage">
+                        <div class="fallback-text">
+                            <i class="fas fa-futbol" style="font-size: 48px; display: block; margin-bottom: 10px; color: var(--accent-cyan);"></i>
+                            Fly Futboleros
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- ============================================================
+           SECCIÓN QUIÉNES SOMOS
+           ============================================================ -->
+        <section class="main-card about-section" id="quienes-somos" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="section-title">
+                <i class="fas fa-users-line"></i> Quiénes Somos
+            </h2>
+            <p class="subtitulo" style="max-width: 100%;">
+                <strong>Fly Futboleros</strong> es una asociación amateur de fútbol 6 vs 6 que comenzó sus actividades a mediados del año 2012. Con más de una década de trayectoria, nos hemos consolidado como un espacio donde la pasión por el deporte y la camaradería se unen fecha tras fecha.
+            </p>
+
+            <div class="about-grid">
+                <div class="about-box" data-aos="fade-right" data-aos-delay="300">
+                    <h3>🏆 Tradición y Deporte</h3>
+                    <p>Reconocida y altamente valorada por sus socios, nuestra asociación promueve el juego limpio, la integración de nuevos valores y la organización semanal de partidos sin complicaciones.</p>
+                </div>
+                <div class="about-box" data-aos="fade-left" data-aos-delay="400">
+                    <h3>🤝 Compromiso Social</h3>
+                    <p>Más allá de la cancha, Fly Futboleros se distingue por ayudar siempre a la sociedad, impulsando causas benéficas, torneos solidarios y apoyo comunitario de manera constante.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+           SECCIÓN DE CONTACTO - WHATSAPP
+           ============================================================ -->
+        <section class="main-card" id="contacto" style="text-align: center;">
+            <h2 style="text-transform: uppercase; font-weight: 900; margin-bottom: 10px; color: var(--accent-cyan);">
+                <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i> Unite al Grupo
+            </h2>
+            <p style="color: var(--text-gray); margin-bottom: 15px;">
+                Sumate al grupo de WhatsApp para enterarte de las novedades, confirmar asistencia y estar en contacto con toda la comunidad.
+            </p>
+            <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="btn-cyan" 
+               style="max-width: 300px; margin: 0 auto; display: block; background: var(--whatsapp);">
+                <i class="fab fa-whatsapp"></i> UNIRME AL GRUPO
+            </a>
+        </section>
+
+    </div>
+
+    <!-- ============================================================
+       MODAL DE REGLAS
+       ============================================================ -->
+    <div class="modal-overlay" id="modalReglas">
+        <div class="modal-content">
+            <h3>📋 Reglas del Grupo</h3>
+            <p><strong>1. Pagos:</strong> El cobro se realiza según el plan seleccionado. No se realizan reembolsos por inasistencia.</p>
+            <p><strong>2. Confirmación:</strong> Confirmar asistencia antes del viernes a las 20:00 hs para reservar cupo.</p>
+            <p><strong>3. Puntualidad:</strong> Se otorgan 15 minutos de tolerancia antes de liberar el lugar a la lista de espera.</p>
+            <p><strong>4. Cancelaciones:</strong> Podés darte de baja avisando antes del día 25 de cada mes.</p>
+            <p><strong>5. Conducta:</strong> Se promueve el respeto entre compañeros y rivales. Conductas antideportivas serán sancionadas.</p>
+            <button class="btn-cyan" id="btnCerrarModal" style="margin-top: 15px;">Entendido</button>
+        </div>
+    </div>
+
+    <!-- ============================================================
+       PIE DE PÁGINA
+       ============================================================ -->
+    <footer class="footer">
+        <p>&copy; 2026 <span>FLY FUTBOLEROS</span>. Todos los derechos reservados.</p>
+        <p>Asociación Amateur de Fútbol 6 vs 6 · Desde 2012</p>
+        <div class="social-links">
+            <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="whatsapp-icon"
+               aria-label="Grupo de WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // ============================================================
+        //  CONFIGURACIÓN
+        // ============================================================
+        let formaPagoSeleccionada = 'transferencia';
+
+        // ============================================================
+        //  INICIALIZAR AOS
+        // ============================================================
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 600,
+            easing: 'ease-out-cubic'
+        });
+
+        // ============================================================
+        //  TOAST NOTIFICATIONS
+        // ============================================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const iconMap = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                pending: 'fa-clock'
+            };
+            
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas ${iconMap[type] || iconMap.success}"></i>
+                <span class="toast-message">${message}</span>
+                <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 5000);
+        }
+
+        // ============================================================
+        //  COPIAR TEXTO
+        // ============================================================
+        function copiarTexto(id) {
+            const elemento = document.getElementById(id);
+            const texto = elemento.textContent.trim().replace('Copiar', '').trim();
+            
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(texto).then(() => {
+                    showToast('📋 Dato copiado al portapapeles', 'success');
+                }).catch(() => {
+                    const textarea = document.createElement('textarea');
+                    textarea.value = texto;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textarea);
+                    showToast('📋 Dato copiado al portapapeles', 'success');
+                });
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = texto;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('📋 Dato copiado al portapapeles', 'success');
+            }
+        }
+
+        // ============================================================
+        //  SELECCIÓN DE FORMA DE PAGO
+        // ============================================================
+        function seleccionarFormaPago(tipo) {
+            formaPagoSeleccionada = tipo;
+            
+            const elTransferencia = document.getElementById('pagoTransferencia');
+            const elEfectivo = document.getElementById('pagoEfectivo');
+            const campoComprobante = document.getElementById('campoComprobante');
+            const mensajeEfectivo = document.getElementById('mensajeEfectivo');
+            const btnSuscribir = document.getElementById('btnSuscribir');
+            
+            elTransferencia.className = 'forma-pago-option';
+            elEfectivo.className = 'forma-pago-option';
+            
+            if (tipo === 'transferencia') {
+                elTransferencia.classList.add('active-transferencia');
+                // Mostrar campo comprobante, ocultar mensaje efectivo
+                campoComprobante.classList.remove('oculto');
+                mensajeEfectivo.style.display = 'none';
+                // Cambiar botón
+                btnSuscribir.className = 'btn-suscribir transferencia';
+                btnSuscribir.innerHTML = `
+                    <span class="btn-text">
+                        <i class="fas fa-upload"></i> 
+                        ENVIAR COMPROBANTE
+                    </span>
+                    <span class="spinner"></span>
+                `;
+                // Hacer obligatorio el comprobante
+                document.getElementById('socioComprobante').required = true;
+            } else {
+                elEfectivo.classList.add('active-efectivo');
+                // Ocultar campo comprobante, mostrar mensaje efectivo
+                campoComprobante.classList.add('oculto');
+                mensajeEfectivo.style.display = 'block';
+                // Cambiar botón
+                btnSuscribir.className = 'btn-suscribir efectivo';
+                btnSuscribir.innerHTML = `
+                    <span class="btn-text">
+                        <i class="fas fa-check-circle"></i> 
+                        REGISTRARME
+                    </span>
+                    <span class="spinner"></span>
+                `;
+                // No obligatorio
+                document.getElementById('socioComprobante').required = false;
+                document.getElementById('socioComprobante').value = '';
+            }
+        }
+
+        // ============================================================
+        //  MANEJO DE ERROR DE IMAGEN
+        // ============================================================
+        const heroImage = document.getElementById('heroImage');
+        heroImage.addEventListener('error', () => {
+            heroImage.classList.add('img-error');
+        });
+
+        // ============================================================
+        //  CONTROL DEL MENÚ HAMBURGUESA
+        // ============================================================
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        hamburgerBtn.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+        mobileLinks.forEach(link => link.addEventListener('click', () => mobileMenu.classList.remove('active')));
+
+        document.addEventListener('click', (e) => {
+            if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.remove('active');
+            }
+        });
+
+        // ============================================================
+        //  SELECCIÓN VISUAL DE PLANES Y ACTUALIZACIÓN DE FORM
+        // ============================================================
+        const planCards = document.querySelectorAll('.plan-card');
+        const planSeleccionado = document.getElementById('planSeleccionado');
+        const planInfoNombre = document.getElementById('planInfoNombre');
+        const planInfoPrecio = document.getElementById('planInfoPrecio');
+        const montoPago = document.getElementById('montoPago');
+
+        function actualizarInfoPlan(plan, precio) {
+            planSeleccionado.textContent = plan;
+            planInfoNombre.textContent = plan;
+            planInfoPrecio.textContent = plan === 'Sábatero' ? '20.000 Gs/mes' : '5.000 Gs/sábado';
+            montoPago.textContent = plan === 'Sábatero' ? '20.000 Gs.' : '5.000 Gs.';
+        }
+
+        planCards.forEach(card => {
+            card.addEventListener('click', () => {
+                planCards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                card.querySelector('input').checked = true;
+                
+                const plan = card.dataset.plan;
+                const precio = card.dataset.price;
+                actualizarInfoPlan(plan, precio);
+            });
+        });
+
+        const planActivoInicial = document.querySelector('.plan-card.active');
+        if (planActivoInicial) {
+            actualizarInfoPlan(
+                planActivoInicial.dataset.plan,
+                planActivoInicial.dataset.price
+            );
+        }
+
+        // ============================================================
+        //  MOSTRAR/OCULTAR FORMULARIO DE SUSCRIPCIÓN
+        // ============================================================
+        const formSuscripcion = document.getElementById('formSuscripcion');
+        const btnUnirme = document.getElementById('btnUnirme');
+        const btnCancelarSuscripcion = document.getElementById('btnCancelarSuscripcion');
+
+        btnUnirme.addEventListener('click', () => {
+            const planActivo = document.querySelector('.plan-card.active');
+            if (planActivo) {
+                actualizarInfoPlan(
+                    planActivo.dataset.plan,
+                    planActivo.dataset.price
+                );
+            }
+            
+            formSuscripcion.classList.toggle('visible');
+            
+            if (formSuscripcion.classList.contains('visible')) {
+                // Resetear a transferencia por defecto
+                seleccionarFormaPago('transferencia');
+                setTimeout(() => {
+                    formSuscripcion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 300);
+            }
+        });
+
+        btnCancelarSuscripcion.addEventListener('click', () => {
+            formSuscripcion.classList.remove('visible');
+            document.getElementById('socioNombre').value = '';
+            document.getElementById('socioTelefono').value = '';
+            document.getElementById('socioPosicion').value = '';
+            document.getElementById('socioComprobante').value = '';
+            document.getElementById('socioTerminos').checked = false;
+            document.querySelectorAll('.form-suscripcion .error').forEach(el => el.classList.remove('error'));
+            seleccionarFormaPago('transferencia');
+        });
+
+        // ============================================================
+        //  LÓGICA DE SUSCRIPCIÓN (DIFERENCIADA)
+        // ============================================================
+        document.getElementById('btnSuscribir').addEventListener('click', async function() {
+            const nombre = document.getElementById('socioNombre');
+            const telefono = document.getElementById('socioTelefono');
+            const posicion = document.getElementById('socioPosicion');
+            const comprobante = document.getElementById('socioComprobante');
+            const terminos = document.getElementById('socioTerminos');
+
+            let hasError = false;
+
+            [nombre, telefono].forEach(field => field.classList.remove('error'));
+
+            if (!nombre.value.trim() || nombre.value.trim().length < 2) {
+                nombre.classList.add('error');
+                hasError = true;
+            }
+
+            if (!telefono.value.trim() || telefono.value.trim().length < 6) {
+                telefono.classList.add('error');
+                hasError = true;
+            }
+
+            // Validar comprobante solo si es transferencia
+            if (formaPagoSeleccionada === 'transferencia' && comprobante.files.length === 0) {
+                showToast('⚠️ Debes adjuntar el comprobante de transferencia', 'warning');
+                hasError = true;
+            }
+
+            if (!terminos.checked) {
+                showToast('Debés aceptar los términos y condiciones', 'warning');
+                hasError = true;
+            }
+
+            if (hasError) {
+                showToast('Por favor, completá todos los campos obligatorios', 'error');
+                return;
+            }
+
+            const planActivo = document.querySelector('.plan-card.active');
+            const plan = planActivo ? planActivo.dataset.plan : 'Sábatero';
+
+            const btn = this;
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            try {
+                const socios = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
+                
+                const existe = socios.some(s => 
+                    s.nombre.toLowerCase() === nombre.value.trim().toLowerCase()
+                );
+                
+                if (existe) {
+                    showToast(`⚠️ Ya existe un socio con el nombre "${nombre.value.trim()}"`, 'warning');
+                    btn.classList.remove('loading');
+                    btn.disabled = false;
+                    return;
+                }
+
+                let comprobanteData = null;
+                let comprobanteNombre = null;
+
+                // Solo leer comprobante si es transferencia
+                if (formaPagoSeleccionada === 'transferencia' && comprobante.files.length > 0) {
+                    const file = comprobante.files[0];
+                    comprobanteNombre = file.name;
+                    comprobanteData = await new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.onload = (e) => resolve(e.target.result);
+                        reader.readAsDataURL(file);
+                    });
+                }
+
+                const nuevoSocio = {
+                    id: Date.now(),
+                    nombre: nombre.value.trim(),
+                    telefono: telefono.value.trim(),
+                    posicion: posicion.value || 'No especificada',
+                    plan: plan,
+                    formaPago: formaPagoSeleccionada,
+                    fechaSuscripcion: new Date().toISOString().slice(0, 10),
+                    comprobanteNombre: comprobanteNombre,
+                    comprobanteData: comprobanteData,
+                    // Si es efectivo → activo, si es transferencia → pendiente
+                    estado: formaPagoSeleccionada === 'efectivo' ? 'activo' : 'pendiente',
+                    pagoConfirmado: formaPagoSeleccionada === 'efectivo' ? true : false,
+                    fechaPago: formaPagoSeleccionada === 'efectivo' ? new Date().toISOString().slice(0, 10) : null
+                };
+
+                socios.push(nuevoSocio);
+                localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+
+                const formaPagoTexto = formaPagoSeleccionada === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo';
+                const estadoTexto = formaPagoSeleccionada === 'efectivo' ? '¡activado inmediatamente!' : 'enviado para verificación.';
+                
+                showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
+                
+                formSuscripcion.classList.remove('visible');
+                document.getElementById('socioNombre').value = '';
+                document.getElementById('socioTelefono').value = '';
+                document.getElementById('socioPosicion').value = '';
+                document.getElementById('socioComprobante').value = '';
+                document.getElementById('socioTerminos').checked = false;
+                seleccionarFormaPago('transferencia');
+                
+                btn.classList.remove('loading');
+                btn.disabled = false;
+
+            } catch (e) {
+                console.error('Error en suscripción:', e);
+                showToast('Error al procesar la suscripción', 'error');
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        });
+
+        // ============================================================
+        //  LÓGICA DE MODAL DE REGLAS
+        // ============================================================
+        const modal = document.getElementById('modalReglas');
+        const btnVerReglas = document.getElementById('btnVerReglas');
+        const btnReglasNav = document.getElementById('btnReglasNav');
+        const btnReglasMobile = document.getElementById('btnReglasMobile');
+        const btnCerrarModal = document.getElementById('btnCerrarModal');
+
+        const abrirModal = (e) => {
+            e.preventDefault();
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        const cerrarModal = () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        btnVerReglas.addEventListener('click', abrirModal);
+        btnReglasNav.addEventListener('click', abrirModal);
+        btnReglasMobile.addEventListener('click', abrirModal);
+        btnCerrarModal.addEventListener('click', cerrarModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) cerrarModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                cerrarModal();
+            }
+        });
+
+        // ============================================================
+        //  INICIALIZAR
+        // ============================================================
+        // Inicializar con transferencia por defecto
+        seleccionarFormaPago('transferencia');
+
+        if (!sessionStorage.getItem('welcome_shown')) {
+            setTimeout(() => {
+                showToast('⚽ Bienvenido a Fly Futboleros', 'success');
+                sessionStorage.setItem('welcome_shown', 'true');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

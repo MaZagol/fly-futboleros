@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>FLY FUTBOLEROS · Gestión de Socios</title>
+
+    <!-- Fuentes modernas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- AOS - Animaciones -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            --bg-dark: #0a0a0e;
+            --card-bg: #12121a;
+            --accent-cyan: #00e5ff;
+            --text-light: #ffffff;
+            --text-gray: #a0a0a8;
+            --border-color: #1e1e2a;
+            --success: #00e676;
+            --error: #ff1744;
+            --warning: #ffea00;
+            --pending: #ff9100;
+            --whatsapp: #25D366;
+            --efectivo: #ff9100;
+            --transferencia: #00a859;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        body {
+            font-family: "Montserrat", "Inter", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            padding: 16px;
+            background-image: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 229, 255, 0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(0, 229, 255, 0.03) 0%, transparent 50%),
+                linear-gradient(90deg, transparent 48%, rgba(0, 229, 255, 0.02) 48%, rgba(0, 229, 255, 0.02) 52%, transparent 52%),
+                linear-gradient(0deg, transparent 48%, rgba(0, 229, 255, 0.02) 48%, rgba(0, 229, 255, 0.02) 52%, transparent 52%),
+                radial-gradient(circle at 50% 50%, transparent 48%, rgba(0, 229, 255, 0.02) 48%, rgba(0, 229, 255, 0.02) 52%, transparent 52%),
+                linear-gradient(180deg, #08080c 0%, #0f0f18 50%, #08080c 100%);
+            background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%, 60% 60%, 100% 100%;
+            background-attachment: fixed;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================================================
+           TOAST NOTIFICATIONS
+           ============================================================ */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            padding: 12px 20px;
+            background: var(--card-bg);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            animation: slideInRight 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-width: 250px;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .toast.success { border-left-color: var(--success); }
+        .toast.error { border-left-color: var(--error); }
+        .toast.warning { border-left-color: var(--warning); }
+        .toast.pending { border-left-color: var(--pending); }
+
+        .toast i { font-size: 20px; }
+        .toast.success i { color: var(--success); }
+        .toast.error i { color: var(--error); }
+        .toast.warning i { color: var(--warning); }
+        .toast.pending i { color: var(--pending); }
+
+        .toast-message {
+            font-size: 13px;
+            font-weight: 600;
+            flex: 1;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+        .toast-close:hover { color: #fff; }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideOutRight {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        /* ============================================================
+           BARRA DE NAVEGACIÓN
+           ============================================================ */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 2px solid var(--accent-cyan);
+            margin-bottom: 24px;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 12px) 100%, 0 100%);
+            box-shadow: 0 4px 30px rgba(0, 229, 255, 0.08);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-badge {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 900;
+            clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+        }
+
+        .logo-text {
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+        }
+
+        .logo-text span {
+            color: var(--accent-cyan);
+        }
+
+        .btn-volver {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            padding: 6px 14px;
+            border: 2px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .btn-volver:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+        }
+
+        /* ============================================================
+           MAIN CARD
+           ============================================================ */
+        .main-card {
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 28px 24px;
+            margin-bottom: 24px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+        }
+
+        .main-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 100px 100px 0;
+            border-color: transparent var(--accent-cyan) transparent transparent;
+            opacity: 0.06;
+            pointer-events: none;
+        }
+
+        .titulo-seccion {
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 20px;
+            color: var(--accent-cyan);
+            font-size: 22px;
+        }
+
+        /* ============================================================
+           STATS GRID
+           ============================================================ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            background: rgba(10, 10, 14, 0.8);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 12px 14px;
+            transition: all 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--text-light);
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .stat-box.pendiente { border-left-color: var(--pending); }
+        .stat-box.pendiente .stat-number { color: var(--pending); }
+        .stat-box.efectivo { border-left-color: var(--efectivo); }
+        .stat-box.efectivo .stat-number { color: var(--efectivo); }
+        .stat-box.transferencia { border-left-color: var(--transferencia); }
+        .stat-box.transferencia .stat-number { color: var(--transferencia); }
+        .stat-box.moroso { border-left-color: var(--error); }
+        .stat-box.moroso .stat-number { color: var(--error); }
+
+        /* ============================================================
+           BARRA DE BÚSQUEDA Y FILTROS
+           ============================================================ */
+        .search-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            background: rgba(10, 10, 14, 0.8);
+            padding: 12px 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .search-bar input,
+        .search-bar select {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 12px;
+            font-family: inherit;
+            font-size: 13px;
+            flex: 1;
+            min-width: 130px;
+            border-radius: 2px;
+        }
+
+        .search-bar input:focus,
+        .search-bar select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+        }
+
+        .btn-cyan-outline {
+            background: transparent;
+            border: 2px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            padding: 8px 16px;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cyan-outline:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+        }
+
+        /* ============================================================
+           FORMULARIO
+           ============================================================ */
+        .form-socio {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            background: rgba(10, 10, 14, 0.8);
+            padding: 12px 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-socio input,
+        .form-socio select {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 12px;
+            font-family: inherit;
+            font-size: 13px;
+            flex: 1;
+            min-width: 130px;
+            border-radius: 2px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-socio input:focus,
+        .form-socio select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .form-socio input.error {
+            border-color: var(--error);
+        }
+
+        .btn-cyan {
+            display: inline-block;
+            padding: 8px 18px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            font-weight: 900;
+            font-size: 13px;
+            text-transform: uppercase;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            clip-path: polygon(0 0, 100% 0, 95% 100%, 0% 100%);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-cyan:hover {
+            background: #5cffff;
+            transform: translateX(4px);
+        }
+
+        .btn-cyan:active {
+            transform: scale(0.97);
+        }
+
+        .btn-cyan-sm {
+            width: auto;
+        }
+
+        /* ============================================================
+           TABLA
+           ============================================================ */
+        .tabla-wrapper {
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .tabla-socios {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .tabla-socios th {
+            background: rgba(10, 10, 14, 0.9);
+            color: var(--accent-cyan);
+            padding: 10px 12px;
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 11px;
+            border-bottom: 2px solid var(--accent-cyan);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            white-space: nowrap;
+        }
+
+        .tabla-socios td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(18, 18, 26, 0.6);
+            transition: background 0.3s ease;
+            vertical-align: middle;
+        }
+
+        .tabla-socios tr:hover td {
+            background: rgba(18, 18, 26, 0.9);
+        }
+
+        .tabla-socios tr.anim-enter {
+            animation: fadeInRow 0.3s ease;
+        }
+
+        @keyframes fadeInRow {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .badge-status {
+            padding: 3px 10px;
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .badge-status.activo {
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--accent-cyan);
+        }
+        .badge-status.moroso {
+            background: rgba(255, 71, 87, 0.15);
+            color: #ff4757;
+        }
+        .badge-status.pendiente {
+            background: rgba(255, 145, 0, 0.15);
+            color: var(--pending);
+        }
+
+        .badge-forma-pago {
+            padding: 2px 8px;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .badge-forma-pago.efectivo {
+            background: rgba(255, 145, 0, 0.15);
+            color: var(--efectivo);
+        }
+        .badge-forma-pago.transferencia {
+            background: rgba(0, 168, 89, 0.15);
+            color: var(--transferencia);
+        }
+
+        .btn-accion {
+            background: none;
+            border: none;
+            color: var(--text-gray);
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-accion:hover {
+            color: var(--text-light);
+        }
+
+        .btn-accion.view:hover {
+            color: var(--accent-cyan);
+        }
+
+        .btn-accion.approve:hover {
+            color: var(--success);
+        }
+
+        .btn-accion.reject:hover {
+            color: var(--error);
+        }
+
+        .btn-accion.delete:hover {
+            color: #ff4757;
+        }
+
+        .btn-accion:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* ============================================================
+           MODAL DE COMPROBANTE
+           ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content.comprobante-modal {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-cyan);
+            max-width: 800px;
+            width: 100%;
+            padding: 24px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-content.comprobante-modal h3 {
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .modal-content.comprobante-modal .socio-info {
+            color: var(--text-gray);
+            font-size: 13px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-content.comprobante-modal .socio-info strong {
+            color: var(--text-light);
+        }
+
+        .modal-content.comprobante-modal .comprobante-img {
+            width: 100%;
+            max-height: 500px;
+            object-fit: contain;
+            background: #0a0a0c;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-content.comprobante-modal .comprobante-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: #0a0a0c;
+            border: 2px dashed var(--border-color);
+            border-radius: 4px;
+            color: var(--text-gray);
+        }
+
+        .modal-content.comprobante-modal .comprobante-placeholder i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .modal-actions .btn-cyan {
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .modal-actions .btn-outline-modal {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 18px;
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-gray);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .modal-actions .btn-outline-modal:hover {
+            border-color: var(--text-light);
+            color: var(--text-light);
+        }
+
+        .modal-actions .btn-cyan.approve {
+            background: var(--success);
+            color: #fff;
+        }
+
+        .modal-actions .btn-cyan.approve:hover {
+            background: #00c96e;
+        }
+
+        .modal-actions .btn-cyan.reject {
+            background: var(--error);
+            color: #fff;
+        }
+
+        .modal-actions .btn-cyan.reject:hover {
+            background: #ff6b81;
+        }
+
+        /* ============================================================
+           PAGINACIÓN
+           ============================================================ */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 18px;
+            padding: 8px 0;
+        }
+
+        .pagination button {
+            background: rgba(10, 10, 14, 0.8);
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 6px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.05);
+        }
+
+        .pagination button.active {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            background: rgba(0, 229, 255, 0.1);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .pagination .info {
+            color: var(--text-gray);
+            font-size: 12px;
+            padding: 0 10px;
+        }
+
+        /* ============================================================
+           EMPTY STATE
+           ============================================================ */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-gray);
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.3;
+        }
+
+        .empty-state h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: var(--text-light);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .main-card {
+                padding: 20px 16px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .stat-number {
+                font-size: 20px;
+            }
+            .titulo-seccion {
+                font-size: 18px;
+            }
+            .form-socio,
+            .search-bar {
+                flex-direction: column;
+            }
+            .form-socio input,
+            .form-socio select,
+            .search-bar input,
+            .search-bar select {
+                min-width: unset;
+            }
+            .navbar {
+                flex-wrap: wrap;
+                gap: 10px;
+                padding: 10px 14px;
+            }
+            .modal-content.comprobante-modal {
+                padding: 16px;
+                margin: 10px;
+            }
+            .modal-actions {
+                flex-direction: column;
+            }
+            .modal-actions .btn-cyan,
+            .modal-actions .btn-outline-modal {
+                min-width: unset;
+                width: 100%;
+            }
+            .tabla-socios {
+                font-size: 12px;
+            }
+            .tabla-socios th,
+            .tabla-socios td {
+                padding: 8px 10px;
+            }
+            .logo-text {
+                font-size: 16px;
+            }
+            .logo-badge {
+                width: 34px;
+                height: 34px;
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+            }
+            .stat-box {
+                padding: 10px 12px;
+            }
+            .stat-number {
+                font-size: 18px;
+            }
+            .stat-label {
+                font-size: 9px;
+            }
+            .btn-volver {
+                font-size: 10px;
+                padding: 4px 10px;
+            }
+            input, select, textarea, button {
+                font-size: 16px !important;
+            }
+            .toast {
+                min-width: 160px;
+                max-width: 250px;
+                font-size: 11px;
+                padding: 10px 14px;
+            }
+            .toast i {
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .tabla-socios {
+                font-size: 11px;
+            }
+            .tabla-socios th,
+            .tabla-socios td {
+                padding: 6px 8px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-cyan);
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+       TOAST CONTAINER
+       ============================================================ -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="container">
+
+        <!-- ============================================================
+           BARRA DE NAVEGACIÓN
+           ============================================================ -->
+        <header class="navbar">
+            <div class="logo-container">
+                <div class="logo-badge">⚡</div>
+                <div class="logo-text">FLY <span>FUTBOLEROS</span></div>
+            </div>
+            <a href="index.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
+        </header>
+
+        <!-- ============================================================
+           PANEL DE SOCIOS
+           ============================================================ -->
+        <section class="main-card" data-aos="fade-up">
+            <h2 class="titulo-seccion">📊 Panel de Socios</h2>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-box" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number" id="totalSocios">0</div>
+                    <div class="stat-label">Total Inscriptos</div>
+                </div>
+                <div class="stat-box" data-aos="fade-up" data-aos-delay="150">
+                    <div class="stat-number" style="color: var(--accent-cyan);" id="activosSocios">0</div>
+                    <div class="stat-label">✅ Activos</div>
+                </div>
+                <div class="stat-box pendiente" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number" id="pendientesSocios">0</div>
+                    <div class="stat-label">⏳ Pendientes</div>
+                </div>
+                <div class="stat-box transferencia" data-aos="fade-up" data-aos-delay="250">
+                    <div class="stat-number" id="transferenciaSocios">0</div>
+                    <div class="stat-label">🏦 Transferencia</div>
+                </div>
+                <div class="stat-box efectivo" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number" id="efectivoSocios">0</div>
+                    <div class="stat-label">💵 Efectivo</div>
+                </div>
+            </div>
+
+            <!-- Barra de búsqueda y filtros -->
+            <div class="search-bar">
+                <input type="text" id="buscarSocio" placeholder="🔍 Buscar socio..." />
+                <select id="filtroEstado">
+                    <option value="todos">Todos los estados</option>
+                    <option value="activo">✅ Activos</option>
+                    <option value="pendiente">⏳ Pendientes</option>
+                    <option value="moroso">⚠️ Morosos</option>
+                </select>
+                <select id="filtroFormaPago">
+                    <option value="todos">Todas las formas de pago</option>
+                    <option value="transferencia">🏦 Transferencia</option>
+                    <option value="efectivo">💵 Efectivo</option>
+                </select>
+                <select id="filtroPlan">
+                    <option value="todos">Todos los planes</option>
+                    <option value="Sábatero">Plan Sábatero</option>
+                    <option value="Finder">Plan Finder</option>
+                </select>
+                <button class="btn-cyan-outline" id="btnExportar"><i class="fas fa-download"></i> Exportar</button>
+            </div>
+
+            <!-- Formulario de alta -->
+            <div class="form-socio" id="formSocio">
+                <input type="text" id="nombreSocio" placeholder="Nombre completo del jugador" />
+                <select id="planSocio">
+                    <option value="Sábatero">Plan Sábatero (Mensual)</option>
+                    <option value="Finder">Plan Finder (Por fecha)</option>
+                </select>
+                <select id="formaPagoSocio">
+                    <option value="transferencia">🏦 Transferencia</option>
+                    <option value="efectivo">💵 Efectivo</option>
+                </select>
+                <select id="estadoSocio">
+                    <option value="activo">✅ Activo</option>
+                    <option value="pendiente">⏳ Pendiente</option>
+                    <option value="moroso">⚠️ Moroso</option>
+                </select>
+                <button class="btn-cyan btn-cyan-sm" id="btnAgregar">+ AGREGAR</button>
+            </div>
+
+            <!-- Tabla -->
+            <div class="tabla-wrapper">
+                <table class="tabla-socios">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Jugador</th>
+                            <th>Teléfono</th>
+                            <th>Plan</th>
+                            <th>Forma de pago</th>
+                            <th>Estado</th>
+                            <th style="text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaBody">
+                        <!-- Se llena dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Paginación -->
+            <div class="pagination" id="pagination">
+                <button id="prevPage" disabled><i class="fas fa-chevron-left"></i></button>
+                <span class="info" id="pageInfo">Página 1</span>
+                <button id="nextPage"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- ============================================================
+       MODAL DE COMPROBANTE
+       ============================================================ -->
+    <div class="modal-overlay" id="modalComprobante">
+        <div class="modal-content comprobante-modal">
+            <h3>📎 Comprobante de pago</h3>
+            <div class="socio-info" id="comprobanteInfo">
+                <strong id="compSocioNombre">Juan Pérez</strong> · 
+                Plan: <span id="compSocioPlan">Sábatero</span> · 
+                Fecha: <span id="compSocioFecha">2024-01-01</span> · 
+                Pago: <span id="compSocioFormaPago">Transferencia</span>
+            </div>
+            <div id="comprobanteContainer">
+                <!-- Se llena dinámicamente -->
+            </div>
+            <div class="modal-actions" id="comprobanteActions">
+                <button class="btn-cyan approve" id="btnAprobarPago">
+                    <i class="fas fa-check"></i> APROBAR PAGO
+                </button>
+                <button class="btn-cyan reject" id="btnRechazarPago">
+                    <i class="fas fa-times"></i> RECHAZAR
+                </button>
+                <button class="btn-outline-modal" id="btnCerrarComprobante">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // ============================================================
+        //  INICIALIZAR AOS
+        // ============================================================
+        AOS.init({ once: true, offset: 30, duration: 500 });
+
+        // ============================================================
+        //  TOAST NOTIFICATIONS
+        // ============================================================
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            const iconMap = {
+                success: 'fa-check-circle',
+                error: 'fa-exclamation-circle',
+                warning: 'fa-exclamation-triangle',
+                pending: 'fa-clock'
+            };
+            
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <i class="fas ${iconMap[type] || iconMap.success}"></i>
+                <span class="toast-message">${message}</span>
+                <button class="toast-close" onclick="this.parentElement.remove()"><i class="fas fa-times"></i></button>
+            `;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideOutRight 0.3s ease forwards';
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        // ============================================================
+        //  LÓGICA DE SOCIOS
+        // ============================================================
+
+        let socios = [];
+        let currentPage = 1;
+        const perPage = 10;
+        let viewingSocioId = null;
+
+        function loadSocios() {
+            try {
+                const data = localStorage.getItem('fly_socios_v2');
+                if (data) {
+                    socios = JSON.parse(data);
+                } else {
+                    socios = [
+                        { id: 1, nombre: 'Juan Pérez', telefono: '0981 123 456', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', posicion: 'Delantero', fechaSuscripcion: '2024-01-01' },
+                        { id: 2, nombre: 'Carlos Gómez', telefono: '0981 654 321', plan: 'Finder', estado: 'moroso', formaPago: 'efectivo', posicion: 'Defensor', fechaSuscripcion: '2024-01-01' },
+                        { id: 3, nombre: 'Luis Martínez', telefono: '0981 789 123', plan: 'Sábatero', estado: 'pendiente', formaPago: 'transferencia', posicion: 'Arquero', fechaSuscripcion: '2024-01-01', comprobanteData: null }
+                    ];
+                    localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                }
+            } catch (e) {
+                console.error('Error cargando socios:', e);
+                socios = [];
+            }
+        }
+
+        function saveSocios() {
+            try {
+                localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+            } catch (e) {
+                console.error('Error guardando socios:', e);
+                showToast('Error al guardar los datos', 'error');
+            }
+        }
+
+        function getFilteredSocios() {
+            const busqueda = document.getElementById('buscarSocio').value.toLowerCase().trim();
+            const filtroEstado = document.getElementById('filtroEstado').value;
+            const filtroFormaPago = document.getElementById('filtroFormaPago').value;
+            const filtroPlan = document.getElementById('filtroPlan').value;
+
+            let filtered = socios;
+
+            if (busqueda) {
+                filtered = filtered.filter(s => s.nombre.toLowerCase().includes(busqueda));
+            }
+
+            if (filtroEstado !== 'todos') {
+                filtered = filtered.filter(s => s.estado === filtroEstado);
+            }
+
+            if (filtroFormaPago !== 'todos') {
+                filtered = filtered.filter(s => s.formaPago === filtroFormaPago);
+            }
+
+            if (filtroPlan !== 'todos') {
+                filtered = filtered.filter(s => s.plan === filtroPlan);
+            }
+
+            return filtered;
+        }
+
+        function getPaginatedSocios() {
+            const filtered = getFilteredSocios();
+            const total = filtered.length;
+            const totalPages = Math.ceil(total / perPage);
+            
+            if (currentPage > totalPages) currentPage = Math.max(1, totalPages);
+            
+            const start = (currentPage - 1) * perPage;
+            const end = Math.min(start + perPage, total);
+            const paginated = filtered.slice(start, end);
+
+            return { socios: paginated, total, totalPages, start, end };
+        }
+
+        function renderTabla() {
+            const tbody = document.getElementById('tablaBody');
+            const { socios: paginated, total, totalPages, start, end } = getPaginatedSocios();
+
+            tbody.innerHTML = '';
+
+            if (paginated.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7">
+                            <div class="empty-state">
+                                <i class="fas fa-users-slash"></i>
+                                <h3>No hay socios</h3>
+                                <p>Agregá tu primer socio usando el formulario arriba</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            } else {
+                paginated.forEach((socio, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'anim-enter';
+                    const realIndex = start + index;
+                    
+                    const tieneComprobante = socio.comprobanteData && socio.comprobanteData.length > 100;
+                    const esPendiente = socio.estado === 'pendiente';
+                    const esTransferencia = socio.formaPago === 'transferencia';
+
+                    let acciones = '';
+
+                    // Botón ver comprobante (solo si es transferencia y tiene comprobante)
+                    if (esTransferencia && tieneComprobante) {
+                        acciones += `
+                            <button class="btn-accion view" onclick="verComprobante(${socio.id})" title="Ver comprobante">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        `;
+                    } else if (esTransferencia && esPendiente && !tieneComprobante) {
+                        acciones += `
+                            <button class="btn-accion view" disabled title="Sin comprobante">
+                                <i class="fas fa-image" style="opacity:0.3;"></i>
+                            </button>
+                        `;
+                    }
+
+                    // Botón aprobar (solo si está pendiente y es transferencia)
+                    if (esPendiente && esTransferencia && tieneComprobante) {
+                        acciones += `
+                            <button class="btn-accion approve" onclick="aprobarPago(${socio.id})" title="Aprobar pago">
+                                <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                            </button>
+                        `;
+                    }
+
+                    // Botón eliminar (siempre)
+                    acciones += `
+                        <button class="btn-accion delete" onclick="eliminarSocio(${socio.id})" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+
+                    const badgeClass = socio.estado === 'pendiente' ? 'pendiente' : socio.estado;
+                    const formaPagoLabel = socio.formaPago === 'efectivo' ? '💵 Efectivo' : '🏦 Transferencia';
+                    const formaPagoClass = socio.formaPago === 'efectivo' ? 'efectivo' : 'transferencia';
+                    
+                    tr.innerHTML = `
+                        <td>${realIndex + 1}</td>
+                        <td><strong>${socio.nombre || 'Sin nombre'}</strong></td>
+                        <td>${socio.telefono || 'N/A'}</td>
+                        <td>${socio.plan || 'N/A'}</td>
+                        <td><span class="badge-forma-pago ${formaPagoClass}">${formaPagoLabel}</span></td>
+                        <td><span class="badge-status ${badgeClass}">${socio.estado || 'N/A'}</span></td>
+                        <td style="text-align: center; white-space: nowrap;">
+                            ${acciones}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+
+            // Actualizar stats
+            const totalSocios = socios.length;
+            const activos = socios.filter(s => s.estado === 'activo').length;
+            const pendientes = socios.filter(s => s.estado === 'pendiente').length;
+            const transferencia = socios.filter(s => s.formaPago === 'transferencia').length;
+            const efectivo = socios.filter(s => s.formaPago === 'efectivo').length;
+
+            document.getElementById('totalSocios').textContent = totalSocios;
+            document.getElementById('activosSocios').textContent = activos;
+            document.getElementById('pendientesSocios').textContent = pendientes;
+            document.getElementById('transferenciaSocios').textContent = transferencia;
+            document.getElementById('efectivoSocios').textContent = efectivo;
+
+            // Actualizar paginación
+            const filteredTotal = getFilteredSocios().length;
+            document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${totalPages || 1} (${filteredTotal} socios)`;
+            document.getElementById('prevPage').disabled = currentPage <= 1;
+            document.getElementById('nextPage').disabled = currentPage >= totalPages;
+        }
+
+        // ============================================================
+        //  AGREGAR SOCIO
+        // ============================================================
+        document.getElementById('btnAgregar').addEventListener('click', () => {
+            const input = document.getElementById('nombreSocio');
+            const nombre = input.value.trim();
+            const plan = document.getElementById('planSocio').value;
+            const formaPago = document.getElementById('formaPagoSocio').value;
+            const estado = document.getElementById('estadoSocio').value;
+
+            if (!nombre || nombre.length < 2) {
+                input.classList.add('error');
+                showToast('Por favor, ingresá un nombre válido', 'error');
+                return;
+            }
+
+            input.classList.remove('error');
+
+            const existe = socios.some(s => s.nombre.toLowerCase() === nombre.toLowerCase());
+            if (existe) {
+                showToast('Ya existe un socio con ese nombre', 'warning');
+                return;
+            }
+
+            socios.push({
+                id: Date.now(),
+                nombre: nombre,
+                plan: plan,
+                formaPago: formaPago,
+                estado: estado,
+                telefono: 'N/A',
+                posicion: 'No especificada',
+                fechaSuscripcion: new Date().toISOString().slice(0, 10),
+                comprobanteData: null
+            });
+
+            saveSocios();
+            renderTabla();
+            input.value = '';
+            showToast(`✅ Socio "${nombre}" agregado correctamente`, 'success');
+        });
+
+        document.getElementById('nombreSocio').addEventListener('input', function() {
+            this.classList.remove('error');
+        });
+
+        document.getElementById('nombreSocio').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                document.getElementById('btnAgregar').click();
+            }
+        });
+
+        // ============================================================
+        //  ELIMINAR SOCIO
+        // ============================================================
+        window.eliminarSocio = function(id) {
+            const socio = socios.find(s => s.id === id);
+            if (!socio) return;
+
+            if (confirm(`¿Estás seguro de eliminar a "${socio.nombre}"?`)) {
+                socios = socios.filter(s => s.id !== id);
+                saveSocios();
+                renderTabla();
+                showToast(`🗑️ Socio "${socio.nombre}" eliminado`, 'warning');
+            }
+        };
+
+        // ============================================================
+        //  VER COMPROBANTE
+        // ============================================================
+        window.verComprobante = function(id) {
+            const socio = socios.find(s => s.id === id);
+            if (!socio) {
+                showToast('Socio no encontrado', 'error');
+                return;
+            }
+
+            if (socio.formaPago !== 'transferencia') {
+                showToast('Este socio no tiene comprobante porque pagó en efectivo', 'warning');
+                return;
+            }
+
+            viewingSocioId = id;
+
+            document.getElementById('compSocioNombre').textContent = socio.nombre || 'Sin nombre';
+            document.getElementById('compSocioPlan').textContent = socio.plan || 'N/A';
+            document.getElementById('compSocioFecha').textContent = socio.fechaSuscripcion || 'N/A';
+            document.getElementById('compSocioFormaPago').textContent = '🏦 Transferencia';
+
+            const container = document.getElementById('comprobanteContainer');
+            
+            if (socio.comprobanteData && socio.comprobanteData.length > 100) {
+                const isImage = socio.comprobanteData.startsWith('data:image');
+                const isPDF = socio.comprobanteData.startsWith('data:application/pdf');
+
+                if (isImage) {
+                    container.innerHTML = `
+                        <img src="${socio.comprobanteData}" class="comprobante-img" alt="Comprobante de ${socio.nombre}" />
+                    `;
+                } else if (isPDF) {
+                    container.innerHTML = `
+                        <embed src="${socio.comprobanteData}" type="application/pdf" style="width:100%; height:500px;" />
+                    `;
+                } else {
+                    container.innerHTML = `
+                        <img src="${socio.comprobanteData}" class="comprobante-img" alt="Comprobante de ${socio.nombre}" onerror="this.parentElement.innerHTML='<div class=\\'comprobante-placeholder\\'><i class=\\'fas fa-file-image\\'></i><p>No se pudo cargar la imagen del comprobante</p></div>'" />
+                    `;
+                }
+            } else {
+                container.innerHTML = `
+                    <div class="comprobante-placeholder">
+                        <i class="fas fa-file-image"></i>
+                        <p>No hay comprobante disponible para este socio</p>
+                        <p style="font-size: 12px; margin-top: 5px;">El socio no adjuntó ningún archivo</p>
+                    </div>
+                `;
+            }
+
+            // Mostrar/ocultar botones según estado y forma de pago
+            const btnAprobar = document.getElementById('btnAprobarPago');
+            const btnRechazar = document.getElementById('btnRechazarPago');
+            
+            if (socio.estado === 'pendiente' && socio.formaPago === 'transferencia' && socio.comprobanteData && socio.comprobanteData.length > 100) {
+                btnAprobar.style.display = 'block';
+                btnRechazar.style.display = 'block';
+            } else {
+                btnAprobar.style.display = 'none';
+                btnRechazar.style.display = 'none';
+            }
+
+            document.getElementById('modalComprobante').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+
+        // ============================================================
+        //  APROBAR PAGO
+        // ============================================================
+        document.getElementById('btnAprobarPago').addEventListener('click', () => {
+            if (!viewingSocioId) return;
+            
+            if (confirm('¿Confirmar que el pago fue realizado correctamente?')) {
+                aprobarPago(viewingSocioId);
+                document.getElementById('modalComprobante').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        window.aprobarPago = function(id) {
+            const socio = socios.find(s => s.id === id);
+            if (!socio) {
+                showToast('Socio no encontrado', 'error');
+                return;
+            }
+
+            if (socio.formaPago === 'efectivo') {
+                showToast('Este socio pagó en efectivo, ya está activo', 'warning');
+                return;
+            }
+
+            socio.estado = 'activo';
+            socio.pagoConfirmado = true;
+            socio.fechaPago = new Date().toISOString().slice(0, 10);
+            saveSocios();
+            renderTabla();
+            showToast(`✅ Pago aprobado para ${socio.nombre}`, 'success');
+        };
+
+        // ============================================================
+        //  RECHAZAR PAGO
+        // ============================================================
+        document.getElementById('btnRechazarPago').addEventListener('click', () => {
+            if (!viewingSocioId) return;
+            
+            if (confirm('¿Rechazar el comprobante de pago? El socio será eliminado.')) {
+                const socio = socios.find(s => s.id === viewingSocioId);
+                if (socio) {
+                    socios = socios.filter(s => s.id !== viewingSocioId);
+                    saveSocios();
+                    renderTabla();
+                    showToast(`❌ Comprobante rechazado - Socio "${socio.nombre}" eliminado`, 'error');
+                }
+                document.getElementById('modalComprobante').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ============================================================
+        //  CERRAR MODAL DE COMPROBANTE
+        // ============================================================
+        document.getElementById('btnCerrarComprobante').addEventListener('click', () => {
+            document.getElementById('modalComprobante').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.getElementById('modalComprobante').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('modalComprobante').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('modalComprobante').classList.contains('active')) {
+                document.getElementById('modalComprobante').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ============================================================
+        //  BÚSQUEDA Y FILTROS
+        // ============================================================
+        document.getElementById('buscarSocio').addEventListener('input', () => {
+            currentPage = 1;
+            renderTabla();
+        });
+
+        document.getElementById('filtroEstado').addEventListener('change', () => {
+            currentPage = 1;
+            renderTabla();
+        });
+
+        document.getElementById('filtroFormaPago').addEventListener('change', () => {
+            currentPage = 1;
+            renderTabla();
+        });
+
+        document.getElementById('filtroPlan').addEventListener('change', () => {
+            currentPage = 1;
+            renderTabla();
+        });
+
+        // ============================================================
+        //  PAGINACIÓN
+        // ============================================================
+        document.getElementById('prevPage').addEventListener('click', () => {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTabla();
+            }
+        });
+
+        document.getElementById('nextPage').addEventListener('click', () => {
+            const { totalPages } = getPaginatedSocios();
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderTabla();
+            }
+        });
+
+        // ============================================================
+        //  EXPORTAR DATOS
+        // ============================================================
+        document.getElementById('btnExportar').addEventListener('click', () => {
+            const filtered = getFilteredSocios();
+            
+            if (filtered.length === 0) {
+                showToast('No hay datos para exportar', 'warning');
+                return;
+            }
+
+            let csv = '#,Nombre,Teléfono,Plan,Forma de Pago,Estado,Fecha\n';
+            filtered.forEach((s, i) => {
+                const formaPago = s.formaPago === 'efectivo' ? 'Efectivo' : 'Transferencia';
+                csv += `${i + 1},"${s.nombre || ''}","${s.telefono || ''}",${s.plan || ''},${formaPago},${s.estado || ''},${s.fechaSuscripcion || ''}\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `socios_fly_futboleros_${new Date().toISOString().slice(0,10)}.csv`;
+            link.click();
+            URL.revokeObjectURL(link.href);
+
+            showToast(`📥 Exportados ${filtered.length} socios`, 'success');
+        });
+
+        // ============================================================
+        //  INICIALIZAR
+        // ============================================================
+        loadSocios();
+        renderTabla();
+
+        if (!sessionStorage.getItem('panel_welcome')) {
+            setTimeout(() => {
+                const pendientes = socios.filter(s => s.estado === 'pendiente' && s.formaPago === 'transferencia').length;
+                if (pendientes > 0) {
+                    showToast(`⏳ Hay ${pendientes} socios pendientes de verificación por transferencia`, 'pending');
+                } else {
+                    showToast(`👋 ${socios.length} socios registrados`, 'success');
+                }
+                sessionStorage.setItem('panel_welcome', 'true');
+            }, 800);
+        }
+    </script>
+</body>
+</html>
