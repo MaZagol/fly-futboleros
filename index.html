@@ -87,9 +87,7 @@
             z-index: 1;
         }
 
-        /* ============================================================
-           TOAST NOTIFICATIONS
-           ============================================================ */
+        /* TOAST */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -153,9 +151,7 @@
             to { transform: translateX(100%); opacity: 0; }
         }
 
-        /* ============================================================
-           PATRONES DECORATIVOS
-           ============================================================ */
+        /* PATRONES DECORATIVOS */
         .pattern-dots {
             display: grid;
             grid-template-columns: repeat(5, 6px);
@@ -169,9 +165,7 @@
             border-radius: 50%;
         }
 
-        /* ============================================================
-           NAVEGACIÓN
-           ============================================================ */
+        /* NAVEGACIÓN */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -349,9 +343,7 @@
             box-shadow: 0 0 20px rgba(37, 211, 102, 0.3);
         }
 
-        /* ============================================================
-           MENÚ HAMBURGUESA
-           ============================================================ */
+        /* MENÚ HAMBURGUESA */
         .hamburger-btn {
             display: none;
             background: transparent;
@@ -422,9 +414,7 @@
             color: var(--whatsapp);
         }
 
-        /* ============================================================
-           ESTRUCTURA TARJETAS
-           ============================================================ */
+        /* MAIN CARD */
         .main-card {
             background: rgba(18, 18, 26, 0.85);
             backdrop-filter: blur(12px);
@@ -456,9 +446,7 @@
             pointer-events: none;
         }
 
-        /* ============================================================
-           HERO SECTION
-           ============================================================ */
+        /* HERO */
         .hero-layout {
             display: grid;
             grid-template-columns: 1fr 320px;
@@ -559,9 +547,7 @@
             background: var(--bg-dark);
         }
 
-        /* ============================================================
-           PLANES DE SUSCRIPCIÓN
-           ============================================================ */
+        /* PLANES */
         .planes-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -640,9 +626,7 @@
             display: none;
         }
 
-        /* ============================================================
-           FORMULARIO DE SUSCRIPCIÓN
-           ============================================================ */
+        /* FORMULARIO */
         .form-suscripcion {
             background: rgba(10, 10, 14, 0.9);
             border: 1px solid var(--border-color);
@@ -758,9 +742,7 @@
             color: var(--accent-cyan);
         }
 
-        /* ============================================================
-           DATOS BANCARIOS - UENO BANK
-           ============================================================ */
+        /* DATOS BANCARIOS - UENO BANK */
         .datos-bancarios {
             background: rgba(0, 229, 255, 0.04);
             border: 2px solid rgba(0, 184, 148, 0.3);
@@ -810,10 +792,6 @@
         .datos-bancarios .banco-row .value {
             color: var(--text-light);
             font-weight: 600;
-        }
-
-        .datos-bancarios .banco-row .value .highlight {
-            color: var(--ueno);
         }
 
         .datos-bancarios .copy-btn {
@@ -980,9 +958,7 @@
             color: var(--text-light);
         }
 
-        /* ============================================================
-           SECCIÓN QUIÉNES SOMOS
-           ============================================================ */
+        /* SECCIÓN QUIÉNES SOMOS */
         .about-section {
             position: relative;
             z-index: 2;
@@ -1033,9 +1009,7 @@
             line-height: 1.6;
         }
 
-        /* ============================================================
-           BOTONES
-           ============================================================ */
+        /* BOTONES */
         .btn-cyan {
             display: inline-block;
             width: 100%;
@@ -1161,9 +1135,7 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
-        /* ============================================================
-           MODAL
-           ============================================================ */
+        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -1218,9 +1190,7 @@
             line-height: 1.6;
         }
 
-        /* ============================================================
-           PIE DE PÁGINA
-           ============================================================ */
+        /* FOOTER */
         .footer {
             background: rgba(18, 18, 26, 0.85);
             backdrop-filter: blur(12px);
@@ -1264,374 +1234,133 @@
             color: var(--whatsapp);
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .hero-layout {
-                grid-template-columns: 1fr 280px;
-                gap: 20px;
-            }
-            .titulo-principal {
-                font-size: 38px;
-            }
-            .image-frame {
-                height: 280px;
-            }
-            .form-suscripcion .form-row {
-                grid-template-columns: 1fr 1fr;
-            }
+            .hero-layout { grid-template-columns: 1fr 280px; gap: 20px; }
+            .titulo-principal { font-size: 38px; }
+            .image-frame { height: 280px; }
+            .form-suscripcion .form-row { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 12px 12px 0 12px;
-            }
-            .hero-layout {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-            .image-frame-wrapper {
-                display: none;
-            }
-            .desktop-nav {
-                display: none;
-            }
-            .hamburger-btn {
-                display: block;
-            }
-            .titulo-principal {
-                font-size: 32px;
-            }
-            .subtitulo {
-                max-width: 100%;
-                font-size: 13px;
-            }
-            .planes-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            .main-card {
-                padding: 20px 16px;
-            }
-            .form-suscripcion .form-row {
-                grid-template-columns: 1fr;
-            }
-            .form-suscripcion {
-                padding: 14px;
-            }
-            .datos-bancarios .banco-row {
-                flex-direction: column;
-                gap: 2px;
-                padding: 4px 0;
-            }
-            .datos-bancarios .alias-box {
-                flex-direction: column;
-                gap: 4px;
-                text-align: center;
-            }
-            .forma-pago-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .toast {
-                min-width: 200px;
-                max-width: 300px;
-                font-size: 12px;
-                padding: 12px 16px;
-            }
-            .btn-whatsapp-float {
-                width: 50px;
-                height: 50px;
-                font-size: 24px;
-                bottom: 16px;
-                right: 16px;
-            }
-            .logo-text {
-                font-size: 18px;
-            }
-            .logo-badge {
-                width: 38px;
-                height: 38px;
-            }
-            .logo-badge .icono {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
+            body { padding: 12px 12px 0 12px; }
+            .hero-layout { grid-template-columns: 1fr; gap: 16px; }
+            .image-frame-wrapper { display: none; }
+            .desktop-nav { display: none; }
+            .hamburger-btn { display: block; }
+            .titulo-principal { font-size: 32px; }
+            .subtitulo { max-width: 100%; font-size: 13px; }
+            .planes-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .main-card { padding: 20px 16px; }
+            .form-suscripcion .form-row { grid-template-columns: 1fr; }
+            .form-suscripcion { padding: 14px; }
+            .datos-bancarios .banco-row { flex-direction: column; gap: 2px; padding: 4px 0; }
+            .datos-bancarios .alias-box { flex-direction: column; gap: 4px; text-align: center; }
+            .forma-pago-grid { grid-template-columns: 1fr 1fr; }
+            .toast { min-width: 200px; max-width: 300px; font-size: 12px; padding: 12px 16px; }
+            .btn-whatsapp-float { width: 50px; height: 50px; font-size: 24px; bottom: 16px; right: 16px; }
+            .logo-text { font-size: 18px; }
+            .logo-badge { width: 38px; height: 38px; }
+            .logo-badge .icono { width: 32px; height: 32px; font-size: 16px; }
+            .about-grid { grid-template-columns: 1fr; gap: 12px; }
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 8px 8px 0 8px;
-            }
-            .navbar {
-                padding: 10px 14px;
-                margin-bottom: 16px;
-            }
-            .titulo-principal {
-                font-size: 26px;
-            }
-            .titulo-principal .accent {
-                font-size: 22px;
-            }
-            .planes-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            .plan-card {
-                padding: 12px 14px;
-            }
-            .plan-title {
-                font-size: 14px;
-            }
-            .plan-price {
-                font-size: 16px;
-            }
-            .plan-desc {
-                font-size: 11px;
-            }
-            .btn-cyan {
-                padding: 14px 16px;
-                font-size: 14px;
-            }
-            .btn-outline {
-                padding: 10px;
-                font-size: 11px;
-            }
-            .main-card {
-                padding: 16px 12px;
-                margin-bottom: 14px;
-            }
-            .form-suscripcion {
-                padding: 12px;
-            }
-            .form-suscripcion h3 {
-                font-size: 14px;
-            }
+            body { padding: 8px 8px 0 8px; }
+            .navbar { padding: 10px 14px; margin-bottom: 16px; }
+            .titulo-principal { font-size: 26px; }
+            .titulo-principal .accent { font-size: 22px; }
+            .planes-grid { grid-template-columns: 1fr; gap: 10px; }
+            .plan-card { padding: 12px 14px; }
+            .plan-title { font-size: 14px; }
+            .plan-price { font-size: 16px; }
+            .plan-desc { font-size: 11px; }
+            .btn-cyan { padding: 14px 16px; font-size: 14px; }
+            .btn-outline { padding: 10px; font-size: 11px; }
+            .main-card { padding: 16px 12px; margin-bottom: 14px; }
+            .form-suscripcion { padding: 12px; }
+            .form-suscripcion h3 { font-size: 14px; }
             .form-suscripcion .form-group input,
-            .form-suscripcion .form-group select {
-                padding: 8px 10px;
-                font-size: 12px;
-            }
-            .form-suscripcion .form-group label {
-                font-size: 9px;
-            }
-            .form-suscripcion .plan-info {
-                font-size: 12px;
-                padding: 8px 12px;
-            }
-            .datos-bancarios {
-                padding: 10px;
-            }
-            .datos-bancarios .banco-row {
-                font-size: 11px;
-                padding: 3px 0;
-            }
-            .datos-bancarios .alias-box .alias-value {
-                font-size: 12px;
-            }
-            .forma-pago-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .forma-pago-option {
-                padding: 8px;
-            }
-            .forma-pago-option i {
-                font-size: 16px;
-            }
-            .forma-pago-option .label {
-                font-size: 10px;
-            }
-            .forma-pago-option .sub {
-                font-size: 8px;
-            }
-            .section-title {
-                font-size: 20px;
-            }
-            .about-box {
-                padding: 12px 14px;
-            }
-            .about-box h3 {
-                font-size: 13px;
-            }
-            .about-box p {
-                font-size: 11px;
-            }
-            .footer {
-                padding: 14px 12px;
-            }
-            .footer p {
-                font-size: 10px;
-            }
-            .footer .social-links a {
-                font-size: 14px;
-            }
-            .modal-content {
-                padding: 16px;
-            }
-            .modal-content h3 {
-                font-size: 16px;
-            }
-            .modal-content p {
-                font-size: 12px;
-            }
-            .toast {
-                min-width: 160px;
-                max-width: 250px;
-                font-size: 11px;
-                padding: 10px 14px;
-            }
-            .toast i {
-                font-size: 16px;
-            }
-            .btn-whatsapp-float {
-                width: 44px;
-                height: 44px;
-                font-size: 20px;
-                bottom: 12px;
-                right: 12px;
-            }
-            .logo-text {
-                font-size: 15px;
-            }
-            .logo-badge {
-                width: 34px;
-                height: 34px;
-            }
-            .logo-badge .icono {
-                width: 28px;
-                height: 28px;
-                font-size: 14px;
-            }
-            .mobile-menu ul li a {
-                font-size: 12px;
-                padding: 10px 16px;
-            }
-            .plan-card .check-mark {
-                font-size: 12px;
-                top: 4px;
-                right: 8px;
-            }
-            .plan-header {
-                padding-right: 14px;
-            }
+            .form-suscripcion .form-group select { padding: 8px 10px; font-size: 12px; }
+            .form-suscripcion .form-group label { font-size: 9px; }
+            .form-suscripcion .plan-info { font-size: 12px; padding: 8px 12px; }
+            .datos-bancarios { padding: 10px; }
+            .datos-bancarios .banco-row { font-size: 11px; padding: 3px 0; }
+            .datos-bancarios .alias-box .alias-value { font-size: 12px; }
+            .forma-pago-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .forma-pago-option { padding: 8px; }
+            .forma-pago-option i { font-size: 16px; }
+            .forma-pago-option .label { font-size: 10px; }
+            .forma-pago-option .sub { font-size: 8px; }
+            .section-title { font-size: 20px; }
+            .about-box { padding: 12px 14px; }
+            .about-box h3 { font-size: 13px; }
+            .about-box p { font-size: 11px; }
+            .footer { padding: 14px 12px; }
+            .footer p { font-size: 10px; }
+            .footer .social-links a { font-size: 14px; }
+            .modal-content { padding: 16px; }
+            .modal-content h3 { font-size: 16px; }
+            .modal-content p { font-size: 12px; }
+            .toast { min-width: 160px; max-width: 250px; font-size: 11px; padding: 10px 14px; }
+            .toast i { font-size: 16px; }
+            .btn-whatsapp-float { width: 44px; height: 44px; font-size: 20px; bottom: 12px; right: 12px; }
+            .logo-text { font-size: 15px; }
+            .logo-badge { width: 34px; height: 34px; }
+            .logo-badge .icono { width: 28px; height: 28px; font-size: 14px; }
+            .mobile-menu ul li a { font-size: 12px; padding: 10px 16px; }
+            .plan-card .check-mark { font-size: 12px; top: 4px; right: 8px; }
+            .plan-header { padding-right: 14px; }
             .logo-ring-1 { inset: -2px; }
             .logo-ring-2 { inset: -5px; }
             .logo-ring-3 { inset: 0px; }
         }
 
         @media (max-width: 320px) {
-            .titulo-principal {
-                font-size: 20px;
-            }
-            .titulo-principal .accent {
-                font-size: 18px;
-            }
-            .logo-text {
-                font-size: 13px;
-            }
-            .logo-badge {
-                width: 30px;
-                height: 30px;
-            }
-            .logo-badge .icono {
-                width: 24px;
-                height: 24px;
-                font-size: 12px;
-            }
-            .btn-cyan {
-                font-size: 12px;
-                padding: 12px 14px;
-            }
-            .forma-pago-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .forma-pago-option {
-                padding: 6px;
-            }
-            .forma-pago-option i {
-                font-size: 14px;
-            }
-            .forma-pago-option .label {
-                font-size: 9px;
-            }
+            .titulo-principal { font-size: 20px; }
+            .titulo-principal .accent { font-size: 18px; }
+            .logo-text { font-size: 13px; }
+            .logo-badge { width: 30px; height: 30px; }
+            .logo-badge .icono { width: 24px; height: 24px; font-size: 12px; }
+            .btn-cyan { font-size: 12px; padding: 12px 14px; }
+            .forma-pago-grid { grid-template-columns: 1fr 1fr; }
+            .forma-pago-option { padding: 6px; }
+            .forma-pago-option i { font-size: 14px; }
+            .forma-pago-option .label { font-size: 9px; }
         }
 
         @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-            .hero-layout {
-                grid-template-columns: 1fr 240px;
-            }
-            .image-frame {
-                height: 240px;
-            }
-            .titulo-principal {
-                font-size: 34px;
-            }
+            .hero-layout { grid-template-columns: 1fr 240px; }
+            .image-frame { height: 240px; }
+            .titulo-principal { font-size: 34px; }
         }
 
         @media (hover: none) {
-            .btn-cyan:hover {
-                transform: none;
-                background: var(--accent-cyan);
-            }
-            .btn-cyan:active {
-                transform: scale(0.97);
-            }
-            .plan-card:hover {
-                transform: none;
-            }
-            .plan-card:active {
-                transform: scale(0.98);
-            }
-            .desktop-nav a::after {
-                display: none;
-            }
-            .btn-nav-whatsapp:hover {
-                background: transparent !important;
-                color: var(--whatsapp) !important;
-            }
-            .logo-badge:hover .icono {
-                transform: none;
-            }
+            .btn-cyan:hover { transform: none; background: var(--accent-cyan); }
+            .btn-cyan:active { transform: scale(0.97); }
+            .plan-card:hover { transform: none; }
+            .plan-card:active { transform: scale(0.98); }
+            .desktop-nav a::after { display: none; }
+            .btn-nav-whatsapp:hover { background: transparent !important; color: var(--whatsapp) !important; }
+            .logo-badge:hover .icono { transform: none; }
         }
 
         @media (max-width: 480px) {
-            input, select, textarea, button {
-                font-size: 16px !important;
-            }
+            input, select, textarea, button { font-size: 16px !important; }
         }
 
-        ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-cyan);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-cyan-dark);
-        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan-dark); }
     </style>
 </head>
 <body>
 
-    <!-- ============================================================
-       TOAST CONTAINER
-       ============================================================ -->
+    <!-- TOAST CONTAINER -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- ============================================================
-       BOTÓN FLOTANTE DE WHATSAPP
-       ============================================================ -->
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
        class="btn-whatsapp-float" 
        target="_blank" 
@@ -1642,9 +1371,7 @@
 
     <div class="container">
 
-        <!-- ============================================================
-           BARRA DE NAVEGACIÓN
-           ============================================================ -->
+        <!-- BARRA DE NAVEGACIÓN -->
         <header class="navbar">
             <div class="logo-container">
                 <div class="logo-badge">
@@ -1699,9 +1426,7 @@
             </nav>
         </header>
 
-        <!-- ============================================================
-           HERO CARD PRINCIPAL
-           ============================================================ -->
+        <!-- HERO -->
         <main class="main-card" id="inicio" data-aos="fade-up" data-aos-duration="800">
             
             <div style="position: absolute; bottom: 16px; left: 30%;" class="pattern-dots">
@@ -1749,9 +1474,7 @@
                         📋 Ver Reglas del Grupo
                     </button>
 
-                    <!-- ================================================
-                       FORMULARIO DE SUSCRIPCIÓN
-                       ================================================ -->
+                    <!-- FORMULARIO -->
                     <div class="form-suscripcion" id="formSuscripcion">
                         <h3>
                             <i class="fas fa-pen-fancy"></i> 
@@ -1765,9 +1488,7 @@
                             Precio: <strong id="planInfoPrecio">20.000 Gs/mes</strong>
                         </div>
 
-                        <!-- ============================================
-                           DATOS BANCARIOS - UENO BANK
-                           ============================================ -->
+                        <!-- DATOS BANCARIOS -->
                         <div class="datos-bancarios" id="datosBancarios">
                             <div class="banco-header">
                                 <span class="banco-logo">UENO</span>
@@ -1889,9 +1610,7 @@
             </div>
         </main>
 
-        <!-- ============================================================
-           SECCIÓN QUIÉNES SOMOS
-           ============================================================ -->
+        <!-- QUIÉNES SOMOS -->
         <section class="main-card about-section" id="quienes-somos" data-aos="fade-up" data-aos-delay="200">
             <h2 class="section-title">
                 <i class="fas fa-users-line"></i> Quiénes Somos
@@ -1912,9 +1631,7 @@
             </div>
         </section>
 
-        <!-- ============================================================
-           SECCIÓN DE CONTACTO - WHATSAPP
-           ============================================================ -->
+        <!-- CONTACTO -->
         <section class="main-card" id="contacto" style="text-align: center;">
             <h2 style="text-transform: uppercase; font-weight: 900; margin-bottom: 10px; color: var(--accent-cyan);">
                 <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i> Unite al Grupo
@@ -1933,9 +1650,7 @@
 
     </div>
 
-    <!-- ============================================================
-       MODAL DE REGLAS
-       ============================================================ -->
+    <!-- MODAL REGLAS -->
     <div class="modal-overlay" id="modalReglas">
         <div class="modal-content">
             <h3>📋 Reglas del Grupo</h3>
@@ -1948,9 +1663,7 @@
         </div>
     </div>
 
-    <!-- ============================================================
-       PIE DE PÁGINA
-       ============================================================ -->
+    <!-- FOOTER -->
     <footer class="footer">
         <p>&copy; 2026 <span>FLY FUTBOLEROS</span>. Todos los derechos reservados.</p>
         <p>Asociación Amateur de Fútbol 6 vs 6 · Desde 2012</p>
@@ -1968,17 +1681,13 @@
         </div>
     </footer>
 
-    <!-- ============================================================
-       SCRIPTS
-       ============================================================ -->
+    <!-- SCRIPTS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================================
         //  CONFIGURACIÓN
         // ============================================================
         let formaPagoSeleccionada = 'transferencia';
-
-        // 🔥 URL DE LA API
         const API_URL = 'https://script.google.com/macros/s/AKfycbwketl7buY-qobLe4KR8Gn9clDRrFu1ENp25A3dOpd58zWtmeX_fT19JOLTxg9Qj1kpGg/exec';
 
         // ============================================================
@@ -1992,7 +1701,7 @@
         });
 
         // ============================================================
-        //  TOAST NOTIFICATIONS
+        //  TOAST
         // ============================================================
         function showToast(message, type = 'success') {
             const container = document.getElementById('toastContainer');
@@ -2095,15 +1804,29 @@
         }
 
         // ============================================================
-        //  🔥 GUARDAR EN LA NUBE (GOOGLE SHEETS)
+        //  🔥 GUARDAR EN LA NUBE
         // ============================================================
         async function guardarSocioEnNube(socio) {
             try {
+                // Asegurar que los campos tengan los nombres correctos para Google Sheets
+                const socioParaNube = {
+                    id: socio.id,
+                    Nombre: socio.nombre,
+                    Teléfono: socio.telefono,
+                    Plan: socio.plan,
+                    FormaPago: socio.formaPago,
+                    Estado: socio.estado,
+                    FechaSuscripcion: socio.fechaSuscripcion,
+                    FechaUltimoPago: socio.fechaUltimoPago || '',
+                    Pagos: socio.pagos || 0,
+                    Comprobante: socio.comprobanteData || ''
+                };
+                
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(socio)
+                    body: JSON.stringify(socioParaNube)
                 });
                 return { success: true };
             } catch (error) {
@@ -2163,7 +1886,7 @@
         });
 
         // ============================================================
-        //  ACCESO SECRETO AL PANEL DE SOCIOS
+        //  ACCESO SECRETO AL PANEL
         // ============================================================
         let clickCount = 0;
         let clickTimer = null;
@@ -2192,7 +1915,7 @@
         });
 
         // ============================================================
-        //  SELECCIÓN VISUAL DE PLANES
+        //  SELECCIÓN DE PLANES
         // ============================================================
         const planCards = document.querySelectorAll('.plan-card');
         const planSeleccionado = document.getElementById('planSeleccionado');
@@ -2227,7 +1950,7 @@
         }
 
         // ============================================================
-        //  MOSTRAR/OCULTAR FORMULARIO
+        //  FORMULARIO
         // ============================================================
         const formSuscripcion = document.getElementById('formSuscripcion');
         const btnUnirme = document.getElementById('btnUnirme');
@@ -2262,7 +1985,7 @@
         });
 
         // ============================================================
-        //  LÓGICA DE SUSCRIPCIÓN (GUARDA LOCAL + NUBE)
+        //  🔥 SUSCRIPCIÓN
         // ============================================================
         document.getElementById('btnSuscribir').addEventListener('click', async function() {
             const nombre = document.getElementById('socioNombre');
@@ -2353,11 +2076,8 @@
                     pagos: formaPagoSeleccionada === 'efectivo' ? 1 : 0
                 };
 
-                // Guardar en localStorage
                 socios.push(nuevoSocio);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
-
-                // 🔥 GUARDAR EN LA NUBE
                 await guardarSocioEnNube(nuevoSocio);
 
                 const formaPagoTexto = formaPagoSeleccionada === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo';
@@ -2366,7 +2086,6 @@
                 showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, 
                           formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
                 
-                // Limpiar formulario
                 formSuscripcion.classList.remove('visible');
                 document.getElementById('socioNombre').value = '';
                 document.getElementById('socioTelefono').value = '';
@@ -2378,8 +2097,6 @@
                 btn.classList.remove('loading');
                 btn.disabled = false;
 
-                // ❌ NO REDIRIGIR AL PANEL
-
             } catch (e) {
                 console.error('Error en suscripción:', e);
                 showToast('Error al procesar la suscripción', 'error');
@@ -2389,7 +2106,7 @@
         });
 
         // ============================================================
-        //  LÓGICA DE MODAL DE REGLAS
+        //  MODAL REGLAS
         // ============================================================
         const modal = document.getElementById('modalReglas');
         const btnVerReglas = document.getElementById('btnVerReglas');
