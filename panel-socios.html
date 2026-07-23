@@ -13,7 +13,7 @@
 
     <style>
         /* ============================================================
-           TODOS LOS ESTILOS (los mismos que ya tenías)
+           TODOS LOS ESTILOS (COMPLETOS)
            ============================================================ */
         :root {
             --bg-dark: #0a0a0e;
@@ -373,7 +373,6 @@
             display: inline-block;
             animation: pulse-vencido 2s infinite;
         }
-
         .badge-por-vencer {
             background: rgba(255, 145, 0, 0.2);
             color: #ff9100;
@@ -384,7 +383,6 @@
             border-radius: 2px;
             display: inline-block;
         }
-
         .badge-al-dia {
             background: rgba(0, 229, 255, 0.15);
             color: var(--accent-cyan);
@@ -395,11 +393,7 @@
             border-radius: 2px;
             display: inline-block;
         }
-
-        @keyframes pulse-vencido {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
+        @keyframes pulse-vencido { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
         /* TABLA */
         .tabla-wrapper { overflow-x: auto; position: relative; }
@@ -1010,7 +1004,7 @@
     </div>
 
     <!-- ============================================================
-       SCRIPTS - SUPABASE (CORREGIDO)
+       SCRIPTS - SUPABASE (DEFINITIVO)
        ============================================================ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -1068,7 +1062,7 @@
         }
 
         // ============================================================
-        //  🔥 FUNCIONES SUPABASE (CORREGIDAS)
+        //  🔥 FUNCIÓN PARA PETICIONES A SUPABASE
         // ============================================================
         async function supabaseFetch(endpoint, method = 'GET', body = null) {
             const options = {
@@ -1099,7 +1093,7 @@
         }
 
         // ============================================================
-        //  🔥 CARGAR DESDE SUPABASE (reemplaza a cargarDesdeNube)
+        //  🔥 CARGAR DESDE SUPABASE
         // ============================================================
         async function cargarDesdeSupabase() {
             try {
@@ -1147,7 +1141,7 @@
         }
 
         // ============================================================
-        //  🔥 GUARDAR EN SUPABASE (reemplaza a guardarEnNube)
+        //  🔥 GUARDAR EN SUPABASE
         // ============================================================
         async function guardarEnSupabase(socio) {
             try {
@@ -1192,7 +1186,7 @@
         }
 
         // ============================================================
-        //  🔥 ELIMINAR DE SUPABASE (reemplaza a eliminarDeNube)
+        //  🔥 ELIMINAR DE SUPABASE
         // ============================================================
         async function eliminarDeSupabase(id) {
             try {
@@ -1876,6 +1870,7 @@
         // ============================================================
         loadSocios();
         
+        // Cargar desde Supabase automáticamente
         setTimeout(async () => {
             await cargarDesdeSupabase();
             renderTabla();
