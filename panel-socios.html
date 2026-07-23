@@ -12,6 +12,9 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
+        /* ============================================================
+           TODOS LOS ESTILOS (los mismos que ya tenías)
+           ============================================================ */
         :root {
             --bg-dark: #0a0a0e;
             --card-bg: #12121a;
@@ -1007,7 +1010,7 @@
     </div>
 
     <!-- ============================================================
-       SCRIPTS
+       SCRIPTS - SUPABASE (CORREGIDO)
        ============================================================ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -1065,7 +1068,7 @@
         }
 
         // ============================================================
-        //  FUNCIÓN PARA HACER PETICIONES A SUPABASE
+        //  🔥 FUNCIONES SUPABASE (CORREGIDAS)
         // ============================================================
         async function supabaseFetch(endpoint, method = 'GET', body = null) {
             const options = {
@@ -1096,7 +1099,7 @@
         }
 
         // ============================================================
-        //  CARGAR SOCIOS DESDE SUPABASE
+        //  🔥 CARGAR DESDE SUPABASE (reemplaza a cargarDesdeNube)
         // ============================================================
         async function cargarDesdeSupabase() {
             try {
@@ -1144,7 +1147,7 @@
         }
 
         // ============================================================
-        //  GUARDAR SOCIO EN SUPABASE
+        //  🔥 GUARDAR EN SUPABASE (reemplaza a guardarEnNube)
         // ============================================================
         async function guardarEnSupabase(socio) {
             try {
@@ -1176,7 +1179,7 @@
         }
 
         // ============================================================
-        //  ACTUALIZAR SOCIO EN SUPABASE
+        //  🔥 ACTUALIZAR EN SUPABASE
         // ============================================================
         async function actualizarEnSupabase(id, datos) {
             try {
@@ -1189,7 +1192,7 @@
         }
 
         // ============================================================
-        //  ELIMINAR SOCIO DE SUPABASE
+        //  🔥 ELIMINAR DE SUPABASE (reemplaza a eliminarDeNube)
         // ============================================================
         async function eliminarDeSupabase(id) {
             try {
@@ -1200,6 +1203,13 @@
                 return { success: false, error: error.toString() };
             }
         }
+
+        // ============================================================
+        //  🔥 ALIAS PARA COMPATIBILIDAD (reemplazan las funciones viejas)
+        // ============================================================
+        const cargarDesdeNube = cargarDesdeSupabase;
+        const guardarEnNube = guardarEnSupabase;
+        const eliminarDeNube = eliminarDeSupabase;
 
         // ============================================================
         //  SINCRONIZAR
@@ -1709,7 +1719,6 @@
             socio.fechaVencimiento = nuevaFecha;
             socio.estado = 'activo';
 
-            // Actualizar en Supabase
             const datosActualizados = {
                 plan: nuevoPlan,
                 fecha_vencimiento: nuevaFecha,
