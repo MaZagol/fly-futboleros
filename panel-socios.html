@@ -358,6 +358,46 @@
         .btn-cyan-sm { width: auto; }
         .btn-cyan:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
+        /* BADGES DE VENCIMIENTO */
+        .badge-vencido {
+            background: rgba(255, 23, 68, 0.2);
+            color: #ff1744;
+            padding: 2px 8px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+            animation: pulse-vencido 2s infinite;
+        }
+
+        .badge-por-vencer {
+            background: rgba(255, 145, 0, 0.2);
+            color: #ff9100;
+            padding: 2px 8px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .badge-al-dia {
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--accent-cyan);
+            padding: 2px 8px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        @keyframes pulse-vencido {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         /* TABLA */
         .tabla-wrapper { overflow-x: auto; position: relative; }
         .tabla-socios { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
@@ -403,45 +443,6 @@
         .badge-status.pendiente { background: rgba(255, 145, 0, 0.15); color: var(--pending); }
         .badge-status.inactivo { background: rgba(255, 23, 68, 0.15); color: var(--inactivo); }
 
-        .badge-vencido {
-            background: rgba(255, 23, 68, 0.2);
-            color: #ff1744;
-            padding: 2px 8px;
-            font-size: 8px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 2px;
-            display: inline-block;
-            animation: pulse-vencido 2s infinite;
-        }
-
-        .badge-por-vencer {
-            background: rgba(255, 145, 0, 0.2);
-            color: #ff9100;
-            padding: 2px 8px;
-            font-size: 8px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 2px;
-            display: inline-block;
-        }
-
-        .badge-al-dia {
-            background: rgba(0, 229, 255, 0.15);
-            color: var(--accent-cyan);
-            padding: 2px 8px;
-            font-size: 8px;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 2px;
-            display: inline-block;
-        }
-
-        @keyframes pulse-vencido {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
         .badge-forma-pago {
             padding: 2px 8px;
             font-size: 8px;
@@ -452,6 +453,15 @@
         }
         .badge-forma-pago.efectivo { background: rgba(255, 145, 0, 0.15); color: var(--efectivo); }
         .badge-forma-pago.transferencia { background: rgba(0, 168, 89, 0.15); color: var(--transferencia); }
+
+        .id-cell {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .id-cell:hover { color: var(--accent-cyan); }
 
         .btn-accion {
             background: none;
@@ -468,16 +478,7 @@
         .btn-accion.delete:hover { color: #ff4757; }
         .btn-accion:disabled { opacity: 0.3; cursor: not-allowed; }
 
-        .id-cell {
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            color: var(--text-gray);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .id-cell:hover { color: var(--accent-cyan); }
-
-        /* MODAL */
+        /* MODALES */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -496,7 +497,7 @@
         .modal-content.comprobante-modal {
             background: var(--card-bg);
             border: 2px solid var(--accent-cyan);
-            max-width: 800px;
+            max-width: 450px;
             width: 100%;
             padding: 20px;
             max-height: 90vh;
@@ -505,27 +506,6 @@
             box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .modal-content.comprobante-modal h3 { color: var(--accent-cyan); text-transform: uppercase; font-size: 17px; margin-bottom: 4px; }
-        .modal-content.comprobante-modal .socio-info { color: var(--text-gray); font-size: 12px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
-        .modal-content.comprobante-modal .socio-info strong { color: var(--text-light); }
-        .modal-content.comprobante-modal .comprobante-img { width: 100%; max-height: 500px; object-fit: contain; background: #0a0a0c; border-radius: 4px; border: 1px solid var(--border-color); }
-        .modal-content.comprobante-modal .comprobante-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; background: #0a0a0c; border: 2px dashed var(--border-color); border-radius: 4px; color: var(--text-gray); }
-        .modal-content.comprobante-modal .comprobante-placeholder i { font-size: 40px; margin-bottom: 10px; opacity: 0.3; }
-
-        .modal-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-        .modal-actions .btn-cyan { flex: 1; min-width: 100px; padding: 10px 16px; font-size: 12px; }
-        .modal-actions .btn-outline-modal {
-            flex: 1; min-width: 100px; padding: 10px 16px;
-            background: transparent; border: 2px solid var(--border-color);
-            color: var(--text-gray); font-weight: 700; font-size: 12px;
-            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 2px;
-        }
-        .modal-actions .btn-outline-modal:hover { border-color: var(--text-light); color: var(--text-light); }
-        .modal-actions .btn-cyan.approve { background: var(--success); color: #fff; }
-        .modal-actions .btn-cyan.approve:hover { background: #00c96e; }
-        .modal-actions .btn-cyan.reject { background: var(--error); color: #fff; }
-        .modal-actions .btn-cyan.reject:hover { background: #ff6b81; }
 
         /* CARNET */
         .carnet-container {
@@ -539,7 +519,6 @@
             overflow: hidden;
             box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
         }
-
         .carnet-container::before {
             content: "FLY FUTBOLEROS";
             position: absolute;
@@ -551,7 +530,6 @@
             transform: rotate(-10deg);
             pointer-events: none;
         }
-
         .carnet-header {
             display: flex;
             justify-content: space-between;
@@ -560,14 +538,12 @@
             border-bottom: 2px solid rgba(0, 229, 255, 0.2);
             padding-bottom: 12px;
         }
-
         .carnet-header .logo-text {
             font-size: 16px;
             font-weight: 900;
             color: var(--accent-cyan);
         }
         .carnet-header .logo-text span { color: var(--text-light); }
-
         .carnet-foto {
             width: 100px;
             height: 100px;
@@ -579,7 +555,6 @@
             background: var(--bg-dark);
             box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
         }
-
         .carnet-foto-placeholder {
             width: 100px;
             height: 100px;
@@ -593,7 +568,6 @@
             font-size: 40px;
             background: var(--bg-dark);
         }
-
         .carnet-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -612,7 +586,6 @@
             word-break: break-word;
         }
         .carnet-info .full-width { grid-column: 1 / -1; }
-
         .carnet-footer {
             margin-top: 16px;
             padding-top: 12px;
@@ -636,7 +609,7 @@
             color: var(--text-gray);
         }
 
-        /* CAMBIO PLAN */
+        /* CAMBIO DE PLAN */
         .cambio-plan-modal {
             background: var(--card-bg);
             border: 2px solid var(--accent-cyan);
@@ -645,14 +618,12 @@
             margin: 0 auto;
             border-radius: 2px;
         }
-
         .cambio-plan-modal h3 {
             color: var(--accent-cyan);
             text-transform: uppercase;
             font-size: 18px;
             margin-bottom: 16px;
         }
-
         .cambio-plan-modal .form-group { margin-bottom: 12px; }
         .cambio-plan-modal .form-group label {
             display: block;
@@ -678,6 +649,49 @@
             outline: none;
             border-color: var(--accent-cyan);
         }
+        .cambio-plan-modal .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+        }
+        .cambio-plan-modal .modal-actions .btn-cyan {
+            flex: 1;
+            padding: 12px;
+            font-size: 13px;
+        }
+
+        /* MODAL ACTIONS */
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+        .modal-actions .btn-cyan {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 16px;
+            font-size: 12px;
+        }
+        .modal-actions .btn-outline-modal {
+            flex: 1;
+            min-width: 100px;
+            padding: 10px 16px;
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-gray);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+        .modal-actions .btn-outline-modal:hover { border-color: var(--text-light); color: var(--text-light); }
+        .modal-actions .btn-cyan.approve { background: var(--success); color: #fff; }
+        .modal-actions .btn-cyan.approve:hover { background: #00c96e; }
+        .modal-actions .btn-cyan.reject { background: var(--error); color: #fff; }
+        .modal-actions .btn-cyan.reject:hover { background: #ff6b81; }
 
         /* PAGINACION */
         .pagination {
@@ -719,10 +733,6 @@
             .tabla-socios th, .tabla-socios td { padding: 4px 6px; }
             .logo-text { font-size: 16px; }
             .logo-badge { width: 34px; height: 34px; font-size: 15px; }
-            .carnet-container { padding: 16px; }
-            .carnet-foto { width: 80px; height: 80px; }
-            .carnet-foto-placeholder { width: 80px; height: 80px; font-size: 32px; }
-            .carnet-info { grid-template-columns: 1fr; gap: 2px 0; }
         }
         @media (max-width: 480px) {
             .finanzas-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -1002,9 +1012,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================================
-        //  CONFIGURACIÓN
+        //  CONFIGURACIÓN - SUPABASE
         // ============================================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbyz4uxyyUqGNs59FMid3t9ojDppurNsX2_VQljV-znWPKOjHd-Hbsygle8A21qUusCG/exec';
+        const SUPABASE_URL = 'https://loyqcjqcrjfuqpelmnto.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxveXFjanFjcmpmdXFwZWxtbnRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4MjkyMTcsImV4cCI6MjEwMDQwNTIxN30._VZtI2zRT5Ia6gnqfLwW-Rlm6yJ6QcYF76IDq3jBcmY';
 
         // ============================================================
         //  INICIALIZAR
@@ -1054,75 +1065,63 @@
         }
 
         // ============================================================
-        //  FUNCIONES DE UTILIDAD
+        //  FUNCIÓN PARA HACER PETICIONES A SUPABASE
         // ============================================================
-        function formatearFecha(fecha) {
-            if (!fecha || fecha === 'N/A') return 'N/A';
-            const partes = fecha.split('-');
-            if (partes.length === 3) {
-                return `${partes[2]}/${partes[1]}/${partes[0]}`;
-            }
-            return fecha;
-        }
-
-        function calcularDiasRestantes(fechaVencimiento) {
-            if (!fechaVencimiento || fechaVencimiento === 'N/A') return null;
-            const hoy = new Date();
-            const venc = new Date(fechaVencimiento + 'T00:00:00');
-            const diff = Math.ceil((venc - hoy) / (1000 * 60 * 60 * 24));
-            return diff;
-        }
-
-        function obtenerEstadoVencimiento(fechaVencimiento) {
-            const dias = calcularDiasRestantes(fechaVencimiento);
-            if (dias === null) return 'sin-fecha';
-            if (dias < 0) return 'vencido';
-            if (dias <= 7) return 'por-vencer';
-            return 'al-dia';
-        }
-
-        function obtenerBadgeVencimiento(fechaVencimiento) {
-            const estado = obtenerEstadoVencimiento(fechaVencimiento);
-            const dias = calcularDiasRestantes(fechaVencimiento);
+        async function supabaseFetch(endpoint, method = 'GET', body = null) {
+            const options = {
+                method: method,
+                headers: {
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': `Bearer ${SUPABASE_KEY}`,
+                    'Content-Type': 'application/json'
+                }
+            };
             
-            if (estado === 'sin-fecha') {
-                return `<span class="badge-status">Sin fecha</span>`;
+            if (body && (method === 'POST' || method === 'PATCH')) {
+                options.body = JSON.stringify(body);
             }
-            if (estado === 'vencido') {
-                return `<span class="badge-vencido">🚫 Vencido (${Math.abs(dias)} días)</span>`;
+            
+            const response = await fetch(`${SUPABASE_URL}/rest/v1/${endpoint}`, options);
+            
+            if (!response.ok) {
+                const error = await response.text();
+                throw new Error(`Error ${response.status}: ${error}`);
             }
-            if (estado === 'por-vencer') {
-                return `<span class="badge-por-vencer">⚠️ ${dias} días</span>`;
+            
+            if (method === 'DELETE') {
+                return { success: true };
             }
-            return `<span class="badge-al-dia">✅ ${dias} días</span>`;
+            
+            return await response.json();
         }
 
         // ============================================================
-        //  CARGAR DESDE LA NUBE
+        //  CARGAR SOCIOS DESDE SUPABASE
         // ============================================================
-        async function cargarDesdeNube() {
+        async function cargarDesdeSupabase() {
             try {
                 document.getElementById('statusNube').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
                 
-                const response = await fetch(API_URL);
-                const data = await response.json();
+                const data = await supabaseFetch('socios?select=*&order=created_at.desc');
                 
-                if (data.socios && data.socios.length > 0) {
-                    const sociosNube = data.socios.map(s => ({
-                        id: parseInt(s.ID) || Date.now() + Math.random(),
-                        nombre: s.Nombre || s.nombre || '',
-                        ci: s.CI || s.ci || '',
-                        telefono: s.Teléfono || s.telefono || '',
-                        posicion: s.Posicion || s.posicion || '',
-                        plan: s.Plan || s.plan || '',
-                        formaPago: s.FormaPago || s.formaPago || '',
-                        estado: s.Estado || s.estado || '',
-                        fechaSuscripcion: s.FechaSuscripcion || s.fechaSuscripcion || '',
-                        fechaVencimiento: s.FechaVencimiento || s.fechaVencimiento || '',
-                        fechaUltimoPago: s.FechaUltimoPago || s.fechaUltimoPago || null,
-                        pagos: parseInt(s.Pagos || s.pagos) || 0,
-                        totalAportado: parseInt(s.TotalAportado || s.totalAportado) || 0,
-                        foto: s.Foto || s.foto || null
+                if (data && data.length > 0) {
+                    const sociosNube = data.map(s => ({
+                        id: s.id,
+                        nombre: s.nombre || '',
+                        ci: s.ci || '',
+                        telefono: s.telefono || '',
+                        posicion: s.posicion || '',
+                        plan: s.plan || '',
+                        formaPago: s.forma_pago || '',
+                        estado: s.estado || '',
+                        fechaSuscripcion: s.fecha_suscripcion || '',
+                        fechaVencimiento: s.fecha_vencimiento || '',
+                        fechaUltimoPago: s.fecha_ultimo_pago || null,
+                        pagos: s.pagos || 0,
+                        totalAportado: s.total_aportado || 0,
+                        foto: s.foto || null,
+                        comprobanteData: s.comprobante_data || null,
+                        comprobanteNombre: s.comprobante_nombre || null
                     }));
                     
                     localStorage.setItem('fly_socios_v2', JSON.stringify(sociosNube));
@@ -1137,7 +1136,7 @@
                     return false;
                 }
             } catch (error) {
-                console.error('❌ Error:', error);
+                console.error('❌ Error cargando desde Supabase:', error);
                 document.getElementById('statusNube').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error de conexión';
                 document.getElementById('statusNube').style.color = 'var(--error)';
                 return false;
@@ -1145,36 +1144,59 @@
         }
 
         // ============================================================
-        //  GUARDAR EN LA NUBE
+        //  GUARDAR SOCIO EN SUPABASE
         // ============================================================
-        async function guardarEnNube(socio) {
+        async function guardarEnSupabase(socio) {
             try {
-                const socioParaNube = {
+                const socioSupabase = {
                     id: socio.id,
-                    Nombre: socio.nombre,
-                    CI: socio.ci || '',
-                    Teléfono: socio.telefono,
-                    Posicion: socio.posicion || '',
-                    Plan: socio.plan,
-                    FormaPago: socio.formaPago,
-                    Estado: socio.estado,
-                    FechaSuscripcion: socio.fechaSuscripcion,
-                    FechaVencimiento: socio.fechaVencimiento || '',
-                    FechaUltimoPago: socio.fechaUltimoPago || '',
-                    Pagos: socio.pagos || 0,
-                    TotalAportado: socio.totalAportado || 0,
-                    Foto: socio.foto || ''
+                    nombre: socio.nombre,
+                    ci: socio.ci || '',
+                    telefono: socio.telefono || '',
+                    posicion: socio.posicion || '',
+                    plan: socio.plan,
+                    forma_pago: socio.formaPago || '',
+                    estado: socio.estado,
+                    fecha_suscripcion: socio.fechaSuscripcion || null,
+                    fecha_vencimiento: socio.fechaVencimiento || null,
+                    fecha_ultimo_pago: socio.fechaUltimoPago || null,
+                    pagos: socio.pagos || 0,
+                    total_aportado: socio.totalAportado || 0,
+                    foto: socio.foto || null,
+                    comprobante_data: socio.comprobanteData || null,
+                    comprobante_nombre: socio.comprobanteNombre || null
                 };
                 
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(socioParaNube)
-                });
+                const result = await supabaseFetch('socios', 'POST', socioSupabase);
+                return { success: true, data: result };
+            } catch (error) {
+                console.error('❌ Error guardando en Supabase:', error);
+                return { success: false, error: error.toString() };
+            }
+        }
+
+        // ============================================================
+        //  ACTUALIZAR SOCIO EN SUPABASE
+        // ============================================================
+        async function actualizarEnSupabase(id, datos) {
+            try {
+                const result = await supabaseFetch(`socios?id=eq.${id}`, 'PATCH', datos);
+                return { success: true, data: result };
+            } catch (error) {
+                console.error('❌ Error actualizando en Supabase:', error);
+                return { success: false, error: error.toString() };
+            }
+        }
+
+        // ============================================================
+        //  ELIMINAR SOCIO DE SUPABASE
+        // ============================================================
+        async function eliminarDeSupabase(id) {
+            try {
+                await supabaseFetch(`socios?id=eq.${id}`, 'DELETE');
                 return { success: true };
             } catch (error) {
-                console.error('❌ Error guardando en la nube:', error);
+                console.error('❌ Error eliminando de Supabase:', error);
                 return { success: false, error: error.toString() };
             }
         }
@@ -1185,23 +1207,23 @@
         async function sincronizar() {
             if (sincronizando) return;
             sincronizando = true;
-            showToast('🔄 Sincronizando con la nube...', 'pending');
+            showToast('🔄 Sincronizando con Supabase...', 'pending');
             
             try {
-                const cargado = await cargarDesdeNube();
+                const cargado = await cargarDesdeSupabase();
                 if (cargado) {
                     renderTabla();
-                    showToast('✅ Datos sincronizados', 'success');
+                    showToast('✅ Datos sincronizados desde Supabase', 'success');
                 } else {
                     const locales = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
                     if (locales.length > 0) {
                         let subidos = 0;
                         for (const socio of locales) {
-                            const result = await guardarEnNube(socio);
+                            const result = await guardarEnSupabase(socio);
                             if (result.success) subidos++;
                         }
                         if (subidos > 0) {
-                            showToast(`✅ ${subidos} socios subidos a la nube`, 'success');
+                            showToast(`✅ ${subidos} socios subidos a Supabase`, 'success');
                         }
                     } else {
                         showToast('⚠️ No hay datos para sincronizar', 'warning');
@@ -1283,6 +1305,50 @@
             document.getElementById('totalSabado').textContent = totalSabado.toLocaleString('es-PY');
             document.getElementById('sabateroActivos').textContent = sabateroActivos;
             document.getElementById('finderActivos').textContent = finderActivos;
+        }
+
+        // ============================================================
+        //  FUNCIONES DE UTILIDAD
+        // ============================================================
+        function formatearFecha(fecha) {
+            if (!fecha || fecha === 'N/A') return 'N/A';
+            const partes = fecha.split('-');
+            if (partes.length === 3) {
+                return `${partes[2]}/${partes[1]}/${partes[0]}`;
+            }
+            return fecha;
+        }
+
+        function calcularDiasRestantes(fechaVencimiento) {
+            if (!fechaVencimiento || fechaVencimiento === 'N/A') return null;
+            const hoy = new Date();
+            const venc = new Date(fechaVencimiento + 'T00:00:00');
+            const diff = Math.ceil((venc - hoy) / (1000 * 60 * 60 * 24));
+            return diff;
+        }
+
+        function obtenerEstadoVencimiento(fechaVencimiento) {
+            const dias = calcularDiasRestantes(fechaVencimiento);
+            if (dias === null) return 'sin-fecha';
+            if (dias < 0) return 'vencido';
+            if (dias <= 7) return 'por-vencer';
+            return 'al-dia';
+        }
+
+        function obtenerBadgeVencimiento(fechaVencimiento) {
+            const estado = obtenerEstadoVencimiento(fechaVencimiento);
+            const dias = calcularDiasRestantes(fechaVencimiento);
+            
+            if (estado === 'sin-fecha') {
+                return `<span class="badge-status">Sin fecha</span>`;
+            }
+            if (estado === 'vencido') {
+                return `<span class="badge-vencido">🚫 Vencido (${Math.abs(dias)} días)</span>`;
+            }
+            if (estado === 'por-vencer') {
+                return `<span class="badge-por-vencer">⚠️ ${dias} días</span>`;
+            }
+            return `<span class="badge-al-dia">✅ ${dias} días</span>`;
         }
 
         // ============================================================
@@ -1540,107 +1606,24 @@
                                 color: #ffffff;
                                 box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
                             }
-                            .carnet-header {
-                                display: flex;
-                                justify-content: space-between;
-                                align-items: center;
-                                margin-bottom: 16px;
-                                border-bottom: 2px solid rgba(0, 229, 255, 0.2);
-                                padding-bottom: 12px;
-                            }
+                            .carnet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 2px solid rgba(0, 229, 255, 0.2); padding-bottom: 12px; }
                             .logo-text { font-size: 16px; font-weight: 900; color: #00e5ff; }
                             .logo-text span { color: #ffffff; }
-                            .carnet-foto {
-                                width: 100px;
-                                height: 100px;
-                                border-radius: 50%;
-                                border: 3px solid #00e5ff;
-                                object-fit: cover;
-                                margin: 0 auto 16px;
-                                display: block;
-                                background: #0a0a0e;
-                            }
-                            .carnet-foto-placeholder {
-                                width: 100px;
-                                height: 100px;
-                                border-radius: 50%;
-                                border: 3px dashed #1e1e2a;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                margin: 0 auto 16px;
-                                color: #a0a0a8;
-                                font-size: 40px;
-                                background: #0a0a0e;
-                            }
-                            .carnet-info {
-                                display: grid;
-                                grid-template-columns: 1fr 1fr;
-                                gap: 4px 16px;
-                                font-size: 13px;
-                            }
-                            .carnet-info .label {
-                                color: #a0a0a8;
-                                font-size: 10px;
-                                text-transform: uppercase;
-                                font-weight: 700;
-                            }
-                            .carnet-info .value {
-                                color: #ffffff;
-                                font-weight: 600;
-                            }
-                            .carnet-info .full-width {
-                                grid-column: 1 / -1;
-                            }
-                            .carnet-footer {
-                                margin-top: 16px;
-                                padding-top: 12px;
-                                border-top: 2px solid rgba(0, 229, 255, 0.1);
-                                text-align: center;
-                                font-size: 11px;
-                                color: #a0a0a8;
-                            }
-                            .qr-placeholder {
-                                width: 50px;
-                                height: 50px;
-                                background: rgba(0, 229, 255, 0.05);
-                                border: 1px solid #1e1e2a;
-                                border-radius: 4px;
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                margin: 0 auto 6px;
-                                font-size: 24px;
-                                color: #a0a0a8;
-                            }
-                            .badge-vencido, .badge-por-vencer, .badge-al-dia {
-                                padding: 2px 8px;
-                                font-size: 8px;
-                                font-weight: 800;
-                                text-transform: uppercase;
-                                border-radius: 2px;
-                                display: inline-block;
-                            }
-                            .badge-vencido {
-                                background: rgba(255, 23, 68, 0.2);
-                                color: #ff1744;
-                            }
-                            .badge-por-vencer {
-                                background: rgba(255, 145, 0, 0.2);
-                                color: #ff9100;
-                            }
-                            .badge-al-dia {
-                                background: rgba(0, 229, 255, 0.15);
-                                color: #00e5ff;
-                            }
+                            .carnet-foto { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #00e5ff; object-fit: cover; margin: 0 auto 16px; display: block; background: #0a0a0e; }
+                            .carnet-foto-placeholder { width: 100px; height: 100px; border-radius: 50%; border: 3px dashed #1e1e2a; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; color: #a0a0a8; font-size: 40px; background: #0a0a0e; }
+                            .carnet-info { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; font-size: 13px; }
+                            .carnet-info .label { color: #a0a0a8; font-size: 10px; text-transform: uppercase; font-weight: 700; }
+                            .carnet-info .value { color: #ffffff; font-weight: 600; }
+                            .carnet-info .full-width { grid-column: 1 / -1; }
+                            .carnet-footer { margin-top: 16px; padding-top: 12px; border-top: 2px solid rgba(0, 229, 255, 0.1); text-align: center; font-size: 11px; color: #a0a0a8; }
+                            .qr-placeholder { width: 50px; height: 50px; background: rgba(0, 229, 255, 0.05); border: 1px solid #1e1e2a; border-radius: 4px; display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 24px; color: #a0a0a8; }
+                            .badge-vencido, .badge-por-vencer, .badge-al-dia { padding: 2px 8px; font-size: 8px; font-weight: 800; text-transform: uppercase; border-radius: 2px; display: inline-block; }
+                            .badge-vencido { background: rgba(255, 23, 68, 0.2); color: #ff1744; }
+                            .badge-por-vencer { background: rgba(255, 145, 0, 0.2); color: #ff9100; }
+                            .badge-al-dia { background: rgba(0, 229, 255, 0.15); color: #00e5ff; }
                             @media print {
                                 body { background: white; }
-                                .carnet-container { 
-                                    border-color: #00e5ff; 
-                                    box-shadow: none;
-                                    background: white;
-                                    color: #000;
-                                }
+                                .carnet-container { border-color: #00e5ff; box-shadow: none; background: white; color: #000; }
                                 .carnet-container .logo-text { color: #00e5ff; }
                                 .carnet-container .logo-text span { color: #000; }
                                 .carnet-container .carnet-info .value { color: #000; }
@@ -1704,7 +1687,7 @@
             document.body.style.overflow = 'hidden';
         }
 
-        document.getElementById('btnConfirmarCambioPlan').addEventListener('click', () => {
+        document.getElementById('btnConfirmarCambioPlan').addEventListener('click', async () => {
             if (!socioCambioPlanId) return;
             
             const socio = socios.find(s => s.id === socioCambioPlanId);
@@ -1726,9 +1709,18 @@
             socio.fechaVencimiento = nuevaFecha;
             socio.estado = 'activo';
 
+            // Actualizar en Supabase
+            const datosActualizados = {
+                plan: nuevoPlan,
+                fecha_vencimiento: nuevaFecha,
+                estado: 'activo'
+            };
+            
+            await actualizarEnSupabase(socio.id, datosActualizados);
+            
             saveSocios();
-            guardarEnNube(socio);
             renderTabla();
+            
             showToast(`✅ ${socio.nombre} cambió de ${planAnterior} a ${nuevoPlan}`, 'success');
 
             document.getElementById('modalCambioPlan').classList.remove('active');
@@ -1761,16 +1753,8 @@
                 socios = socios.filter(s => s.id !== id);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 
-                try {
-                    const url = new URL(API_URL);
-                    url.searchParams.append('action', 'delete');
-                    url.searchParams.append('id', id);
-                    await fetch(url.toString(), { method: 'DELETE', mode: 'no-cors' });
-                } catch (e) {
-                    console.log('Error al eliminar de la nube:', e);
-                }
-                
-                await cargarDesdeNube();
+                await eliminarDeSupabase(id);
+                await cargarDesdeSupabase();
                 renderTabla();
                 showToast(`🗑️ Socio "${socio.nombre}" eliminado`, 'warning');
             }
@@ -1822,7 +1806,7 @@
 
             socios.push(nuevoSocio);
             saveSocios();
-            await guardarEnNube(nuevoSocio);
+            await guardarEnSupabase(nuevoSocio);
             renderTabla();
             
             document.getElementById('nombreSocio').value = '';
@@ -1884,7 +1868,7 @@
         loadSocios();
         
         setTimeout(async () => {
-            await cargarDesdeNube();
+            await cargarDesdeSupabase();
             renderTabla();
         }, 1000);
         
