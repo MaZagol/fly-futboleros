@@ -2241,7 +2241,7 @@
         });
 
         // ============================================================
-        //  LÓGICA DE SUSCRIPCIÓN
+        //  🔥 LÓGICA DE SUSCRIPCIÓN (CORREGIDA - SIN REDIRECCIÓN)
         // ============================================================
         document.getElementById('btnSuscribir').addEventListener('click', async function() {
             const nombre = document.getElementById('socioNombre');
@@ -2338,8 +2338,11 @@
                 const formaPagoTexto = formaPagoSeleccionada === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo';
                 const estadoTexto = formaPagoSeleccionada === 'efectivo' ? '¡activado inmediatamente!' : 'enviado para verificación.';
                 
-                showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
+                // ✅ SOLO MUESTRA MENSAJE - NO REDIRIGE AL PANEL
+                showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, 
+                          formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
                 
+                // Limpiar formulario
                 formSuscripcion.classList.remove('visible');
                 document.getElementById('socioNombre').value = '';
                 document.getElementById('socioTelefono').value = '';
@@ -2351,10 +2354,7 @@
                 btn.classList.remove('loading');
                 btn.disabled = false;
 
-                // Redirigir al panel
-                setTimeout(() => {
-                    window.location.href = 'panel-socios.html';
-                }, 2000);
+                // ❌ ELIMINADO: setTimeout(() => { window.location.href = 'panel-socios.html'; }, 2000);
 
             } catch (e) {
                 console.error('Error en suscripción:', e);
