@@ -29,18 +29,11 @@
             --inactivo: #ff1744;
             --sabatero: #00e5ff;
             --finder: #ff9100;
+            --ueno: #00b894;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
 
         body {
             font-family: "Montserrat", "Inter", sans-serif;
@@ -61,12 +54,7 @@
             background-repeat: no-repeat;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+        .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
         /* ============================================================
            TOAST NOTIFICATIONS
@@ -108,20 +96,8 @@
         .toast.warning i { color: var(--warning); }
         .toast.pending i { color: var(--pending); }
 
-        .toast-message {
-            font-size: 13px;
-            font-weight: 600;
-            flex: 1;
-        }
-
-        .toast-close {
-            background: none;
-            border: none;
-            color: var(--text-gray);
-            cursor: pointer;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
+        .toast-message { font-size: 13px; font-weight: 600; flex: 1; }
+        .toast-close { background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 16px; transition: color 0.3s; }
         .toast-close:hover { color: #fff; }
 
         @keyframes slideInRight {
@@ -151,15 +127,9 @@
             box-shadow: 0 4px 30px rgba(0, 229, 255, 0.08);
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
+        .logo-container { display: flex; align-items: center; gap: 12px; }
         .logo-badge {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             background: var(--accent-cyan);
             color: var(--bg-dark);
             display: flex;
@@ -170,25 +140,10 @@
             clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
             box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
         }
+        .logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; }
+        .logo-text span { color: var(--accent-cyan); }
 
-        .logo-text {
-            font-size: 20px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            text-transform: uppercase;
-        }
-
-        .logo-text span {
-            color: var(--accent-cyan);
-        }
-
-        .nav-actions {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }
-
+        .nav-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         .btn-volver {
             color: var(--text-light);
             text-decoration: none;
@@ -200,12 +155,7 @@
             transition: all 0.3s ease;
             border-radius: 2px;
         }
-
-        .btn-volver:hover {
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-            box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
-        }
+        .btn-volver:hover { background: var(--accent-cyan); color: var(--bg-dark); box-shadow: 0 0 20px rgba(0, 229, 255, 0.2); }
 
         .btn-cerrar-sesion {
             background: transparent;
@@ -218,11 +168,7 @@
             transition: all 0.3s ease;
             border-radius: 2px;
         }
-
-        .btn-cerrar-sesion:hover {
-            border-color: var(--error);
-            color: var(--error);
-        }
+        .btn-cerrar-sesion:hover { border-color: var(--error); color: var(--error); }
 
         .badge-admin {
             font-size: 11px;
@@ -232,6 +178,16 @@
             border-radius: 2px;
             border: 1px solid rgba(0, 229, 255, 0.2);
         }
+
+        .badge-online {
+            font-size: 10px;
+            color: var(--success);
+            background: rgba(0, 229, 255, 0.05);
+            padding: 2px 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 229, 255, 0.1);
+        }
+        .badge-online i { margin-right: 4px; }
 
         /* ============================================================
            MAIN CARD
@@ -273,15 +229,10 @@
             gap: 10px;
             flex-wrap: wrap;
         }
-
-        .titulo-seccion .sub {
-            font-size: 12px;
-            color: var(--text-gray);
-            font-weight: 400;
-        }
+        .titulo-seccion .sub { font-size: 12px; color: var(--text-gray); font-weight: 400; }
 
         /* ============================================================
-           DASHBOARD FINANCIERO
+           FINANZAS
            ============================================================ */
         .finanzas-grid {
             display: grid;
@@ -296,48 +247,20 @@
             border-left: 3px solid var(--accent-cyan);
             transition: all 0.3s ease;
         }
-
-        .finanza-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .finanza-box .numero {
-            font-size: 28px;
-            font-weight: 900;
-            color: var(--text-light);
-        }
-
-        .finanza-box .label {
-            font-size: 10px;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
-        .finanza-box .moneda {
-            font-size: 14px;
-            color: var(--accent-cyan);
-            font-weight: 700;
-        }
-
+        .finanza-box:hover { transform: translateY(-3px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+        .finanza-box .numero { font-size: 28px; font-weight: 900; color: var(--text-light); }
+        .finanza-box .label { font-size: 10px; color: var(--text-gray); text-transform: uppercase; font-weight: 700; }
+        .finanza-box .moneda { font-size: 14px; color: var(--accent-cyan); font-weight: 700; }
         .finanza-box.mensual { border-left-color: var(--accent-cyan); }
-        .finanza-box.mensual .moneda { color: var(--accent-cyan); }
-
         .finanza-box.sabado { border-left-color: var(--finder); }
         .finanza-box.sabado .moneda { color: var(--finder); }
-
         .finanza-box.sabatero { border-left-color: var(--sabatero); }
         .finanza-box.sabatero .numero { color: var(--sabatero); }
-
         .finanza-box.finder { border-left-color: var(--finder); }
         .finanza-box.finder .numero { color: var(--finder); }
 
-        .finanza-box.inactivos { border-left-color: var(--inactivo); }
-        .finanza-box.inactivos .numero { color: var(--inactivo); }
-
         /* ============================================================
-           STATS GRID (Socios)
+           STATS
            ============================================================ */
         .stats-grid {
             display: grid;
@@ -352,36 +275,18 @@
             padding: 12px 14px;
             transition: all 0.3s ease;
         }
-
-        .stat-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .stat-number {
-            font-size: 24px;
-            font-weight: 900;
-            color: var(--text-light);
-        }
-
-        .stat-label {
-            font-size: 10px;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-
+        .stat-box:hover { transform: translateY(-3px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+        .stat-number { font-size: 24px; font-weight: 900; color: var(--text-light); }
+        .stat-label { font-size: 10px; color: var(--text-gray); text-transform: uppercase; font-weight: 700; }
         .stat-box.pendiente { border-left-color: var(--pending); }
         .stat-box.pendiente .stat-number { color: var(--pending); }
-        .stat-box.efectivo { border-left-color: var(--efectivo); }
-        .stat-box.efectivo .stat-number { color: var(--efectivo); }
-        .stat-box.transferencia { border-left-color: var(--transferencia); }
-        .stat-box.transferencia .stat-number { color: var(--transferencia); }
         .stat-box.inactivos { border-left-color: var(--inactivo); }
         .stat-box.inactivos .stat-number { color: var(--inactivo); }
+        .stat-box.transferencia { border-left-color: var(--transferencia); }
+        .stat-box.transferencia .stat-number { color: var(--transferencia); }
 
         /* ============================================================
-           BARRA DE BÚSQUEDA Y FILTROS
+           SEARCH
            ============================================================ */
         .search-bar {
             display: flex;
@@ -405,7 +310,6 @@
             min-width: 120px;
             border-radius: 2px;
         }
-
         .search-bar input:focus,
         .search-bar select:focus {
             outline: none;
@@ -425,14 +329,10 @@
             text-transform: uppercase;
             transition: all 0.3s ease;
         }
-
-        .btn-cyan-outline:hover {
-            background: var(--accent-cyan);
-            color: var(--bg-dark);
-        }
+        .btn-cyan-outline:hover { background: var(--accent-cyan); color: var(--bg-dark); }
 
         /* ============================================================
-           FORMULARIO
+           FORM
            ============================================================ */
         .form-socio {
             display: flex;
@@ -457,16 +357,9 @@
             border-radius: 2px;
             transition: border-color 0.3s ease;
         }
-
         .form-socio input:focus,
-        .form-socio select:focus {
-            outline: none;
-            border-color: var(--accent-cyan);
-        }
-
-        .form-socio input.error {
-            border-color: var(--error);
-        }
+        .form-socio select:focus { outline: none; border-color: var(--accent-cyan); }
+        .form-socio input.error { border-color: var(--error); }
 
         .btn-cyan {
             display: inline-block;
@@ -483,35 +376,16 @@
             transition: all 0.3s ease;
             letter-spacing: 0.5px;
         }
-
-        .btn-cyan:hover {
-            background: #5cffff;
-            transform: translateX(4px);
-        }
-
-        .btn-cyan:active {
-            transform: scale(0.97);
-        }
-
-        .btn-cyan-sm {
-            width: auto;
-        }
+        .btn-cyan:hover { background: #5cffff; transform: translateX(4px); }
+        .btn-cyan:active { transform: scale(0.97); }
+        .btn-cyan-sm { width: auto; }
+        .btn-cyan:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
         /* ============================================================
            TABLA
            ============================================================ */
-        .tabla-wrapper {
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .tabla-socios {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-            text-align: left;
-        }
-
+        .tabla-wrapper { overflow-x: auto; position: relative; }
+        .tabla-socios { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
         .tabla-socios th {
             background: rgba(10, 10, 14, 0.9);
             color: var(--accent-cyan);
@@ -525,7 +399,6 @@
             z-index: 10;
             white-space: nowrap;
         }
-
         .tabla-socios td {
             padding: 8px 10px;
             border-bottom: 1px solid var(--border-color);
@@ -533,23 +406,9 @@
             transition: background 0.3s ease;
             vertical-align: middle;
         }
-
-        .tabla-socios tr:hover td {
-            background: rgba(18, 18, 26, 0.9);
-        }
-
-        .tabla-socios tr.anim-enter {
-            animation: fadeInRow 0.3s ease;
-        }
-
-        .tabla-socios tr.inactivo td {
-            opacity: 0.6;
-        }
-
-        .tabla-socios tr.inactivo td .badge-status {
-            background: rgba(255, 23, 68, 0.15);
-            color: var(--inactivo);
-        }
+        .tabla-socios tr:hover td { background: rgba(18, 18, 26, 0.9); }
+        .tabla-socios tr.anim-enter { animation: fadeInRow 0.3s ease; }
+        .tabla-socios tr.inactivo td { opacity: 0.6; }
 
         @keyframes fadeInRow {
             from { opacity: 0; transform: translateX(-10px); }
@@ -564,23 +423,10 @@
             border-radius: 2px;
             display: inline-block;
         }
-
-        .badge-status.activo {
-            background: rgba(0, 229, 255, 0.15);
-            color: var(--accent-cyan);
-        }
-        .badge-status.moroso {
-            background: rgba(255, 71, 87, 0.15);
-            color: #ff4757;
-        }
-        .badge-status.pendiente {
-            background: rgba(255, 145, 0, 0.15);
-            color: var(--pending);
-        }
-        .badge-status.inactivo {
-            background: rgba(255, 23, 68, 0.15);
-            color: var(--inactivo);
-        }
+        .badge-status.activo { background: rgba(0, 229, 255, 0.15); color: var(--accent-cyan); }
+        .badge-status.moroso { background: rgba(255, 71, 87, 0.15); color: #ff4757; }
+        .badge-status.pendiente { background: rgba(255, 145, 0, 0.15); color: var(--pending); }
+        .badge-status.inactivo { background: rgba(255, 23, 68, 0.15); color: var(--inactivo); }
 
         .badge-forma-pago {
             padding: 2px 8px;
@@ -590,15 +436,8 @@
             border-radius: 2px;
             display: inline-block;
         }
-
-        .badge-forma-pago.efectivo {
-            background: rgba(255, 145, 0, 0.15);
-            color: var(--efectivo);
-        }
-        .badge-forma-pago.transferencia {
-            background: rgba(0, 168, 89, 0.15);
-            color: var(--transferencia);
-        }
+        .badge-forma-pago.efectivo { background: rgba(255, 145, 0, 0.15); color: var(--efectivo); }
+        .badge-forma-pago.transferencia { background: rgba(0, 168, 89, 0.15); color: var(--transferencia); }
 
         .btn-accion {
             background: none;
@@ -609,34 +448,25 @@
             padding: 3px 5px;
             transition: all 0.3s ease;
         }
+        .btn-accion:hover { color: var(--text-light); }
+        .btn-accion.view:hover { color: var(--accent-cyan); }
+        .btn-accion.approve:hover { color: var(--success); }
+        .btn-accion.delete:hover { color: #ff4757; }
+        .btn-accion:disabled { opacity: 0.3; cursor: not-allowed; }
 
-        .btn-accion:hover {
-            color: var(--text-light);
+        .btn-accion .spinner-small {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid var(--text-gray);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
         }
-
-        .btn-accion.view:hover {
-            color: var(--accent-cyan);
-        }
-
-        .btn-accion.approve:hover {
-            color: var(--success);
-        }
-
-        .btn-accion.reject:hover {
-            color: var(--error);
-        }
-
-        .btn-accion.delete:hover {
-            color: #ff4757;
-        }
-
-        .btn-accion:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* ============================================================
-           MODAL DE COMPROBANTE
+           MODAL
            ============================================================ */
         .modal-overlay {
             display: none;
@@ -650,16 +480,8 @@
             backdrop-filter: blur(6px);
             -webkit-backdrop-filter: blur(6px);
         }
-
-        .modal-overlay.active {
-            display: flex;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .modal-content.comprobante-modal {
             background: var(--card-bg);
@@ -672,341 +494,96 @@
             animation: slideUp 0.3s ease;
             box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
+        .modal-content.comprobante-modal h3 { color: var(--accent-cyan); text-transform: uppercase; font-size: 17px; margin-bottom: 4px; }
+        .modal-content.comprobante-modal .socio-info { color: var(--text-gray); font-size: 12px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
+        .modal-content.comprobante-modal .socio-info strong { color: var(--text-light); }
+        .modal-content.comprobante-modal .comprobante-img { width: 100%; max-height: 500px; object-fit: contain; background: #0a0a0c; border-radius: 4px; border: 1px solid var(--border-color); }
 
-        .modal-content.comprobante-modal h3 {
-            color: var(--accent-cyan);
-            text-transform: uppercase;
-            font-size: 17px;
-            margin-bottom: 4px;
-        }
-
-        .modal-content.comprobante-modal .socio-info {
-            color: var(--text-gray);
-            font-size: 12px;
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .modal-content.comprobante-modal .socio-info strong {
-            color: var(--text-light);
-        }
-
-        .modal-content.comprobante-modal .comprobante-img {
-            width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-            background: #0a0a0c;
-            border-radius: 4px;
-            border: 1px solid var(--border-color);
-        }
-
-        .modal-content.comprobante-modal .comprobante-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            background: #0a0a0c;
-            border: 2px dashed var(--border-color);
-            border-radius: 4px;
-            color: var(--text-gray);
-        }
-
-        .modal-content.comprobante-modal .comprobante-placeholder i {
-            font-size: 40px;
-            margin-bottom: 10px;
-            opacity: 0.3;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 14px;
-            flex-wrap: wrap;
-        }
-
-        .modal-actions .btn-cyan {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 16px;
-            font-size: 12px;
-        }
-
+        .modal-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+        .modal-actions .btn-cyan { flex: 1; min-width: 100px; padding: 10px 16px; font-size: 12px; }
         .modal-actions .btn-outline-modal {
-            flex: 1;
-            min-width: 100px;
-            padding: 10px 16px;
-            background: transparent;
-            border: 2px solid var(--border-color);
-            color: var(--text-gray);
-            font-weight: 700;
-            font-size: 12px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-radius: 2px;
+            flex: 1; min-width: 100px; padding: 10px 16px;
+            background: transparent; border: 2px solid var(--border-color);
+            color: var(--text-gray); font-weight: 700; font-size: 12px;
+            text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; border-radius: 2px;
         }
-
-        .modal-actions .btn-outline-modal:hover {
-            border-color: var(--text-light);
-            color: var(--text-light);
-        }
-
-        .modal-actions .btn-cyan.approve {
-            background: var(--success);
-            color: #fff;
-        }
-
-        .modal-actions .btn-cyan.approve:hover {
-            background: #00c96e;
-        }
-
-        .modal-actions .btn-cyan.reject {
-            background: var(--error);
-            color: #fff;
-        }
-
-        .modal-actions .btn-cyan.reject:hover {
-            background: #ff6b81;
-        }
+        .modal-actions .btn-outline-modal:hover { border-color: var(--text-light); color: var(--text-light); }
+        .modal-actions .btn-cyan.approve { background: var(--success); color: #fff; }
+        .modal-actions .btn-cyan.approve:hover { background: #00c96e; }
+        .modal-actions .btn-cyan.reject { background: var(--error); color: #fff; }
+        .modal-actions .btn-cyan.reject:hover { background: #ff6b81; }
 
         /* ============================================================
-           PAGINACIÓN
+           PAGINACION
            ============================================================ */
         .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 14px;
-            padding: 6px 0;
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            margin-top: 14px; padding: 6px 0;
         }
-
         .pagination button {
-            background: rgba(10, 10, 14, 0.8);
-            border: 1px solid var(--border-color);
-            color: var(--text-gray);
-            padding: 5px 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            font-weight: 700;
-            font-size: 12px;
-            border-radius: 2px;
+            background: rgba(10, 10, 14, 0.8); border: 1px solid var(--border-color);
+            color: var(--text-gray); padding: 5px 10px; cursor: pointer;
+            transition: all 0.3s ease; font-family: inherit; font-weight: 700; font-size: 12px; border-radius: 2px;
         }
+        .pagination button:hover:not(:disabled) { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0, 229, 255, 0.05); }
+        .pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
+        .pagination .info { color: var(--text-gray); font-size: 11px; padding: 0 8px; }
 
-        .pagination button:hover:not(:disabled) {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            background: rgba(0, 229, 255, 0.05);
-        }
-
-        .pagination button.active {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
-            background: rgba(0, 229, 255, 0.1);
-        }
-
-        .pagination button:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-        }
-
-        .pagination .info {
-            color: var(--text-gray);
-            font-size: 11px;
-            padding: 0 8px;
-        }
-
-        /* ============================================================
-           EMPTY STATE
-           ============================================================ */
-        .empty-state {
-            text-align: center;
-            padding: 30px 20px;
-            color: var(--text-gray);
-        }
-
-        .empty-state i {
-            font-size: 40px;
-            margin-bottom: 10px;
-            opacity: 0.3;
-        }
-
-        .empty-state h3 {
-            font-size: 16px;
-            margin-bottom: 6px;
-            color: var(--text-light);
-        }
+        .empty-state { text-align: center; padding: 30px 20px; color: var(--text-gray); }
+        .empty-state i { font-size: 40px; margin-bottom: 10px; opacity: 0.3; }
+        .empty-state h3 { font-size: 16px; margin-bottom: 6px; color: var(--text-light); }
 
         /* ============================================================
            RESPONSIVE
            ============================================================ */
         @media (max-width: 1024px) {
-            .finanzas-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .stats-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
+            .finanzas-grid { grid-template-columns: repeat(2, 1fr); }
+            .stats-grid { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            .main-card {
-                padding: 16px 12px;
-            }
-            .finanzas-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-            }
-            .finanza-box .numero {
-                font-size: 22px;
-            }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 8px;
-            }
-            .stat-number {
-                font-size: 20px;
-            }
-            .titulo-seccion {
-                font-size: 17px;
-            }
-            .form-socio,
-            .search-bar {
-                flex-direction: column;
-            }
-            .form-socio input,
-            .form-socio select,
-            .search-bar input,
-            .search-bar select {
-                min-width: unset;
-            }
-            .navbar {
-                flex-wrap: wrap;
-                gap: 8px;
-                padding: 10px 12px;
-            }
-            .modal-content.comprobante-modal {
-                padding: 14px;
-                margin: 10px;
-            }
-            .modal-actions {
-                flex-direction: column;
-            }
-            .modal-actions .btn-cyan,
-            .modal-actions .btn-outline-modal {
-                min-width: unset;
-                width: 100%;
-            }
-            .tabla-socios {
-                font-size: 11px;
-            }
-            .tabla-socios th,
-            .tabla-socios td {
-                padding: 6px 8px;
-            }
-            .logo-text {
-                font-size: 16px;
-            }
-            .logo-badge {
-                width: 34px;
-                height: 34px;
-                font-size: 15px;
-            }
-            .badge-admin {
-                font-size: 9px;
-                padding: 2px 8px;
-            }
+            body { padding: 10px; }
+            .main-card { padding: 16px 12px; }
+            .finanzas-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+            .finanza-box .numero { font-size: 22px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+            .stat-number { font-size: 20px; }
+            .titulo-seccion { font-size: 17px; }
+            .form-socio, .search-bar { flex-direction: column; }
+            .form-socio input, .form-socio select, .search-bar input, .search-bar select { min-width: unset; }
+            .navbar { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+            .tabla-socios { font-size: 11px; }
+            .tabla-socios th, .tabla-socios td { padding: 6px 8px; }
+            .logo-text { font-size: 16px; }
+            .logo-badge { width: 34px; height: 34px; font-size: 15px; }
         }
 
         @media (max-width: 480px) {
-            .finanzas-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .finanza-box {
-                padding: 10px 12px;
-            }
-            .finanza-box .numero {
-                font-size: 18px;
-            }
-            .finanza-box .label {
-                font-size: 8px;
-            }
-            .finanza-box .moneda {
-                font-size: 12px;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 6px;
-            }
-            .stat-box {
-                padding: 8px 10px;
-            }
-            .stat-number {
-                font-size: 16px;
-            }
-            .stat-label {
-                font-size: 8px;
-            }
-            .btn-volver {
-                font-size: 10px;
-                padding: 4px 10px;
-            }
-            input, select, textarea, button {
-                font-size: 16px !important;
-            }
-            .toast {
-                min-width: 160px;
-                max-width: 250px;
-                font-size: 11px;
-                padding: 10px 14px;
-            }
-            .toast i {
-                font-size: 16px;
-            }
+            .finanzas-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .finanza-box { padding: 10px 12px; }
+            .finanza-box .numero { font-size: 18px; }
+            .finanza-box .label { font-size: 8px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
+            .stat-box { padding: 8px 10px; }
+            .stat-number { font-size: 16px; }
+            .stat-label { font-size: 8px; }
+            input, select, textarea, button { font-size: 16px !important; }
+            .toast { min-width: 160px; max-width: 250px; font-size: 11px; padding: 10px 14px; }
         }
 
         @media (max-width: 360px) {
-            .finanzas-grid {
-                grid-template-columns: 1fr;
-            }
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .tabla-socios {
-                font-size: 10px;
-            }
-            .tabla-socios th,
-            .tabla-socios td {
-                padding: 4px 6px;
-            }
+            .finanzas-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .tabla-socios { font-size: 10px; }
+            .tabla-socios th, .tabla-socios td { padding: 4px 6px; }
         }
 
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--accent-cyan);
-            border-radius: 3px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent-cyan-dark);
-        }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan-dark); }
     </style>
 </head>
 <body>
@@ -1036,7 +613,6 @@
                 window.location.href = 'index.html';
             }, 1800000);
         }
-        
         document.addEventListener('click', resetInactivityTimer);
         document.addEventListener('keypress', resetInactivityTimer);
         document.addEventListener('scroll', resetInactivityTimer);
@@ -1060,6 +636,7 @@
             </div>
             <div class="nav-actions">
                 <span class="badge-admin"><i class="fas fa-user-shield"></i> Admin</span>
+                <span class="badge-online" id="statusNube"><i class="fas fa-cloud"></i> Conectando...</span>
                 <a href="index.html" class="btn-volver"><i class="fas fa-arrow-left"></i> Volver</a>
                 <button class="btn-cerrar-sesion" onclick="cerrarSesion()"><i class="fas fa-sign-out-alt"></i> Salir</button>
             </div>
@@ -1147,6 +724,7 @@
                     <option value="Sábatero">Plan Sábatero</option>
                     <option value="Finder">Plan Finder</option>
                 </select>
+                <button class="btn-cyan-outline" id="btnSincronizar"><i class="fas fa-sync"></i> Sincronizar</button>
                 <button class="btn-cyan-outline" id="btnExportar"><i class="fas fa-download"></i> Exportar</button>
             </div>
 
@@ -1212,19 +790,11 @@
                 Fecha: <span id="compSocioFecha">2024-01-01</span> · 
                 Pago: <span id="compSocioFormaPago">Transferencia</span>
             </div>
-            <div id="comprobanteContainer">
-                <!-- Se llena dinámicamente -->
-            </div>
+            <div id="comprobanteContainer"></div>
             <div class="modal-actions" id="comprobanteActions">
-                <button class="btn-cyan approve" id="btnAprobarPago">
-                    <i class="fas fa-check"></i> APROBAR
-                </button>
-                <button class="btn-cyan reject" id="btnRechazarPago">
-                    <i class="fas fa-times"></i> RECHAZAR
-                </button>
-                <button class="btn-outline-modal" id="btnCerrarComprobante">
-                    <i class="fas fa-times"></i> Cerrar
-                </button>
+                <button class="btn-cyan approve" id="btnAprobarPago"><i class="fas fa-check"></i> APROBAR</button>
+                <button class="btn-cyan reject" id="btnRechazarPago"><i class="fas fa-times"></i> RECHAZAR</button>
+                <button class="btn-outline-modal" id="btnCerrarComprobante"><i class="fas fa-times"></i> Cerrar</button>
             </div>
         </div>
     </div>
@@ -1234,6 +804,12 @@
        ============================================================ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // ============================================================
+        //  CONFIGURACIÓN - GOOGLE SHEETS API
+        // ============================================================
+        // 🔥 URL DE TU API (YA INTEGRADA)
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwketl7buY-qobLe4KR8Gn9clDRrFu1ENp25A3dOpd58zWtmeX_fT19JOLTxg9Qj1kpGg/exec';
+
         // ============================================================
         //  INICIALIZAR
         // ============================================================
@@ -1282,7 +858,109 @@
         let currentPage = 1;
         const perPage = 10;
         let viewingSocioId = null;
+        let sincronizando = false;
 
+        // ============================================================
+        //  🔥 CARGAR DESDE LA NUBE (GOOGLE SHEETS)
+        // ============================================================
+        async function cargarDesdeNube() {
+            try {
+                document.getElementById('statusNube').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
+                
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                
+                if (data.socios && data.socios.length > 0) {
+                    socios = data.socios.map(s => ({
+                        id: parseInt(s.ID) || Date.now() + Math.random(),
+                        nombre: s.Nombre || '',
+                        telefono: s.Teléfono || '',
+                        plan: s.Plan || '',
+                        formaPago: s.FormaPago || '',
+                        estado: s.Estado || '',
+                        fechaSuscripcion: s.FechaSuscripcion || '',
+                        fechaUltimoPago: s.FechaUltimoPago || null,
+                        pagos: parseInt(s.Pagos) || 0,
+                        comprobanteData: s.Comprobante || null
+                    }));
+                    
+                    localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                    document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sincronizado';
+                    document.getElementById('statusNube').style.color = 'var(--success)';
+                    return true;
+                } else {
+                    // Si no hay datos en la nube, mantener los locales
+                    document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sin datos en nube';
+                    document.getElementById('statusNube').style.color = 'var(--text-gray)';
+                    return false;
+                }
+            } catch (error) {
+                console.error('❌ Error cargando desde la nube:', error);
+                document.getElementById('statusNube').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error de conexión';
+                document.getElementById('statusNube').style.color = 'var(--error)';
+                return false;
+            }
+        }
+
+        // ============================================================
+        //  🔥 GUARDAR EN LA NUBE (GOOGLE SHEETS)
+        // ============================================================
+        async function guardarEnNube(socio) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(socio)
+                });
+                return { success: true };
+            } catch (error) {
+                console.error('❌ Error guardando en la nube:', error);
+                return { success: false, error: error.toString() };
+            }
+        }
+
+        // ============================================================
+        //  SINCRONIZAR
+        // ============================================================
+        async function sincronizar() {
+            if (sincronizando) return;
+            sincronizando = true;
+            showToast('🔄 Sincronizando con la nube...', 'pending');
+            
+            try {
+                const cargado = await cargarDesdeNube();
+                if (cargado) {
+                    renderTabla();
+                    showToast('✅ Datos sincronizados desde la nube', 'success');
+                } else {
+                    // Si no hay datos en la nube, subir los locales
+                    const locales = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
+                    if (locales.length > 0) {
+                        let subidos = 0;
+                        for (const socio of locales) {
+                            const result = await guardarEnNube(socio);
+                            if (result.success) subidos++;
+                        }
+                        if (subidos > 0) {
+                            showToast(`✅ ${subidos} socios subidos a la nube`, 'success');
+                            document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sincronizado';
+                            document.getElementById('statusNube').style.color = 'var(--success)';
+                        }
+                    } else {
+                        showToast('⚠️ No hay datos para sincronizar', 'warning');
+                    }
+                }
+            } catch (error) {
+                showToast('❌ Error al sincronizar', 'error');
+            }
+            
+            sincronizando = false;
+        }
+
+        // ============================================================
+        //  CARGAR DATOS LOCALES
+        // ============================================================
         function loadSocios() {
             try {
                 const data = localStorage.getItem('fly_socios_v2');
@@ -1291,9 +969,8 @@
                 } else {
                     const hoy = new Date().toISOString().slice(0, 10);
                     socios = [
-                        { id: 1, nombre: 'Juan Pérez', telefono: '0981 123 456', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', posicion: 'Delantero', fechaSuscripcion: hoy, fechaUltimoPago: hoy, pagos: 12 },
-                        { id: 2, nombre: 'Carlos Gómez', telefono: '0981 654 321', plan: 'Finder', estado: 'inactivo', formaPago: 'efectivo', posicion: 'Defensor', fechaSuscripcion: '2023-12-01', fechaUltimoPago: '2024-05-15', pagos: 2 },
-                        { id: 3, nombre: 'Luis Martínez', telefono: '0981 789 123', plan: 'Sábatero', estado: 'pendiente', formaPago: 'transferencia', posicion: 'Arquero', fechaSuscripcion: hoy, fechaUltimoPago: null, pagos: 0, comprobanteData: null }
+                        { id: 1, nombre: 'Juan Pérez', telefono: '0981 123 456', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', posicion: 'Delantero', fechaSuscripcion: hoy, fechaUltimoPago: hoy, pagos: 1 },
+                        { id: 2, nombre: 'Carlos Gómez', telefono: '0981 654 321', plan: 'Finder', estado: 'inactivo', formaPago: 'efectivo', posicion: 'Defensor', fechaSuscripcion: '2023-12-01', fechaUltimoPago: '2024-05-15', pagos: 2 }
                     ];
                     localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 }
@@ -1303,11 +980,20 @@
             }
         }
 
+        // ============================================================
+        //  GUARDAR DATOS LOCALES + NUBE
+        // ============================================================
         function saveSocios() {
             try {
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                
+                // Guardar el último socio agregado en la nube
+                const ultimoSocio = socios[socios.length - 1];
+                if (ultimoSocio && !ultimoSocio._fromCloud) {
+                    guardarEnNube(ultimoSocio);
+                }
             } catch (e) {
-                console.error('Error guardando socios:', e);
+                console.error('Error guardando:', e);
                 showToast('Error al guardar los datos', 'error');
             }
         }
@@ -1316,11 +1002,6 @@
         //  CÁLCULOS FINANCIEROS
         // ============================================================
         function calcularFinanzas() {
-            const hoy = new Date();
-            const mesActual = hoy.getMonth();
-            const añoActual = hoy.getFullYear();
-            const sabadoActual = hoy.getDate();
-
             let totalMes = 0;
             let totalSabado = 0;
             let sabateroActivos = 0;
@@ -1330,17 +1011,14 @@
                 if (s.estado === 'activo' || s.estado === 'pendiente') {
                     if (s.plan === 'Sábatero') {
                         sabateroActivos++;
-                        // 20.000 Gs por mes
                         if (s.estado === 'activo') {
                             totalMes += 20000;
                             totalSabado += 20000;
                         }
                     } else if (s.plan === 'Finder') {
                         finderActivos++;
-                        // 5.000 Gs por sábado
                         if (s.estado === 'activo') {
                             totalSabado += 5000;
-                            // Finder solo suma al mes si tiene pagos registrados
                             if (s.pagos && s.pagos > 0) {
                                 totalMes += 5000 * s.pagos;
                             }
@@ -1349,7 +1027,6 @@
                 }
             });
 
-            // Redondear y formatear
             document.getElementById('totalMes').textContent = totalMes.toLocaleString('es-PY');
             document.getElementById('totalSabado').textContent = totalSabado.toLocaleString('es-PY');
             document.getElementById('sabateroActivos').textContent = sabateroActivos;
@@ -1370,15 +1047,12 @@
             if (busqueda) {
                 filtered = filtered.filter(s => s.nombre.toLowerCase().includes(busqueda));
             }
-
             if (filtroEstado !== 'todos') {
                 filtered = filtered.filter(s => s.estado === filtroEstado);
             }
-
             if (filtroFormaPago !== 'todos') {
                 filtered = filtered.filter(s => s.formaPago === filtroFormaPago);
             }
-
             if (filtroPlan !== 'todos') {
                 filtered = filtered.filter(s => s.plan === filtroPlan);
             }
@@ -1486,10 +1160,8 @@
             document.getElementById('pendientesSocios').textContent = pendientes;
             document.getElementById('transferenciaSocios').textContent = transferencia;
 
-            // Finanzas
             calcularFinanzas();
 
-            // Paginación
             const filteredTotal = getFilteredSocios().length;
             document.getElementById('pageInfo').textContent = `Página ${currentPage} de ${totalPages || 1} (${filteredTotal} socios)`;
             document.getElementById('prevPage').disabled = currentPage <= 1;
@@ -1499,7 +1171,7 @@
         // ============================================================
         //  AGREGAR SOCIO
         // ============================================================
-        document.getElementById('btnAgregar').addEventListener('click', () => {
+        document.getElementById('btnAgregar').addEventListener('click', async () => {
             const input = document.getElementById('nombreSocio');
             const nombre = input.value.trim();
             const plan = document.getElementById('planSocio').value;
@@ -1521,7 +1193,7 @@
             }
 
             const hoy = new Date().toISOString().slice(0, 10);
-            socios.push({
+            const nuevoSocio = {
                 id: Date.now(),
                 nombre: nombre,
                 plan: plan,
@@ -1533,12 +1205,21 @@
                 fechaUltimoPago: estado === 'activo' ? hoy : null,
                 pagos: 0,
                 comprobanteData: null
-            });
+            };
 
-            saveSocios();
+            socios.push(nuevoSocio);
+            
+            // Guardar en localStorage y nube
+            try {
+                localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                await guardarEnNube(nuevoSocio);
+                showToast(`✅ Socio "${nombre}" agregado y sincronizado`, 'success');
+            } catch (e) {
+                showToast(`⚠️ Socio "${nombre}" agregado localmente, error en nube`, 'warning');
+            }
+            
             renderTabla();
             input.value = '';
-            showToast(`✅ Socio "${nombre}" agregado`, 'success');
         });
 
         document.getElementById('nombreSocio').addEventListener('input', function() {
@@ -1559,7 +1240,7 @@
             if (!socio) return;
             if (confirm(`¿Eliminar a "${socio.nombre}"?`)) {
                 socios = socios.filter(s => s.id !== id);
-                saveSocios();
+                localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 renderTabla();
                 showToast(`🗑️ Socio "${socio.nombre}" eliminado`, 'warning');
             }
@@ -1622,7 +1303,7 @@
             socio.fechaPago = new Date().toISOString().slice(0, 10);
             socio.fechaUltimoPago = new Date().toISOString().slice(0, 10);
             socio.pagos = (socio.pagos || 0) + 1;
-            saveSocios();
+            localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
             renderTabla();
             showToast(`✅ Pago aprobado para ${socio.nombre}`, 'success');
         };
@@ -1643,7 +1324,7 @@
                 const socio = socios.find(s => s.id === viewingSocioId);
                 if (socio) {
                     socios = socios.filter(s => s.id !== viewingSocioId);
-                    saveSocios();
+                    localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                     renderTabla();
                     showToast(`❌ Socio "${socio.nombre}" eliminado`, 'error');
                 }
@@ -1681,6 +1362,11 @@
         document.getElementById('filtroEstado').addEventListener('change', () => { currentPage = 1; renderTabla(); });
         document.getElementById('filtroFormaPago').addEventListener('change', () => { currentPage = 1; renderTabla(); });
         document.getElementById('filtroPlan').addEventListener('change', () => { currentPage = 1; renderTabla(); });
+
+        // ============================================================
+        //  SINCRONIZAR MANUAL
+        // ============================================================
+        document.getElementById('btnSincronizar').addEventListener('click', sincronizar);
 
         // ============================================================
         //  PAGINACIÓN
@@ -1723,6 +1409,13 @@
         //  INICIALIZAR
         // ============================================================
         loadSocios();
+        
+        // Cargar desde la nube automáticamente
+        setTimeout(async () => {
+            await cargarDesdeNube();
+            renderTabla();
+        }, 1000);
+        
         renderTabla();
 
         if (!sessionStorage.getItem('panel_welcome')) {
@@ -1734,7 +1427,7 @@
                 if (inactivos > 0) msg += ` · ⚠️ ${inactivos} inactivos`;
                 showToast(msg, pendientes > 0 ? 'pending' : 'success');
                 sessionStorage.setItem('panel_welcome', 'true');
-            }, 800);
+            }, 1500);
         }
     </script>
 </body>
