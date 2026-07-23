@@ -501,6 +501,8 @@
         @media (max-width: 1024px) {
             .finanzas-grid { grid-template-columns: repeat(2, 1fr); }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
+            .tabla-socios { font-size: 11px; }
+            .tabla-socios th, .tabla-socios td { padding: 6px 8px; }
         }
         @media (max-width: 768px) {
             body { padding: 10px; }
@@ -513,8 +515,8 @@
             .form-socio, .search-bar { flex-direction: column; }
             .form-socio input, .form-socio select, .search-bar input, .search-bar select { min-width: unset; }
             .navbar { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
-            .tabla-socios { font-size: 11px; }
-            .tabla-socios th, .tabla-socios td { padding: 6px 8px; }
+            .tabla-socios { font-size: 10px; }
+            .tabla-socios th, .tabla-socios td { padding: 4px 6px; }
             .logo-text { font-size: 16px; }
             .logo-badge { width: 34px; height: 34px; font-size: 15px; }
         }
@@ -529,12 +531,14 @@
             .stat-label { font-size: 8px; }
             input, select, textarea, button { font-size: 16px !important; }
             .toast { min-width: 160px; max-width: 250px; font-size: 11px; padding: 10px 14px; }
+            .tabla-socios { font-size: 9px; }
+            .tabla-socios th, .tabla-socios td { padding: 3px 4px; }
         }
         @media (max-width: 360px) {
             .finanzas-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
-            .tabla-socios { font-size: 10px; }
-            .tabla-socios th, .tabla-socios td { padding: 4px 6px; }
+            .tabla-socios { font-size: 8px; }
+            .tabla-socios th, .tabla-socios td { padding: 2px 3px; }
         }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
@@ -714,6 +718,7 @@
                             <th>Plan</th>
                             <th>Forma de pago</th>
                             <th>Estado</th>
+                            <th>Fecha Registro</th>
                             <th style="text-align: center;">Acciones</th>
                         </tr>
                     </thead>
@@ -1046,7 +1051,7 @@
         }
 
         // ============================================================
-        //  RENDER TABLA
+        //  RENDER TABLA (CORREGIDO - NOMBRES VISIBLES)
         // ============================================================
         function renderTabla() {
             const tbody = document.getElementById('tablaBody');
@@ -1057,7 +1062,7 @@
             if (paginated.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="7">
+                        <td colspan="8">
                             <div class="empty-state">
                                 <i class="fas fa-users-slash"></i>
                                 <h3>No hay socios</h3>
@@ -1106,6 +1111,7 @@
                     const badgeClass = socio.estado === 'inactivo' ? 'inactivo' : socio.estado;
                     const formaPagoLabel = socio.formaPago === 'efectivo' ? '💵 Efectivo' : '🏦 Transferencia';
                     const formaPagoClass = socio.formaPago === 'efectivo' ? 'efectivo' : 'transferencia';
+                    const fechaRegistro = socio.fechaSuscripcion || 'N/A';
                     
                     tr.innerHTML = `
                         <td>${realIndex + 1}</td>
@@ -1114,6 +1120,7 @@
                         <td>${socio.plan || 'N/A'}</td>
                         <td><span class="badge-forma-pago ${formaPagoClass}">${formaPagoLabel}</span></td>
                         <td><span class="badge-status ${badgeClass}">${socio.estado || 'N/A'}</span></td>
+                        <td style="font-size: 11px; white-space: nowrap;">${fechaRegistro}</td>
                         <td style="text-align: center; white-space: nowrap;">
                             ${acciones}
                         </td>
@@ -1213,7 +1220,6 @@
                 await eliminarDeNube(id);
                 renderTabla();
                 showToast(`🗑️ Socio "${socio.nombre}" eliminado`, 'warning');
-                // Recargar desde nube para confirmar
                 setTimeout(async () => {
                     await cargarDesdeNube();
                     renderTabla();
@@ -1385,7 +1391,6 @@
         // ============================================================
         loadSocios();
         
-        // Cargar desde la nube automáticamente
         setTimeout(async () => {
             await cargarDesdeNube();
             renderTabla();
