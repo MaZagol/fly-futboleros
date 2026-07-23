@@ -1978,6 +1978,9 @@
         // ============================================================
         let formaPagoSeleccionada = 'transferencia';
 
+        // 🔥 URL DE LA API
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwketl7buY-qobLe4KR8Gn9clDRrFu1ENp25A3dOpd58zWtmeX_fT19JOLTxg9Qj1kpGg/exec';
+
         // ============================================================
         //  INICIALIZAR AOS
         // ============================================================
@@ -2088,6 +2091,24 @@
                 `;
                 document.getElementById('socioComprobante').required = false;
                 document.getElementById('socioComprobante').value = '';
+            }
+        }
+
+        // ============================================================
+        //  🔥 GUARDAR EN LA NUBE (GOOGLE SHEETS)
+        // ============================================================
+        async function guardarSocioEnNube(socio) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(socio)
+                });
+                return { success: true };
+            } catch (error) {
+                console.error('❌ Error guardando en la nube:', error);
+                return { success: false, error: error.toString() };
             }
         }
 
@@ -2241,7 +2262,7 @@
         });
 
         // ============================================================
-        //  🔥 LÓGICA DE SUSCRIPCIÓN (CORREGIDA - SIN REDIRECCIÓN)
+        //  LÓGICA DE SUSCRIPCIÓN (GUARDA LOCAL + NUBE)
         // ============================================================
         document.getElementById('btnSuscribir').addEventListener('click', async function() {
             const nombre = document.getElementById('socioNombre');
@@ -2332,13 +2353,16 @@
                     pagos: formaPagoSeleccionada === 'efectivo' ? 1 : 0
                 };
 
+                // Guardar en localStorage
                 socios.push(nuevoSocio);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+
+                // 🔥 GUARDAR EN LA NUBE
+                await guardarSocioEnNube(nuevoSocio);
 
                 const formaPagoTexto = formaPagoSeleccionada === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo';
                 const estadoTexto = formaPagoSeleccionada === 'efectivo' ? '¡activado inmediatamente!' : 'enviado para verificación.';
                 
-                // ✅ SOLO MUESTRA MENSAJE - NO REDIRIGE AL PANEL
                 showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, 
                           formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
                 
@@ -2354,7 +2378,7 @@
                 btn.classList.remove('loading');
                 btn.disabled = false;
 
-                // ❌ ELIMINADO: setTimeout(() => { window.location.href = 'panel-socios.html'; }, 2000);
+                // ❌ NO REDIRIGIR AL PANEL
 
             } catch (e) {
                 console.error('Error en suscripción:', e);
