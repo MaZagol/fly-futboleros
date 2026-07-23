@@ -32,6 +32,7 @@
             --whatsapp: #25D366;
             --efectivo: #ff9100;
             --transferencia: #00a859;
+            --ueno: #00b894;
         }
 
         * {
@@ -349,7 +350,7 @@
         }
 
         /* ============================================================
-           MENÚ HAMBURGUESA - CORREGIDO
+           MENÚ HAMBURGUESA
            ============================================================ */
         .hamburger-btn {
             display: none;
@@ -757,20 +758,38 @@
             color: var(--accent-cyan);
         }
 
-        /* DATOS BANCARIOS */
+        /* ============================================================
+           DATOS BANCARIOS - UENO BANK
+           ============================================================ */
         .datos-bancarios {
             background: rgba(0, 229, 255, 0.04);
-            border: 2px solid rgba(0, 229, 255, 0.15);
+            border: 2px solid rgba(0, 184, 148, 0.3);
             padding: 14px;
             margin-bottom: 14px;
             border-radius: 2px;
+        }
+
+        .datos-bancarios .banco-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .datos-bancarios .banco-header .banco-logo {
+            background: var(--ueno);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
         }
 
         .datos-bancarios h4 {
             color: var(--accent-cyan);
             font-size: 12px;
             text-transform: uppercase;
-            margin-bottom: 6px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -793,6 +812,10 @@
             font-weight: 600;
         }
 
+        .datos-bancarios .banco-row .value .highlight {
+            color: var(--ueno);
+        }
+
         .datos-bancarios .copy-btn {
             background: transparent;
             border: 1px solid var(--border-color);
@@ -808,6 +831,33 @@
         .datos-bancarios .copy-btn:hover {
             border-color: var(--accent-cyan);
             color: var(--accent-cyan);
+        }
+
+        .datos-bancarios .alias-box {
+            background: rgba(0, 184, 148, 0.08);
+            border: 1px solid rgba(0, 184, 148, 0.2);
+            padding: 8px 12px;
+            margin-top: 6px;
+            border-radius: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .datos-bancarios .alias-box .alias-label {
+            font-size: 10px;
+            color: var(--text-gray);
+            text-transform: uppercase;
+        }
+
+        .datos-bancarios .alias-box .alias-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--ueno);
+        }
+
+        .datos-bancarios .alias-box .copy-btn {
+            margin-left: 10px;
         }
 
         /* FORMA DE PAGO */
@@ -1275,6 +1325,11 @@
                 gap: 2px;
                 padding: 4px 0;
             }
+            .datos-bancarios .alias-box {
+                flex-direction: column;
+                gap: 4px;
+                text-align: center;
+            }
             .forma-pago-grid {
                 grid-template-columns: 1fr 1fr;
             }
@@ -1375,6 +1430,9 @@
             .datos-bancarios .banco-row {
                 font-size: 11px;
                 padding: 3px 0;
+            }
+            .datos-bancarios .alias-box .alias-value {
+                font-size: 12px;
             }
             .forma-pago-grid {
                 grid-template-columns: 1fr 1fr;
@@ -1691,7 +1749,9 @@
                         📋 Ver Reglas del Grupo
                     </button>
 
-                    <!-- FORMULARIO DE SUSCRIPCIÓN -->
+                    <!-- ================================================
+                       FORMULARIO DE SUSCRIPCIÓN
+                       ================================================ -->
                     <div class="form-suscripcion" id="formSuscripcion">
                         <h3>
                             <i class="fas fa-pen-fancy"></i> 
@@ -1705,29 +1765,38 @@
                             Precio: <strong id="planInfoPrecio">20.000 Gs/mes</strong>
                         </div>
 
+                        <!-- ============================================
+                           DATOS BANCARIOS - UENO BANK
+                           ============================================ -->
                         <div class="datos-bancarios" id="datosBancarios">
-                            <h4><i class="fas fa-university"></i> Datos para la transferencia</h4>
-                            <div class="banco-row">
-                                <span class="label">Banco</span>
-                                <span class="value">Banco Nacional de Fomento</span>
-                            </div>
-                            <div class="banco-row">
-                                <span class="label">Tipo de cuenta</span>
-                                <span class="value">Cuenta Corriente</span>
-                            </div>
-                            <div class="banco-row">
-                                <span class="label">N° de cuenta</span>
-                                <span class="value" id="cuentaBanco">1234567890 <button class="copy-btn" onclick="copiarTexto('cuentaBanco')"><i class="fas fa-copy"></i></button></span>
+                            <div class="banco-header">
+                                <span class="banco-logo">UENO</span>
+                                <h4><i class="fas fa-university"></i> Datos para la transferencia</h4>
                             </div>
                             <div class="banco-row">
                                 <span class="label">Titular</span>
-                                <span class="value" id="titularCuenta">Fly Futboleros - Asociación</span>
+                                <span class="value">Alberto Mariano Ramirez Zarate</span>
                             </div>
                             <div class="banco-row">
-                                <span class="label">Cédula / RUC</span>
-                                <span class="value" id="rucCuenta">1234567-8</span>
+                                <span class="label">CI / RUC</span>
+                                <span class="value">3.652.362</span>
                             </div>
-                            <div class="banco-row" style="border-bottom: none; margin-top: 4px;">
+                            <div class="banco-row">
+                                <span class="label">N° de cuenta</span>
+                                <span class="value" id="cuentaBanco">619315284 <button class="copy-btn" onclick="copiarTexto('cuentaBanco')"><i class="fas fa-copy"></i></button></span>
+                            </div>
+                            <div class="banco-row">
+                                <span class="label">Moneda</span>
+                                <span class="value">Guaraníes (Gs)</span>
+                            </div>
+                            <div class="alias-box">
+                                <span class="alias-label"><i class="fas fa-mobile-alt"></i> Alias / Teléfono</span>
+                                <span>
+                                    <span class="alias-value" id="aliasBanco">+595 961 101 538</span>
+                                    <button class="copy-btn" onclick="copiarTexto('aliasBanco')"><i class="fas fa-copy"></i></button>
+                                </span>
+                            </div>
+                            <div class="banco-row" style="border-bottom: none; margin-top: 6px;">
                                 <span class="label">Monto a pagar</span>
                                 <span class="value" style="color: var(--accent-cyan); font-size: 16px;" id="montoPago">20.000 Gs.</span>
                             </div>
@@ -1736,6 +1805,7 @@
                             </div>
                         </div>
 
+                        <!-- FORMA DE PAGO -->
                         <div class="forma-pago-grid" id="formaPagoGrid">
                             <div class="forma-pago-option active-transferencia" id="pagoTransferencia" onclick="seleccionarFormaPago('transferencia')">
                                 <i class="fas fa-university"></i>
@@ -2030,17 +2100,15 @@
         });
 
         // ============================================================
-        //  CONTROL DEL MENÚ HAMBURGUESA - CORREGIDO
+        //  CONTROL DEL MENÚ HAMBURGUESA
         // ============================================================
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Abrir/cerrar menú
         hamburgerBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             mobileMenu.classList.toggle('active');
-            // Cambiar icono
             const icon = this.querySelector('i');
             if (mobileMenu.classList.contains('active')) {
                 icon.className = 'fas fa-times';
@@ -2049,7 +2117,6 @@
             }
         });
 
-        // Cerrar menú al hacer clic en un enlace
         mobileLinks.forEach(link => {
             link.addEventListener('click', function() {
                 mobileMenu.classList.remove('active');
@@ -2058,7 +2125,6 @@
             });
         });
 
-        // Cerrar menú al hacer clic fuera
         document.addEventListener('click', function(e) {
             if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
                 mobileMenu.classList.remove('active');
@@ -2067,7 +2133,6 @@
             }
         });
 
-        // Cerrar menú al hacer scroll
         window.addEventListener('scroll', function() {
             if (mobileMenu.classList.contains('active')) {
                 mobileMenu.classList.remove('active');
@@ -2077,22 +2142,19 @@
         });
 
         // ============================================================
-        //  ACCESO SECRETO AL PANEL DE SOCIOS (Doble clic en el logo)
+        //  ACCESO SECRETO AL PANEL DE SOCIOS
         // ============================================================
         let clickCount = 0;
         let clickTimer = null;
 
         document.querySelector('.logo-container').addEventListener('click', function(e) {
             clickCount++;
-            
             if (clickTimer) {
                 clearTimeout(clickTimer);
                 clickTimer = null;
             }
-            
             clickTimer = setTimeout(() => {
                 if (clickCount >= 2) {
-                    // Redirigir al panel (que tiene protección)
                     window.location.href = 'panel-socios.html';
                     clickCount = 0;
                 } else {
@@ -2101,7 +2163,6 @@
             }, 500);
         });
 
-        // Acceso con teclado: Ctrl + Shift + P
         document.addEventListener('keydown', function(e) {
             if (e.ctrlKey && e.shiftKey && (e.key === 'P' || e.key === 'p')) {
                 e.preventDefault();
@@ -2110,7 +2171,7 @@
         });
 
         // ============================================================
-        //  SELECCIÓN VISUAL DE PLANES Y ACTUALIZACIÓN DE FORM
+        //  SELECCIÓN VISUAL DE PLANES
         // ============================================================
         const planCards = document.querySelectorAll('.plan-card');
         const planSeleccionado = document.getElementById('planSeleccionado');
@@ -2130,7 +2191,6 @@
                 planCards.forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
                 card.querySelector('input').checked = true;
-                
                 const plan = card.dataset.plan;
                 const precio = card.dataset.price;
                 actualizarInfoPlan(plan, precio);
@@ -2146,7 +2206,7 @@
         }
 
         // ============================================================
-        //  MOSTRAR/OCULTAR FORMULARIO DE SUSCRIPCIÓN
+        //  MOSTRAR/OCULTAR FORMULARIO
         // ============================================================
         const formSuscripcion = document.getElementById('formSuscripcion');
         const btnUnirme = document.getElementById('btnUnirme');
@@ -2160,9 +2220,7 @@
                     planActivo.dataset.price
                 );
             }
-            
             formSuscripcion.classList.toggle('visible');
-            
             if (formSuscripcion.classList.contains('visible')) {
                 seleccionarFormaPago('transferencia');
                 setTimeout(() => {
@@ -2183,7 +2241,7 @@
         });
 
         // ============================================================
-        //  LÓGICA DE SUSCRIPCIÓN (DIFERENCIADA)
+        //  LÓGICA DE SUSCRIPCIÓN
         // ============================================================
         document.getElementById('btnSuscribir').addEventListener('click', async function() {
             const nombre = document.getElementById('socioNombre');
@@ -2229,7 +2287,7 @@
             btn.disabled = true;
 
             try {
-                const socios = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
+                let socios = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
                 
                 const existe = socios.some(s => 
                     s.nombre.toLowerCase() === nombre.value.trim().toLowerCase()
@@ -2255,6 +2313,8 @@
                     });
                 }
 
+                const hoy = new Date().toISOString().slice(0, 10);
+                
                 const nuevoSocio = {
                     id: Date.now(),
                     nombre: nombre.value.trim(),
@@ -2262,12 +2322,14 @@
                     posicion: posicion.value || 'No especificada',
                     plan: plan,
                     formaPago: formaPagoSeleccionada,
-                    fechaSuscripcion: new Date().toISOString().slice(0, 10),
+                    fechaSuscripcion: hoy,
                     comprobanteNombre: comprobanteNombre,
                     comprobanteData: comprobanteData,
                     estado: formaPagoSeleccionada === 'efectivo' ? 'activo' : 'pendiente',
                     pagoConfirmado: formaPagoSeleccionada === 'efectivo' ? true : false,
-                    fechaPago: formaPagoSeleccionada === 'efectivo' ? new Date().toISOString().slice(0, 10) : null
+                    fechaPago: formaPagoSeleccionada === 'efectivo' ? hoy : null,
+                    fechaUltimoPago: formaPagoSeleccionada === 'efectivo' ? hoy : null,
+                    pagos: formaPagoSeleccionada === 'efectivo' ? 1 : 0
                 };
 
                 socios.push(nuevoSocio);
@@ -2288,6 +2350,11 @@
                 
                 btn.classList.remove('loading');
                 btn.disabled = false;
+
+                // Redirigir al panel
+                setTimeout(() => {
+                    window.location.href = 'panel-socios.html';
+                }, 2000);
 
             } catch (e) {
                 console.error('Error en suscripción:', e);
