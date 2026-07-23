@@ -403,6 +403,45 @@
         .badge-status.pendiente { background: rgba(255, 145, 0, 0.15); color: var(--pending); }
         .badge-status.inactivo { background: rgba(255, 23, 68, 0.15); color: var(--inactivo); }
 
+        .badge-vencido {
+            background: rgba(255, 23, 68, 0.2);
+            color: #ff1744;
+            padding: 2px 8px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+            animation: pulse-vencido 2s infinite;
+        }
+
+        .badge-por-vencer {
+            background: rgba(255, 145, 0, 0.2);
+            color: #ff9100;
+            padding: 2px 8px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        .badge-al-dia {
+            background: rgba(0, 229, 255, 0.15);
+            color: var(--accent-cyan);
+            padding: 2px 8px;
+            font-size: 8px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 2px;
+            display: inline-block;
+        }
+
+        @keyframes pulse-vencido {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         .badge-forma-pago {
             padding: 2px 8px;
             font-size: 8px;
@@ -428,6 +467,15 @@
         .btn-accion.approve:hover { color: var(--success); }
         .btn-accion.delete:hover { color: #ff4757; }
         .btn-accion:disabled { opacity: 0.3; cursor: not-allowed; }
+
+        .id-cell {
+            font-family: 'Courier New', monospace;
+            font-size: 10px;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .id-cell:hover { color: var(--accent-cyan); }
 
         /* MODAL */
         .modal-overlay {
@@ -479,6 +527,158 @@
         .modal-actions .btn-cyan.reject { background: var(--error); color: #fff; }
         .modal-actions .btn-cyan.reject:hover { background: #ff6b81; }
 
+        /* CARNET */
+        .carnet-container {
+            background: linear-gradient(135deg, #0a0a0e 0%, #12121a 100%);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+        }
+
+        .carnet-container::before {
+            content: "FLY FUTBOLEROS";
+            position: absolute;
+            top: -10px;
+            right: -20px;
+            font-size: 60px;
+            font-weight: 900;
+            color: rgba(0, 229, 255, 0.03);
+            transform: rotate(-10deg);
+            pointer-events: none;
+        }
+
+        .carnet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            border-bottom: 2px solid rgba(0, 229, 255, 0.2);
+            padding-bottom: 12px;
+        }
+
+        .carnet-header .logo-text {
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--accent-cyan);
+        }
+        .carnet-header .logo-text span { color: var(--text-light); }
+
+        .carnet-foto {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-cyan);
+            object-fit: cover;
+            margin: 0 auto 16px;
+            display: block;
+            background: var(--bg-dark);
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
+        }
+
+        .carnet-foto-placeholder {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px dashed var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            color: var(--text-gray);
+            font-size: 40px;
+            background: var(--bg-dark);
+        }
+
+        .carnet-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 16px;
+            font-size: 13px;
+        }
+        .carnet-info .label {
+            color: var(--text-gray);
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        .carnet-info .value {
+            color: var(--text-light);
+            font-weight: 600;
+            word-break: break-word;
+        }
+        .carnet-info .full-width { grid-column: 1 / -1; }
+
+        .carnet-footer {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 2px solid rgba(0, 229, 255, 0.1);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-gray);
+        }
+        .carnet-footer .qr-placeholder {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: rgba(0, 229, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 6px;
+            font-size: 24px;
+            color: var(--text-gray);
+        }
+
+        /* CAMBIO PLAN */
+        .cambio-plan-modal {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-cyan);
+            padding: 24px;
+            max-width: 450px;
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+
+        .cambio-plan-modal h3 {
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            font-size: 18px;
+            margin-bottom: 16px;
+        }
+
+        .cambio-plan-modal .form-group { margin-bottom: 12px; }
+        .cambio-plan-modal .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            margin-bottom: 4px;
+        }
+        .cambio-plan-modal .form-group select,
+        .cambio-plan-modal .form-group input {
+            width: 100%;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 14px;
+            border-radius: 2px;
+        }
+        .cambio-plan-modal .form-group select:focus,
+        .cambio-plan-modal .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
         /* PAGINACION */
         .pagination {
             display: flex; justify-content: center; align-items: center; gap: 8px;
@@ -519,6 +719,10 @@
             .tabla-socios th, .tabla-socios td { padding: 4px 6px; }
             .logo-text { font-size: 16px; }
             .logo-badge { width: 34px; height: 34px; font-size: 15px; }
+            .carnet-container { padding: 16px; }
+            .carnet-foto { width: 80px; height: 80px; }
+            .carnet-foto-placeholder { width: 80px; height: 80px; font-size: 32px; }
+            .carnet-info { grid-template-columns: 1fr; gap: 2px 0; }
         }
         @media (max-width: 480px) {
             .finanzas-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
@@ -645,17 +849,17 @@
                     <div class="stat-number" style="color: var(--accent-cyan);" id="activosSocios">0</div>
                     <div class="stat-label">✅ Activos</div>
                 </div>
+                <div class="stat-box" data-aos="fade-up" data-aos-delay="175">
+                    <div class="stat-number" style="color: #ff9100;" id="porVencerSocios">0</div>
+                    <div class="stat-label">⚠️ Por Vencer (7 días)</div>
+                </div>
                 <div class="stat-box inactivos" data-aos="fade-up" data-aos-delay="200">
-                    <div class="stat-number" id="inactivosSocios">0</div>
-                    <div class="stat-label">⚠️ Inactivos</div>
+                    <div class="stat-number" id="vencidosSocios">0</div>
+                    <div class="stat-label">🚫 Vencidos</div>
                 </div>
                 <div class="stat-box pendiente" data-aos="fade-up" data-aos-delay="250">
                     <div class="stat-number" id="pendientesSocios">0</div>
                     <div class="stat-label">⏳ Pendientes</div>
-                </div>
-                <div class="stat-box transferencia" data-aos="fade-up" data-aos-delay="300">
-                    <div class="stat-number" id="transferenciaSocios">0</div>
-                    <div class="stat-label">🏦 Transferencia</div>
                 </div>
             </div>
         </section>
@@ -665,13 +869,14 @@
            ============================================================ -->
         <section class="main-card" data-aos="fade-up">
             <div class="search-bar">
-                <input type="text" id="buscarSocio" placeholder="🔍 Buscar socio..." />
+                <input type="text" id="buscarSocio" placeholder="🔍 Buscar socio por nombre o CI..." />
                 <select id="filtroEstado">
                     <option value="todos">Todos los estados</option>
                     <option value="activo">✅ Activos</option>
                     <option value="inactivo">⚠️ Inactivos</option>
                     <option value="pendiente">⏳ Pendientes</option>
-                    <option value="moroso">⛔ Morosos</option>
+                    <option value="vencido">🚫 Vencido</option>
+                    <option value="moroso">⛔ Moroso</option>
                 </select>
                 <select id="filtroFormaPago">
                     <option value="todos">Todas las formas de pago</option>
@@ -689,7 +894,9 @@
 
             <!-- FORMULARIO DE ALTA -->
             <div class="form-socio" id="formSocio">
-                <input type="text" id="nombreSocio" placeholder="Nombre completo del jugador" />
+                <input type="text" id="nombreSocio" placeholder="Nombre completo" />
+                <input type="text" id="ciSocio" placeholder="Cédula" />
+                <input type="tel" id="telefonoSocio" placeholder="Teléfono" />
                 <select id="planSocio">
                     <option value="Sábatero">Plan Sábatero (Mensual)</option>
                     <option value="Finder">Plan Finder (Por fecha)</option>
@@ -713,12 +920,13 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>ID</th>
                             <th>Jugador</th>
-                            <th>Teléfono</th>
+                            <th>CI</th>
                             <th>Plan</th>
-                            <th>Forma de pago</th>
                             <th>Estado</th>
-                            <th>Fecha Registro</th>
+                            <th>Vencimiento</th>
+                            <th>Aportes</th>
                             <th style="text-align: center;">Acciones</th>
                         </tr>
                     </thead>
@@ -739,29 +947,50 @@
     </div>
 
     <!-- ============================================================
-       MODAL DE COMPROBANTE
+       MODAL DE CARNET
        ============================================================ -->
-    <div class="modal-overlay" id="modalComprobante">
-        <div class="modal-content comprobante-modal">
-            <h3>📎 Comprobante de pago</h3>
-            <div class="socio-info" id="comprobanteInfo">
-                <strong id="compSocioNombre">Juan Pérez</strong> · 
-                Plan: <span id="compSocioPlan">Sábatero</span> · 
-                Fecha: <span id="compSocioFecha">2024-01-01</span> · 
-                Pago: <span id="compSocioFormaPago">Transferencia</span>
-            </div>
-            <div id="comprobanteContainer">
+    <div class="modal-overlay" id="modalCarnet">
+        <div class="modal-content comprobante-modal" style="max-width: 450px;">
+            <div class="carnet-container" id="carnetContainer">
                 <!-- Se llena dinámicamente -->
             </div>
-            <div class="modal-actions" id="comprobanteActions">
-                <button class="btn-cyan approve" id="btnAprobarPago">
-                    <i class="fas fa-check"></i> APROBAR
+            <div class="modal-actions" style="margin-top: 16px;">
+                <button class="btn-cyan" id="btnImprimirCarnet" style="background: var(--whatsapp); color: #fff;">
+                    <i class="fas fa-print"></i> Imprimir
                 </button>
-                <button class="btn-cyan reject" id="btnRechazarPago">
-                    <i class="fas fa-times"></i> RECHAZAR
-                </button>
-                <button class="btn-outline-modal" id="btnCerrarComprobante">
+                <button class="btn-outline-modal" id="btnCerrarCarnet">
                     <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+       MODAL DE CAMBIO DE PLAN
+       ============================================================ -->
+    <div class="modal-overlay" id="modalCambioPlan">
+        <div class="cambio-plan-modal">
+            <h3>🔄 Cambiar Plan</h3>
+            <p style="color: var(--text-gray); font-size: 13px; margin-bottom: 16px;">
+                <strong id="cambioPlanNombre">Juan Pérez</strong> · ID: <span id="cambioPlanId">12345</span>
+            </p>
+            <div class="form-group">
+                <label for="cambioPlanSelect">Nuevo Plan</label>
+                <select id="cambioPlanSelect">
+                    <option value="Sábatero">Sábatero (20.000 Gs/mes)</option>
+                    <option value="Finder">Finder (5.000 Gs/sábado)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="cambioPlanFechaVencimiento">Fecha de Vencimiento</label>
+                <input type="date" id="cambioPlanFechaVencimiento" />
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cyan" id="btnConfirmarCambioPlan" style="background: var(--success); color: #fff;">
+                    <i class="fas fa-check"></i> CONFIRMAR CAMBIO
+                </button>
+                <button class="btn-cyan" id="btnCancelarCambioPlan" style="background: var(--error); color: #fff;">
+                    <i class="fas fa-times"></i> CANCELAR
                 </button>
             </div>
         </div>
@@ -775,7 +1004,7 @@
         // ============================================================
         //  CONFIGURACIÓN
         // ============================================================
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwketl7buY-qobLe4KR8Gn9clDRrFu1ENp25A3dOpd58zWtmeX_fT19JOLTxg9Qj1kpGg/exec';
+        const API_URL = 'https://script.google.com/macros/s/AKfycbyz4uxyyUqGNs59FMid3t9ojDppurNsX2_VQljV-znWPKOjHd-Hbsygle8A21qUusCG/exec';
 
         // ============================================================
         //  INICIALIZAR
@@ -825,7 +1054,51 @@
         }
 
         // ============================================================
-        //  🔥 CARGAR DESDE LA NUBE
+        //  FUNCIONES DE UTILIDAD
+        // ============================================================
+        function formatearFecha(fecha) {
+            if (!fecha || fecha === 'N/A') return 'N/A';
+            const partes = fecha.split('-');
+            if (partes.length === 3) {
+                return `${partes[2]}/${partes[1]}/${partes[0]}`;
+            }
+            return fecha;
+        }
+
+        function calcularDiasRestantes(fechaVencimiento) {
+            if (!fechaVencimiento || fechaVencimiento === 'N/A') return null;
+            const hoy = new Date();
+            const venc = new Date(fechaVencimiento + 'T00:00:00');
+            const diff = Math.ceil((venc - hoy) / (1000 * 60 * 60 * 24));
+            return diff;
+        }
+
+        function obtenerEstadoVencimiento(fechaVencimiento) {
+            const dias = calcularDiasRestantes(fechaVencimiento);
+            if (dias === null) return 'sin-fecha';
+            if (dias < 0) return 'vencido';
+            if (dias <= 7) return 'por-vencer';
+            return 'al-dia';
+        }
+
+        function obtenerBadgeVencimiento(fechaVencimiento) {
+            const estado = obtenerEstadoVencimiento(fechaVencimiento);
+            const dias = calcularDiasRestantes(fechaVencimiento);
+            
+            if (estado === 'sin-fecha') {
+                return `<span class="badge-status">Sin fecha</span>`;
+            }
+            if (estado === 'vencido') {
+                return `<span class="badge-vencido">🚫 Vencido (${Math.abs(dias)} días)</span>`;
+            }
+            if (estado === 'por-vencer') {
+                return `<span class="badge-por-vencer">⚠️ ${dias} días</span>`;
+            }
+            return `<span class="badge-al-dia">✅ ${dias} días</span>`;
+        }
+
+        // ============================================================
+        //  CARGAR DESDE LA NUBE
         // ============================================================
         async function cargarDesdeNube() {
             try {
@@ -835,27 +1108,25 @@
                 const data = await response.json();
                 
                 if (data.socios && data.socios.length > 0) {
-                    // 🔥 MAPEAR CORRECTAMENTE LOS CAMPOS
                     const sociosNube = data.socios.map(s => ({
                         id: parseInt(s.ID) || Date.now() + Math.random(),
                         nombre: s.Nombre || s.nombre || '',
+                        ci: s.CI || s.ci || '',
                         telefono: s.Teléfono || s.telefono || '',
+                        posicion: s.Posicion || s.posicion || '',
                         plan: s.Plan || s.plan || '',
                         formaPago: s.FormaPago || s.formaPago || '',
                         estado: s.Estado || s.estado || '',
                         fechaSuscripcion: s.FechaSuscripcion || s.fechaSuscripcion || '',
+                        fechaVencimiento: s.FechaVencimiento || s.fechaVencimiento || '',
                         fechaUltimoPago: s.FechaUltimoPago || s.fechaUltimoPago || null,
                         pagos: parseInt(s.Pagos || s.pagos) || 0,
-                        comprobanteData: s.Comprobante || s.comprobanteData || null
+                        totalAportado: parseInt(s.TotalAportado || s.totalAportado) || 0,
+                        foto: s.Foto || s.foto || null
                     }));
                     
-                    // Combinar con datos locales
-                    const locales = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
-                    const idsNube = new Set(sociosNube.map(s => s.id));
-                    const localesFiltrados = locales.filter(s => !idsNube.has(s.id));
-                    
-                    socios = [...sociosNube, ...localesFiltrados];
-                    localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                    localStorage.setItem('fly_socios_v2', JSON.stringify(sociosNube));
+                    socios = sociosNube;
                     
                     document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sincronizado';
                     document.getElementById('statusNube').style.color = 'var(--success)';
@@ -866,7 +1137,7 @@
                     return false;
                 }
             } catch (error) {
-                console.error('❌ Error cargando desde la nube:', error);
+                console.error('❌ Error:', error);
                 document.getElementById('statusNube').innerHTML = '<i class="fas fa-exclamation-triangle"></i> Error de conexión';
                 document.getElementById('statusNube').style.color = 'var(--error)';
                 return false;
@@ -874,21 +1145,25 @@
         }
 
         // ============================================================
-        //  🔥 GUARDAR EN LA NUBE
+        //  GUARDAR EN LA NUBE
         // ============================================================
         async function guardarEnNube(socio) {
             try {
                 const socioParaNube = {
                     id: socio.id,
                     Nombre: socio.nombre,
+                    CI: socio.ci || '',
                     Teléfono: socio.telefono,
+                    Posicion: socio.posicion || '',
                     Plan: socio.plan,
                     FormaPago: socio.formaPago,
                     Estado: socio.estado,
                     FechaSuscripcion: socio.fechaSuscripcion,
+                    FechaVencimiento: socio.fechaVencimiento || '',
                     FechaUltimoPago: socio.fechaUltimoPago || '',
                     Pagos: socio.pagos || 0,
-                    Comprobante: socio.comprobanteData || ''
+                    TotalAportado: socio.totalAportado || 0,
+                    Foto: socio.foto || ''
                 };
                 
                 const response = await fetch(API_URL, {
@@ -900,26 +1175,6 @@
                 return { success: true };
             } catch (error) {
                 console.error('❌ Error guardando en la nube:', error);
-                return { success: false, error: error.toString() };
-            }
-        }
-
-        // ============================================================
-        //  🔥 ELIMINAR DE LA NUBE
-        // ============================================================
-        async function eliminarDeNube(id) {
-            try {
-                const url = new URL(API_URL);
-                url.searchParams.append('action', 'delete');
-                url.searchParams.append('id', id);
-                
-                const response = await fetch(url.toString(), {
-                    method: 'DELETE',
-                    mode: 'no-cors'
-                });
-                return { success: true };
-            } catch (error) {
-                console.error('❌ Error eliminando de la nube:', error);
                 return { success: false, error: error.toString() };
             }
         }
@@ -968,9 +1223,12 @@
                     socios = JSON.parse(data);
                 } else {
                     const hoy = new Date().toISOString().slice(0, 10);
+                    const venc = new Date();
+                    venc.setMonth(venc.getMonth() + 1);
+                    const fechaVenc = venc.toISOString().slice(0, 10);
                     socios = [
-                        { id: 1, nombre: 'Juan Pérez', telefono: '0981 123 456', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', posicion: 'Delantero', fechaSuscripcion: hoy, fechaUltimoPago: hoy, pagos: 1 },
-                        { id: 2, nombre: 'Carlos Gómez', telefono: '0981 654 321', plan: 'Finder', estado: 'inactivo', formaPago: 'efectivo', posicion: 'Defensor', fechaSuscripcion: '2023-12-01', fechaUltimoPago: '2024-05-15', pagos: 2 }
+                        { id: 1, nombre: 'Juan Pérez', ci: '1234567-8', telefono: '0981 123 456', posicion: 'Delantero', plan: 'Sábatero', estado: 'activo', formaPago: 'transferencia', fechaSuscripcion: hoy, fechaVencimiento: fechaVenc, fechaUltimoPago: hoy, pagos: 1, totalAportado: 20000, foto: null },
+                        { id: 2, nombre: 'Carlos Gómez', ci: '7654321-9', telefono: '0981 654 321', posicion: 'Defensor', plan: 'Finder', estado: 'inactivo', formaPago: 'efectivo', fechaSuscripcion: '2023-12-01', fechaVencimiento: '2024-06-01', fechaUltimoPago: '2024-05-15', pagos: 2, totalAportado: 10000, foto: null }
                     ];
                     localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 }
@@ -1039,10 +1297,18 @@
             let filtered = socios;
 
             if (busqueda) {
-                filtered = filtered.filter(s => s.nombre.toLowerCase().includes(busqueda));
+                filtered = filtered.filter(s => 
+                    (s.nombre || '').toLowerCase().includes(busqueda) ||
+                    (s.ci || '').toLowerCase().includes(busqueda) ||
+                    (s.id || '').toString().includes(busqueda)
+                );
             }
             if (filtroEstado !== 'todos') {
-                filtered = filtered.filter(s => s.estado === filtroEstado);
+                if (filtroEstado === 'vencido') {
+                    filtered = filtered.filter(s => obtenerEstadoVencimiento(s.fechaVencimiento) === 'vencido');
+                } else {
+                    filtered = filtered.filter(s => s.estado === filtroEstado);
+                }
             }
             if (filtroFormaPago !== 'todos') {
                 filtered = filtered.filter(s => s.formaPago === filtroFormaPago);
@@ -1065,7 +1331,7 @@
         }
 
         // ============================================================
-        //  🔥 RENDER TABLA (CORREGIDO)
+        //  RENDER TABLA
         // ============================================================
         function renderTabla() {
             const tbody = document.getElementById('tablaBody');
@@ -1076,7 +1342,7 @@
             if (paginated.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="8">
+                        <td colspan="9">
                             <div class="empty-state">
                                 <i class="fas fa-users-slash"></i>
                                 <h3>No hay socios</h3>
@@ -1089,64 +1355,43 @@
                 paginated.forEach((socio, index) => {
                     const tr = document.createElement('tr');
                     tr.className = 'anim-enter';
-                    if (socio.estado === 'inactivo') {
-                        tr.classList.add('inactivo');
-                    }
                     
                     const realIndex = start + index;
-                    const tieneComprobante = socio.comprobanteData && socio.comprobanteData.length > 100;
-                    const esPendiente = socio.estado === 'pendiente';
-                    const esTransferencia = socio.formaPago === 'transferencia';
-
-                    let acciones = '';
-
-                    if (esTransferencia && tieneComprobante) {
-                        acciones += `
-                            <button class="btn-accion view" onclick="verComprobante(${socio.id})" title="Ver comprobante">
-                                <i class="fas fa-image"></i>
-                            </button>
-                        `;
-                    }
-
-                    if (esPendiente && esTransferencia && tieneComprobante) {
-                        acciones += `
-                            <button class="btn-accion approve" onclick="aprobarPago(${socio.id})" title="Aprobar pago">
-                                <i class="fas fa-check-circle" style="color: var(--success);"></i>
-                            </button>
-                        `;
-                    }
-
-                    acciones += `
-                        <button class="btn-accion delete" onclick="eliminarSocio(${socio.id})" title="Eliminar">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    `;
-
-                    // 🔥 OBTENER DATOS CORRECTAMENTE
-                    const nombreSocio = socio.nombre || socio.Nombre || 'Sin nombre';
-                    const telefonoSocio = socio.telefono || socio.Teléfono || 'N/A';
-                    const planSocio = socio.plan || socio.Plan || 'N/A';
-                    const formaPagoSocio = socio.formaPago || socio.FormaPago || 'N/A';
-                    const estadoSocio = socio.estado || socio.Estado || 'N/A';
-                    const fechaSuscripcion = socio.fechaSuscripcion || socio.FechaSuscripcion || 'N/A';
-
-                    const badgeClass = estadoSocio === 'inactivo' ? 'inactivo' : 
-                                      estadoSocio === 'pendiente' ? 'pendiente' : 
-                                      estadoSocio === 'activo' ? 'activo' : 'moroso';
+                    const estadoVenc = obtenerEstadoVencimiento(socio.fechaVencimiento);
                     
-                    const formaPagoLabel = formaPagoSocio === 'efectivo' || formaPagoSocio === 'Efectivo' ? '💵 Efectivo' : '🏦 Transferencia';
-                    const formaPagoClass = formaPagoSocio === 'efectivo' || formaPagoSocio === 'Efectivo' ? 'efectivo' : 'transferencia';
+                    const badgeVencimiento = obtenerBadgeVencimiento(socio.fechaVencimiento);
+                    
+                    let badgeClass = 'moroso';
+                    const estadoLower = (socio.estado || '').toLowerCase();
+                    if (estadoLower === 'activo') badgeClass = 'activo';
+                    else if (estadoLower === 'inactivo') badgeClass = 'inactivo';
+                    else if (estadoLower === 'pendiente') badgeClass = 'pendiente';
+                    
+                    if (estadoVenc === 'vencido') {
+                        badgeClass = 'moroso';
+                    }
+                    
+                    const aporteDisplay = socio.totalAportado ? `${socio.totalAportado.toLocaleString('es-PY')} Gs` : '0 Gs';
                     
                     tr.innerHTML = `
                         <td>${realIndex + 1}</td>
-                        <td><strong>${nombreSocio}</strong></td>
-                        <td>${telefonoSocio}</td>
-                        <td>${planSocio}</td>
-                        <td><span class="badge-forma-pago ${formaPagoClass}">${formaPagoLabel}</span></td>
-                        <td><span class="badge-status ${badgeClass}">${estadoSocio}</span></td>
-                        <td style="font-size: 11px; white-space: nowrap;">${fechaSuscripcion}</td>
+                        <td><span class="id-cell" onclick="copiarId(${socio.id})" title="Click para copiar ID">${socio.id}</span></td>
+                        <td><strong>${socio.nombre || 'Sin nombre'}</strong></td>
+                        <td>${socio.ci || 'N/A'}</td>
+                        <td>${socio.plan || 'N/A'}</td>
+                        <td><span class="badge-status ${badgeClass}">${socio.estado || 'N/A'}</span></td>
+                        <td>${badgeVencimiento}</td>
+                        <td style="font-size: 11px;">${aporteDisplay}</td>
                         <td style="text-align: center; white-space: nowrap;">
-                            ${acciones}
+                            <button class="btn-accion view" onclick="verCarnet(${socio.id})" title="Ver carnet">
+                                <i class="fas fa-id-card"></i>
+                            </button>
+                            <button class="btn-accion" onclick="cambiarPlan(${socio.id})" title="Cambiar plan" style="color: var(--pending);">
+                                <i class="fas fa-exchange-alt"></i>
+                            </button>
+                            <button class="btn-accion delete" onclick="eliminarSocio(${socio.id})" title="Eliminar">
+                                <i class="fas fa-trash"></i>
+                            </button>
                         </td>
                     `;
                     tbody.appendChild(tr);
@@ -1155,16 +1400,16 @@
 
             // Stats
             const totalSocios = socios.length;
-            const activos = socios.filter(s => (s.estado === 'activo' || s.Estado === 'activo')).length;
-            const inactivos = socios.filter(s => (s.estado === 'inactivo' || s.Estado === 'inactivo')).length;
-            const pendientes = socios.filter(s => (s.estado === 'pendiente' || s.Estado === 'pendiente')).length;
-            const transferencia = socios.filter(s => (s.formaPago === 'transferencia' || s.FormaPago === 'transferencia')).length;
+            const activos = socios.filter(s => (s.estado || '').toLowerCase() === 'activo').length;
+            const porVencer = socios.filter(s => obtenerEstadoVencimiento(s.fechaVencimiento) === 'por-vencer').length;
+            const vencidos = socios.filter(s => obtenerEstadoVencimiento(s.fechaVencimiento) === 'vencido').length;
+            const pendientes = socios.filter(s => (s.estado || '').toLowerCase() === 'pendiente').length;
 
             document.getElementById('totalSocios').textContent = totalSocios;
             document.getElementById('activosSocios').textContent = activos;
-            document.getElementById('inactivosSocios').textContent = inactivos;
+            document.getElementById('porVencerSocios').textContent = porVencer;
+            document.getElementById('vencidosSocios').textContent = vencidos;
             document.getElementById('pendientesSocios').textContent = pendientes;
-            document.getElementById('transferenciaSocios').textContent = transferencia;
 
             calcularFinanzas();
 
@@ -1175,64 +1420,338 @@
         }
 
         // ============================================================
-        //  AGREGAR SOCIO
+        //  COPIAR ID
         // ============================================================
-        document.getElementById('btnAgregar').addEventListener('click', async () => {
-            const input = document.getElementById('nombreSocio');
-            const nombre = input.value.trim();
-            const plan = document.getElementById('planSocio').value;
-            const formaPago = document.getElementById('formaPagoSocio').value;
-            const estado = document.getElementById('estadoSocio').value;
+        function copiarId(id) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(id.toString()).then(() => {
+                    showToast('📋 ID copiado al portapapeles', 'success');
+                });
+            } else {
+                const textarea = document.createElement('textarea');
+                textarea.value = id;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showToast('📋 ID copiado al portapapeles', 'success');
+            }
+        }
 
-            if (!nombre || nombre.length < 2) {
-                input.classList.add('error');
-                showToast('Ingresá un nombre válido', 'error');
+        // ============================================================
+        //  VER CARNET
+        // ============================================================
+        function verCarnet(id) {
+            const socio = socios.find(s => s.id === id);
+            if (!socio) {
+                showToast('Socio no encontrado', 'error');
                 return;
             }
 
-            input.classList.remove('error');
+            const container = document.getElementById('carnetContainer');
+            
+            const qrData = `FLY FUTBOLEROS\nID: ${socio.id}\n${socio.nombre}\nCI: ${socio.ci || 'N/A'}\nPlan: ${socio.plan}`;
+            
+            let fotoHtml = '';
+            if (socio.foto && socio.foto.length > 100) {
+                fotoHtml = `<img src="${socio.foto}" class="carnet-foto" alt="Foto de ${socio.nombre}" />`;
+            } else {
+                fotoHtml = `<div class="carnet-foto-placeholder"><i class="fas fa-user"></i></div>`;
+            }
 
-            const existe = socios.some(s => s.nombre.toLowerCase() === nombre.toLowerCase());
-            if (existe) {
-                showToast('Ya existe un socio con ese nombre', 'warning');
+            const badgeVenc = obtenerBadgeVencimiento(socio.fechaVencimiento);
+
+            container.innerHTML = `
+                <div class="carnet-header">
+                    <div class="logo-text">FLY <span>FUTBOLEROS</span></div>
+                    <div style="font-size: 10px; color: var(--text-gray);">${socio.plan || 'Sin plan'}</div>
+                </div>
+                
+                ${fotoHtml}
+                
+                <div class="carnet-info">
+                    <div class="full-width" style="text-align: center; margin-bottom: 8px;">
+                        <strong style="font-size: 18px; color: var(--accent-cyan);">${socio.nombre || 'Sin nombre'}</strong>
+                    </div>
+                    <div class="label">ID</div>
+                    <div class="value">${socio.id}</div>
+                    <div class="label">Cédula</div>
+                    <div class="value">${socio.ci || 'N/A'}</div>
+                    <div class="label">Teléfono</div>
+                    <div class="value">${socio.telefono || 'N/A'}</div>
+                    <div class="label">Posición</div>
+                    <div class="value">${socio.posicion || 'N/A'}</div>
+                    <div class="label">Plan</div>
+                    <div class="value">${socio.plan || 'N/A'}</div>
+                    <div class="label">Estado</div>
+                    <div class="value">${socio.estado || 'N/A'}</div>
+                    <div class="label">Vencimiento</div>
+                    <div class="value">${formatearFecha(socio.fechaVencimiento)} ${badgeVenc}</div>
+                    <div class="label">Aportes</div>
+                    <div class="value">${socio.totalAportado ? socio.totalAportado.toLocaleString('es-PY') + ' Gs' : '0 Gs'}</div>
+                    <div class="label">Pagos</div>
+                    <div class="value">${socio.pagos || 0}</div>
+                </div>
+                
+                <div class="carnet-footer">
+                    <div class="qr-placeholder">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div style="font-size: 9px; color: var(--text-gray); word-break: break-all;">
+                        ${qrData}
+                    </div>
+                    <div style="margin-top: 4px; font-size: 9px; color: var(--border-color);">
+                        Asociación Amateur de Fútbol 6 vs 6 · Desde 2012
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('modalCarnet').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ============================================================
+        //  IMPRIMIR CARNET
+        // ============================================================
+        document.getElementById('btnImprimirCarnet').addEventListener('click', () => {
+            const contenido = document.getElementById('carnetContainer').innerHTML;
+            const ventana = window.open('', '_blank');
+            ventana.document.write(`
+                <html>
+                    <head>
+                        <title>Carnet FLY FUTBOLEROS</title>
+                        <style>
+                            body { 
+                                background: #0a0a0e; 
+                                display: flex; 
+                                justify-content: center; 
+                                align-items: center; 
+                                min-height: 100vh;
+                                margin: 0;
+                                font-family: 'Montserrat', sans-serif;
+                            }
+                            .carnet-container {
+                                background: linear-gradient(135deg, #0a0a0e 0%, #12121a 100%);
+                                border: 2px solid #00e5ff;
+                                border-radius: 12px;
+                                padding: 24px;
+                                max-width: 400px;
+                                width: 100%;
+                                color: #ffffff;
+                                box-shadow: 0 0 40px rgba(0, 229, 255, 0.1);
+                            }
+                            .carnet-header {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                margin-bottom: 16px;
+                                border-bottom: 2px solid rgba(0, 229, 255, 0.2);
+                                padding-bottom: 12px;
+                            }
+                            .logo-text { font-size: 16px; font-weight: 900; color: #00e5ff; }
+                            .logo-text span { color: #ffffff; }
+                            .carnet-foto {
+                                width: 100px;
+                                height: 100px;
+                                border-radius: 50%;
+                                border: 3px solid #00e5ff;
+                                object-fit: cover;
+                                margin: 0 auto 16px;
+                                display: block;
+                                background: #0a0a0e;
+                            }
+                            .carnet-foto-placeholder {
+                                width: 100px;
+                                height: 100px;
+                                border-radius: 50%;
+                                border: 3px dashed #1e1e2a;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin: 0 auto 16px;
+                                color: #a0a0a8;
+                                font-size: 40px;
+                                background: #0a0a0e;
+                            }
+                            .carnet-info {
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                gap: 4px 16px;
+                                font-size: 13px;
+                            }
+                            .carnet-info .label {
+                                color: #a0a0a8;
+                                font-size: 10px;
+                                text-transform: uppercase;
+                                font-weight: 700;
+                            }
+                            .carnet-info .value {
+                                color: #ffffff;
+                                font-weight: 600;
+                            }
+                            .carnet-info .full-width {
+                                grid-column: 1 / -1;
+                            }
+                            .carnet-footer {
+                                margin-top: 16px;
+                                padding-top: 12px;
+                                border-top: 2px solid rgba(0, 229, 255, 0.1);
+                                text-align: center;
+                                font-size: 11px;
+                                color: #a0a0a8;
+                            }
+                            .qr-placeholder {
+                                width: 50px;
+                                height: 50px;
+                                background: rgba(0, 229, 255, 0.05);
+                                border: 1px solid #1e1e2a;
+                                border-radius: 4px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin: 0 auto 6px;
+                                font-size: 24px;
+                                color: #a0a0a8;
+                            }
+                            .badge-vencido, .badge-por-vencer, .badge-al-dia {
+                                padding: 2px 8px;
+                                font-size: 8px;
+                                font-weight: 800;
+                                text-transform: uppercase;
+                                border-radius: 2px;
+                                display: inline-block;
+                            }
+                            .badge-vencido {
+                                background: rgba(255, 23, 68, 0.2);
+                                color: #ff1744;
+                            }
+                            .badge-por-vencer {
+                                background: rgba(255, 145, 0, 0.2);
+                                color: #ff9100;
+                            }
+                            .badge-al-dia {
+                                background: rgba(0, 229, 255, 0.15);
+                                color: #00e5ff;
+                            }
+                            @media print {
+                                body { background: white; }
+                                .carnet-container { 
+                                    border-color: #00e5ff; 
+                                    box-shadow: none;
+                                    background: white;
+                                    color: #000;
+                                }
+                                .carnet-container .logo-text { color: #00e5ff; }
+                                .carnet-container .logo-text span { color: #000; }
+                                .carnet-container .carnet-info .value { color: #000; }
+                                .carnet-container .carnet-info .label { color: #666; }
+                                .carnet-container .carnet-footer { color: #666; }
+                                .carnet-container .carnet-foto-placeholder { border-color: #ccc; color: #999; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="carnet-container">
+                            ${contenido}
+                        </div>
+                    </body>
+                </html>
+            `);
+            ventana.document.close();
+            setTimeout(() => {
+                ventana.print();
+            }, 500);
+        });
+
+        // ============================================================
+        //  CERRAR CARNET
+        // ============================================================
+        document.getElementById('btnCerrarCarnet').addEventListener('click', () => {
+            document.getElementById('modalCarnet').classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        document.getElementById('modalCarnet').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('modalCarnet').classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // ============================================================
+        //  CAMBIAR PLAN
+        // ============================================================
+        let socioCambioPlanId = null;
+
+        function cambiarPlan(id) {
+            const socio = socios.find(s => s.id === id);
+            if (!socio) {
+                showToast('Socio no encontrado', 'error');
                 return;
             }
 
-            const hoy = new Date().toISOString().slice(0, 10);
-            const nuevoSocio = {
-                id: Date.now(),
-                nombre: nombre,
-                plan: plan,
-                formaPago: formaPago,
-                estado: estado,
-                telefono: 'N/A',
-                posicion: 'No especificada',
-                fechaSuscripcion: hoy,
-                fechaUltimoPago: estado === 'activo' ? hoy : null,
-                pagos: 0,
-                comprobanteData: null
-            };
+            socioCambioPlanId = id;
+            document.getElementById('cambioPlanNombre').textContent = socio.nombre || 'Sin nombre';
+            document.getElementById('cambioPlanId').textContent = socio.id;
+            document.getElementById('cambioPlanSelect').value = socio.plan || 'Sábatero';
+            
+            const hoy = new Date();
+            hoy.setMonth(hoy.getMonth() + 1);
+            const fechaSugerida = hoy.toISOString().slice(0, 10);
+            document.getElementById('cambioPlanFechaVencimiento').value = socio.fechaVencimiento || fechaSugerida;
 
-            socios.push(nuevoSocio);
+            document.getElementById('modalCambioPlan').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        document.getElementById('btnConfirmarCambioPlan').addEventListener('click', () => {
+            if (!socioCambioPlanId) return;
+            
+            const socio = socios.find(s => s.id === socioCambioPlanId);
+            if (!socio) {
+                showToast('Socio no encontrado', 'error');
+                return;
+            }
+
+            const nuevoPlan = document.getElementById('cambioPlanSelect').value;
+            const nuevaFecha = document.getElementById('cambioPlanFechaVencimiento').value;
+
+            if (!nuevaFecha) {
+                showToast('Debés seleccionar una fecha de vencimiento', 'warning');
+                return;
+            }
+
+            const planAnterior = socio.plan;
+            socio.plan = nuevoPlan;
+            socio.fechaVencimiento = nuevaFecha;
+            socio.estado = 'activo';
+
             saveSocios();
-            await guardarEnNube(nuevoSocio);
+            guardarEnNube(socio);
             renderTabla();
-            input.value = '';
-            showToast(`✅ Socio "${nombre}" agregado y sincronizado`, 'success');
+            showToast(`✅ ${socio.nombre} cambió de ${planAnterior} a ${nuevoPlan}`, 'success');
+
+            document.getElementById('modalCambioPlan').classList.remove('active');
+            document.body.style.overflow = '';
+            socioCambioPlanId = null;
         });
 
-        document.getElementById('nombreSocio').addEventListener('input', function() {
-            this.classList.remove('error');
+        document.getElementById('btnCancelarCambioPlan').addEventListener('click', () => {
+            document.getElementById('modalCambioPlan').classList.remove('active');
+            document.body.style.overflow = '';
+            socioCambioPlanId = null;
         });
 
-        document.getElementById('nombreSocio').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                document.getElementById('btnAgregar').click();
+        document.getElementById('modalCambioPlan').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) {
+                document.getElementById('modalCambioPlan').classList.remove('active');
+                document.body.style.overflow = '';
+                socioCambioPlanId = null;
             }
         });
 
         // ============================================================
-        //  ELIMINAR SOCIO (LOCAL + NUBE)
+        //  ELIMINAR SOCIO
         // ============================================================
         window.eliminarSocio = async function(id) {
             const socio = socios.find(s => s.id === id);
@@ -1241,123 +1760,76 @@
             if (confirm(`¿Eliminar a "${socio.nombre}"?`)) {
                 socios = socios.filter(s => s.id !== id);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
-                await eliminarDeNube(id);
+                
+                try {
+                    const url = new URL(API_URL);
+                    url.searchParams.append('action', 'delete');
+                    url.searchParams.append('id', id);
+                    await fetch(url.toString(), { method: 'DELETE', mode: 'no-cors' });
+                } catch (e) {
+                    console.log('Error al eliminar de la nube:', e);
+                }
+                
+                await cargarDesdeNube();
                 renderTabla();
                 showToast(`🗑️ Socio "${socio.nombre}" eliminado`, 'warning');
-                setTimeout(async () => {
-                    await cargarDesdeNube();
-                    renderTabla();
-                }, 1000);
             }
         };
 
         // ============================================================
-        //  VER COMPROBANTE
+        //  AGREGAR SOCIO
         // ============================================================
-        window.verComprobante = function(id) {
-            const socio = socios.find(s => s.id === id);
-            if (!socio) {
-                showToast('Socio no encontrado', 'error');
+        document.getElementById('btnAgregar').addEventListener('click', async () => {
+            const nombre = document.getElementById('nombreSocio').value.trim();
+            const ci = document.getElementById('ciSocio').value.trim();
+            const telefono = document.getElementById('telefonoSocio').value.trim();
+            const plan = document.getElementById('planSocio').value;
+            const formaPago = document.getElementById('formaPagoSocio').value;
+            const estado = document.getElementById('estadoSocio').value;
+
+            if (!nombre || nombre.length < 2) {
+                showToast('Ingresá un nombre válido', 'error');
                 return;
             }
 
-            viewingSocioId = id;
-            document.getElementById('compSocioNombre').textContent = socio.nombre || 'Sin nombre';
-            document.getElementById('compSocioPlan').textContent = socio.plan || 'N/A';
-            document.getElementById('compSocioFecha').textContent = socio.fechaSuscripcion || 'N/A';
-            document.getElementById('compSocioFormaPago').textContent = '🏦 Transferencia';
-
-            const container = document.getElementById('comprobanteContainer');
-            
-            if (socio.comprobanteData && socio.comprobanteData.length > 100) {
-                container.innerHTML = `
-                    <img src="${socio.comprobanteData}" class="comprobante-img" alt="Comprobante" onerror="this.parentElement.innerHTML='<div class=\\'comprobante-placeholder\\'><i class=\\'fas fa-file-image\\'></i><p>Error al cargar la imagen</p></div>'" />
-                `;
-            } else {
-                container.innerHTML = `
-                    <div class="comprobante-placeholder">
-                        <i class="fas fa-file-image"></i>
-                        <p>No hay comprobante disponible</p>
-                    </div>
-                `;
+            const existe = socios.some(s => s.nombre.toLowerCase() === nombre.toLowerCase());
+            if (existe) {
+                showToast('Ya existe un socio con ese nombre', 'warning');
+                return;
             }
 
-            const btnAprobar = document.getElementById('btnAprobarPago');
-            const btnRechazar = document.getElementById('btnRechazarPago');
-            
-            if (socio.estado === 'pendiente' && socio.formaPago === 'transferencia' && socio.comprobanteData && socio.comprobanteData.length > 100) {
-                btnAprobar.style.display = 'block';
-                btnRechazar.style.display = 'block';
-            } else {
-                btnAprobar.style.display = 'none';
-                btnRechazar.style.display = 'none';
-            }
+            const hoy = new Date().toISOString().slice(0, 10);
+            const venc = new Date();
+            venc.setMonth(venc.getMonth() + 1);
+            const fechaVenc = venc.toISOString().slice(0, 10);
 
-            document.getElementById('modalComprobante').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
+            const nuevoSocio = {
+                id: Date.now(),
+                nombre: nombre,
+                ci: ci || '',
+                telefono: telefono || 'N/A',
+                posicion: 'No especificada',
+                plan: plan,
+                formaPago: formaPago,
+                estado: estado,
+                fechaSuscripcion: hoy,
+                fechaVencimiento: estado === 'activo' ? fechaVenc : '',
+                fechaUltimoPago: estado === 'activo' ? hoy : null,
+                pagos: estado === 'activo' ? 1 : 0,
+                totalAportado: estado === 'activo' ? (plan === 'Sábatero' ? 20000 : 5000) : 0,
+                foto: null
+            };
 
-        // ============================================================
-        //  APROBAR PAGO
-        // ============================================================
-        window.aprobarPago = function(id) {
-            const socio = socios.find(s => s.id === id);
-            if (!socio) return;
-            socio.estado = 'activo';
-            socio.pagoConfirmado = true;
-            socio.fechaPago = new Date().toISOString().slice(0, 10);
-            socio.fechaUltimoPago = new Date().toISOString().slice(0, 10);
-            socio.pagos = (socio.pagos || 0) + 1;
+            socios.push(nuevoSocio);
             saveSocios();
+            await guardarEnNube(nuevoSocio);
             renderTabla();
-            showToast(`✅ Pago aprobado para ${socio.nombre}`, 'success');
-        };
-
-        document.getElementById('btnAprobarPago').addEventListener('click', () => {
-            if (!viewingSocioId) return;
-            aprobarPago(viewingSocioId);
-            document.getElementById('modalComprobante').classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        // ============================================================
-        //  RECHAZAR PAGO
-        // ============================================================
-        document.getElementById('btnRechazarPago').addEventListener('click', () => {
-            if (!viewingSocioId) return;
-            if (confirm('¿Rechazar y eliminar el socio?')) {
-                const socio = socios.find(s => s.id === viewingSocioId);
-                if (socio) {
-                    socios = socios.filter(s => s.id !== viewingSocioId);
-                    saveSocios();
-                    renderTabla();
-                    showToast(`❌ Socio "${socio.nombre}" eliminado`, 'error');
-                }
-                document.getElementById('modalComprobante').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // ============================================================
-        //  CERRAR MODAL
-        // ============================================================
-        document.getElementById('btnCerrarComprobante').addEventListener('click', () => {
-            document.getElementById('modalComprobante').classList.remove('active');
-            document.body.style.overflow = '';
-        });
-
-        document.getElementById('modalComprobante').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) {
-                document.getElementById('modalComprobante').classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('modalComprobante').classList.contains('active')) {
-                document.getElementById('modalComprobante').classList.remove('active');
-                document.body.style.overflow = '';
-            }
+            
+            document.getElementById('nombreSocio').value = '';
+            document.getElementById('ciSocio').value = '';
+            document.getElementById('telefonoSocio').value = '';
+            
+            showToast(`✅ Socio "${nombre}" agregado y sincronizado`, 'success');
         });
 
         // ============================================================
@@ -1367,10 +1839,6 @@
         document.getElementById('filtroEstado').addEventListener('change', () => { currentPage = 1; renderTabla(); });
         document.getElementById('filtroFormaPago').addEventListener('change', () => { currentPage = 1; renderTabla(); });
         document.getElementById('filtroPlan').addEventListener('change', () => { currentPage = 1; renderTabla(); });
-
-        // ============================================================
-        //  SINCRONIZAR MANUAL
-        // ============================================================
         document.getElementById('btnSincronizar').addEventListener('click', sincronizar);
 
         // ============================================================
@@ -1395,10 +1863,10 @@
                 return;
             }
 
-            let csv = '#,Nombre,Teléfono,Plan,Forma de Pago,Estado,Fecha,Último Pago\n';
+            let csv = '#,ID,Nombre,CI,Teléfono,Plan,Forma de Pago,Estado,Fecha Registro,Fecha Vencimiento,Pagos,Total Aportado\n';
             filtered.forEach((s, i) => {
                 const formaPago = s.formaPago === 'efectivo' ? 'Efectivo' : 'Transferencia';
-                csv += `${i + 1},"${s.nombre || ''}","${s.telefono || ''}",${s.plan || ''},${formaPago},${s.estado || ''},${s.fechaSuscripcion || ''},${s.fechaUltimoPago || ''}\n`;
+                csv += `${i + 1},${s.id},"${s.nombre || ''}","${s.ci || ''}","${s.telefono || ''}",${s.plan || ''},${formaPago},${s.estado || ''},${s.fechaSuscripcion || ''},${s.fechaVencimiento || ''},${s.pagos || 0},${s.totalAportado || 0}\n`;
             });
 
             const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -1424,12 +1892,12 @@
 
         if (!sessionStorage.getItem('panel_welcome')) {
             setTimeout(() => {
-                const pendientes = socios.filter(s => s.estado === 'pendiente').length;
-                const inactivos = socios.filter(s => s.estado === 'inactivo').length;
+                const vencidos = socios.filter(s => obtenerEstadoVencimiento(s.fechaVencimiento) === 'vencido').length;
+                const porVencer = socios.filter(s => obtenerEstadoVencimiento(s.fechaVencimiento) === 'por-vencer').length;
                 let msg = `👋 ${socios.length} socios registrados`;
-                if (pendientes > 0) msg += ` · ⏳ ${pendientes} pendientes`;
-                if (inactivos > 0) msg += ` · ⚠️ ${inactivos} inactivos`;
-                showToast(msg, pendientes > 0 ? 'pending' : 'success');
+                if (porVencer > 0) msg += ` · ⚠️ ${porVencer} por vencer`;
+                if (vencidos > 0) msg += ` · 🚫 ${vencidos} vencidos`;
+                showToast(msg, porVencer > 0 ? 'pending' : 'success');
                 sessionStorage.setItem('panel_welcome', 'true');
             }, 1500);
         }
