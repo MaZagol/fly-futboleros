@@ -56,9 +56,7 @@
 
         .container { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* ============================================================
-           TOAST NOTIFICATIONS
-           ============================================================ */
+        /* TOAST */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -84,18 +82,15 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.05);
         }
-
         .toast.success { border-left-color: var(--success); }
         .toast.error { border-left-color: var(--error); }
         .toast.warning { border-left-color: var(--warning); }
         .toast.pending { border-left-color: var(--pending); }
-
         .toast i { font-size: 20px; }
         .toast.success i { color: var(--success); }
         .toast.error i { color: var(--error); }
         .toast.warning i { color: var(--warning); }
         .toast.pending i { color: var(--pending); }
-
         .toast-message { font-size: 13px; font-weight: 600; flex: 1; }
         .toast-close { background: none; border: none; color: var(--text-gray); cursor: pointer; font-size: 16px; transition: color 0.3s; }
         .toast-close:hover { color: #fff; }
@@ -104,15 +99,12 @@
             from { transform: translateX(100%); opacity: 0; }
             to { transform: translateX(0); opacity: 1; }
         }
-
         @keyframes slideOutRight {
             from { transform: translateX(0); opacity: 1; }
             to { transform: translateX(100%); opacity: 0; }
         }
 
-        /* ============================================================
-           BARRA DE NAVEGACIÓN
-           ============================================================ */
+        /* NAVBAR */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -189,9 +181,7 @@
         }
         .badge-online i { margin-right: 4px; }
 
-        /* ============================================================
-           MAIN CARD
-           ============================================================ */
+        /* MAIN CARD */
         .main-card {
             background: rgba(18, 18, 26, 0.85);
             backdrop-filter: blur(12px);
@@ -203,7 +193,6 @@
             overflow: hidden;
             box-shadow: 0 8px 40px rgba(0,0,0,0.4);
         }
-
         .main-card::before {
             content: "";
             position: absolute;
@@ -231,16 +220,13 @@
         }
         .titulo-seccion .sub { font-size: 12px; color: var(--text-gray); font-weight: 400; }
 
-        /* ============================================================
-           FINANZAS
-           ============================================================ */
+        /* FINANZAS */
         .finanzas-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 12px;
             margin-bottom: 20px;
         }
-
         .finanza-box {
             background: rgba(10, 10, 14, 0.8);
             padding: 14px 16px;
@@ -259,16 +245,13 @@
         .finanza-box.finder { border-left-color: var(--finder); }
         .finanza-box.finder .numero { color: var(--finder); }
 
-        /* ============================================================
-           STATS
-           ============================================================ */
+        /* STATS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 12px;
             margin-bottom: 20px;
         }
-
         .stat-box {
             background: rgba(10, 10, 14, 0.8);
             border-left: 3px solid var(--accent-cyan);
@@ -285,9 +268,7 @@
         .stat-box.transferencia { border-left-color: var(--transferencia); }
         .stat-box.transferencia .stat-number { color: var(--transferencia); }
 
-        /* ============================================================
-           SEARCH
-           ============================================================ */
+        /* SEARCH */
         .search-bar {
             display: flex;
             gap: 10px;
@@ -297,7 +278,6 @@
             padding: 12px 14px;
             border: 1px solid var(--border-color);
         }
-
         .search-bar input,
         .search-bar select {
             background: rgba(0,0,0,0.4);
@@ -331,9 +311,7 @@
         }
         .btn-cyan-outline:hover { background: var(--accent-cyan); color: var(--bg-dark); }
 
-        /* ============================================================
-           FORM
-           ============================================================ */
+        /* FORM */
         .form-socio {
             display: flex;
             gap: 10px;
@@ -343,7 +321,6 @@
             padding: 12px 14px;
             border: 1px solid var(--border-color);
         }
-
         .form-socio input,
         .form-socio select {
             background: rgba(0,0,0,0.4);
@@ -381,9 +358,7 @@
         .btn-cyan-sm { width: auto; }
         .btn-cyan:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-        /* ============================================================
-           TABLA
-           ============================================================ */
+        /* TABLA */
         .tabla-wrapper { overflow-x: auto; position: relative; }
         .tabla-socios { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
         .tabla-socios th {
@@ -454,20 +429,7 @@
         .btn-accion.delete:hover { color: #ff4757; }
         .btn-accion:disabled { opacity: 0.3; cursor: not-allowed; }
 
-        .btn-accion .spinner-small {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border: 2px solid var(--text-gray);
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* ============================================================
-           MODAL
-           ============================================================ */
+        /* MODAL */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -500,6 +462,8 @@
         .modal-content.comprobante-modal .socio-info { color: var(--text-gray); font-size: 12px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border-color); }
         .modal-content.comprobante-modal .socio-info strong { color: var(--text-light); }
         .modal-content.comprobante-modal .comprobante-img { width: 100%; max-height: 500px; object-fit: contain; background: #0a0a0c; border-radius: 4px; border: 1px solid var(--border-color); }
+        .modal-content.comprobante-modal .comprobante-placeholder { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; background: #0a0a0c; border: 2px dashed var(--border-color); border-radius: 4px; color: var(--text-gray); }
+        .modal-content.comprobante-modal .comprobante-placeholder i { font-size: 40px; margin-bottom: 10px; opacity: 0.3; }
 
         .modal-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
         .modal-actions .btn-cyan { flex: 1; min-width: 100px; padding: 10px 16px; font-size: 12px; }
@@ -515,9 +479,7 @@
         .modal-actions .btn-cyan.reject { background: var(--error); color: #fff; }
         .modal-actions .btn-cyan.reject:hover { background: #ff6b81; }
 
-        /* ============================================================
-           PAGINACION
-           ============================================================ */
+        /* PAGINACION */
         .pagination {
             display: flex; justify-content: center; align-items: center; gap: 8px;
             margin-top: 14px; padding: 6px 0;
@@ -535,14 +497,11 @@
         .empty-state i { font-size: 40px; margin-bottom: 10px; opacity: 0.3; }
         .empty-state h3 { font-size: 16px; margin-bottom: 6px; color: var(--text-light); }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .finanzas-grid { grid-template-columns: repeat(2, 1fr); }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
         }
-
         @media (max-width: 768px) {
             body { padding: 10px; }
             .main-card { padding: 16px 12px; }
@@ -559,7 +518,6 @@
             .logo-text { font-size: 16px; }
             .logo-badge { width: 34px; height: 34px; font-size: 15px; }
         }
-
         @media (max-width: 480px) {
             .finanzas-grid { grid-template-columns: 1fr 1fr; gap: 6px; }
             .finanza-box { padding: 10px 12px; }
@@ -572,7 +530,6 @@
             input, select, textarea, button { font-size: 16px !important; }
             .toast { min-width: 160px; max-width: 250px; font-size: 11px; padding: 10px 14px; }
         }
-
         @media (max-width: 360px) {
             .finanzas-grid { grid-template-columns: 1fr; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
@@ -593,7 +550,6 @@
        ============================================================ -->
     <script>
         const ADMIN_PASSWORD = 'fly2026';
-        
         if (sessionStorage.getItem('admin_auth') !== 'true') {
             const password = prompt('🔐 Ingresá la contraseña del administrador:');
             if (password === ADMIN_PASSWORD) {
@@ -603,7 +559,6 @@
                 window.location.href = 'index.html';
             }
         }
-        
         let inactivityTimer;
         function resetInactivityTimer() {
             clearTimeout(inactivityTimer);
@@ -790,11 +745,19 @@
                 Fecha: <span id="compSocioFecha">2024-01-01</span> · 
                 Pago: <span id="compSocioFormaPago">Transferencia</span>
             </div>
-            <div id="comprobanteContainer"></div>
+            <div id="comprobanteContainer">
+                <!-- Se llena dinámicamente -->
+            </div>
             <div class="modal-actions" id="comprobanteActions">
-                <button class="btn-cyan approve" id="btnAprobarPago"><i class="fas fa-check"></i> APROBAR</button>
-                <button class="btn-cyan reject" id="btnRechazarPago"><i class="fas fa-times"></i> RECHAZAR</button>
-                <button class="btn-outline-modal" id="btnCerrarComprobante"><i class="fas fa-times"></i> Cerrar</button>
+                <button class="btn-cyan approve" id="btnAprobarPago">
+                    <i class="fas fa-check"></i> APROBAR
+                </button>
+                <button class="btn-cyan reject" id="btnRechazarPago">
+                    <i class="fas fa-times"></i> RECHAZAR
+                </button>
+                <button class="btn-outline-modal" id="btnCerrarComprobante">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
             </div>
         </div>
     </div>
@@ -807,13 +770,18 @@
         // ============================================================
         //  CONFIGURACIÓN - GOOGLE SHEETS API
         // ============================================================
-        // 🔥 URL DE TU API (YA INTEGRADA)
         const API_URL = 'https://script.google.com/macros/s/AKfycbwketl7buY-qobLe4KR8Gn9clDRrFu1ENp25A3dOpd58zWtmeX_fT19JOLTxg9Qj1kpGg/exec';
 
         // ============================================================
         //  INICIALIZAR
         // ============================================================
         AOS.init({ once: true, offset: 30, duration: 400 });
+
+        let socios = [];
+        let currentPage = 1;
+        const perPage = 10;
+        let viewingSocioId = null;
+        let sincronizando = false;
 
         // ============================================================
         //  CERRAR SESIÓN
@@ -852,16 +820,7 @@
         }
 
         // ============================================================
-        //  LÓGICA DE SOCIOS
-        // ============================================================
-        let socios = [];
-        let currentPage = 1;
-        const perPage = 10;
-        let viewingSocioId = null;
-        let sincronizando = false;
-
-        // ============================================================
-        //  🔥 CARGAR DESDE LA NUBE (GOOGLE SHEETS)
+        //  🔥 CARGAR DESDE LA NUBE (MERGE)
         // ============================================================
         async function cargarDesdeNube() {
             try {
@@ -871,7 +830,7 @@
                 const data = await response.json();
                 
                 if (data.socios && data.socios.length > 0) {
-                    socios = data.socios.map(s => ({
+                    const sociosNube = data.socios.map(s => ({
                         id: parseInt(s.ID) || Date.now() + Math.random(),
                         nombre: s.Nombre || '',
                         telefono: s.Teléfono || '',
@@ -884,12 +843,18 @@
                         comprobanteData: s.Comprobante || null
                     }));
                     
+                    // Combinar con datos locales
+                    const locales = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
+                    const idsNube = new Set(sociosNube.map(s => s.id));
+                    const localesFiltrados = locales.filter(s => !idsNube.has(s.id));
+                    
+                    socios = [...sociosNube, ...localesFiltrados];
                     localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                    
                     document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sincronizado';
                     document.getElementById('statusNube').style.color = 'var(--success)';
                     return true;
                 } else {
-                    // Si no hay datos en la nube, mantener los locales
                     document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sin datos en nube';
                     document.getElementById('statusNube').style.color = 'var(--text-gray)';
                     return false;
@@ -903,7 +868,7 @@
         }
 
         // ============================================================
-        //  🔥 GUARDAR EN LA NUBE (GOOGLE SHEETS)
+        //  🔥 GUARDAR EN LA NUBE
         // ============================================================
         async function guardarEnNube(socio) {
             try {
@@ -921,6 +886,26 @@
         }
 
         // ============================================================
+        //  🔥 ELIMINAR DE LA NUBE
+        // ============================================================
+        async function eliminarDeNube(id) {
+            try {
+                const url = new URL(API_URL);
+                url.searchParams.append('action', 'delete');
+                url.searchParams.append('id', id);
+                
+                const response = await fetch(url.toString(), {
+                    method: 'DELETE',
+                    mode: 'no-cors'
+                });
+                return { success: true };
+            } catch (error) {
+                console.error('❌ Error eliminando de la nube:', error);
+                return { success: false, error: error.toString() };
+            }
+        }
+
+        // ============================================================
         //  SINCRONIZAR
         // ============================================================
         async function sincronizar() {
@@ -932,9 +917,8 @@
                 const cargado = await cargarDesdeNube();
                 if (cargado) {
                     renderTabla();
-                    showToast('✅ Datos sincronizados desde la nube', 'success');
+                    showToast('✅ Datos sincronizados', 'success');
                 } else {
-                    // Si no hay datos en la nube, subir los locales
                     const locales = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
                     if (locales.length > 0) {
                         let subidos = 0;
@@ -944,8 +928,6 @@
                         }
                         if (subidos > 0) {
                             showToast(`✅ ${subidos} socios subidos a la nube`, 'success');
-                            document.getElementById('statusNube').innerHTML = '<i class="fas fa-cloud"></i> Sincronizado';
-                            document.getElementById('statusNube').style.color = 'var(--success)';
                         }
                     } else {
                         showToast('⚠️ No hay datos para sincronizar', 'warning');
@@ -954,7 +936,6 @@
             } catch (error) {
                 showToast('❌ Error al sincronizar', 'error');
             }
-            
             sincronizando = false;
         }
 
@@ -981,17 +962,11 @@
         }
 
         // ============================================================
-        //  GUARDAR DATOS LOCALES + NUBE
+        //  GUARDAR DATOS LOCALES
         // ============================================================
         function saveSocios() {
             try {
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
-                
-                // Guardar el último socio agregado en la nube
-                const ultimoSocio = socios[socios.length - 1];
-                if (ultimoSocio && !ultimoSocio._fromCloud) {
-                    guardarEnNube(ultimoSocio);
-                }
             } catch (e) {
                 console.error('Error guardando:', e);
                 showToast('Error al guardar los datos', 'error');
@@ -1208,18 +1183,11 @@
             };
 
             socios.push(nuevoSocio);
-            
-            // Guardar en localStorage y nube
-            try {
-                localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
-                await guardarEnNube(nuevoSocio);
-                showToast(`✅ Socio "${nombre}" agregado y sincronizado`, 'success');
-            } catch (e) {
-                showToast(`⚠️ Socio "${nombre}" agregado localmente, error en nube`, 'warning');
-            }
-            
+            saveSocios();
+            await guardarEnNube(nuevoSocio);
             renderTabla();
             input.value = '';
+            showToast(`✅ Socio "${nombre}" agregado y sincronizado`, 'success');
         });
 
         document.getElementById('nombreSocio').addEventListener('input', function() {
@@ -1233,16 +1201,23 @@
         });
 
         // ============================================================
-        //  ELIMINAR SOCIO
+        //  ELIMINAR SOCIO (LOCAL + NUBE)
         // ============================================================
-        window.eliminarSocio = function(id) {
+        window.eliminarSocio = async function(id) {
             const socio = socios.find(s => s.id === id);
             if (!socio) return;
+            
             if (confirm(`¿Eliminar a "${socio.nombre}"?`)) {
                 socios = socios.filter(s => s.id !== id);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                await eliminarDeNube(id);
                 renderTabla();
                 showToast(`🗑️ Socio "${socio.nombre}" eliminado`, 'warning');
+                // Recargar desde nube para confirmar
+                setTimeout(async () => {
+                    await cargarDesdeNube();
+                    renderTabla();
+                }, 1000);
             }
         };
 
@@ -1303,7 +1278,7 @@
             socio.fechaPago = new Date().toISOString().slice(0, 10);
             socio.fechaUltimoPago = new Date().toISOString().slice(0, 10);
             socio.pagos = (socio.pagos || 0) + 1;
-            localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+            saveSocios();
             renderTabla();
             showToast(`✅ Pago aprobado para ${socio.nombre}`, 'success');
         };
@@ -1324,7 +1299,7 @@
                 const socio = socios.find(s => s.id === viewingSocioId);
                 if (socio) {
                     socios = socios.filter(s => s.id !== viewingSocioId);
-                    localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
+                    saveSocios();
                     renderTabla();
                     showToast(`❌ Socio "${socio.nombre}" eliminado`, 'error');
                 }
