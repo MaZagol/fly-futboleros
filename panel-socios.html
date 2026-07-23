@@ -773,7 +773,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================================
-        //  CONFIGURACIÓN - GOOGLE SHEETS API
+        //  CONFIGURACIÓN
         // ============================================================
         const API_URL = 'https://script.google.com/macros/s/AKfycbwketl7buY-qobLe4KR8Gn9clDRrFu1ENp25A3dOpd58zWtmeX_fT19JOLTxg9Qj1kpGg/exec';
 
@@ -825,7 +825,7 @@
         }
 
         // ============================================================
-        //  🔥 CARGAR DESDE LA NUBE (MERGE)
+        //  🔥 CARGAR DESDE LA NUBE
         // ============================================================
         async function cargarDesdeNube() {
             try {
@@ -835,17 +835,18 @@
                 const data = await response.json();
                 
                 if (data.socios && data.socios.length > 0) {
+                    // 🔥 MAPEAR CORRECTAMENTE LOS CAMPOS
                     const sociosNube = data.socios.map(s => ({
                         id: parseInt(s.ID) || Date.now() + Math.random(),
-                        nombre: s.Nombre || '',
-                        telefono: s.Teléfono || '',
-                        plan: s.Plan || '',
-                        formaPago: s.FormaPago || '',
-                        estado: s.Estado || '',
-                        fechaSuscripcion: s.FechaSuscripcion || '',
-                        fechaUltimoPago: s.FechaUltimoPago || null,
-                        pagos: parseInt(s.Pagos) || 0,
-                        comprobanteData: s.Comprobante || null
+                        nombre: s.Nombre || s.nombre || '',
+                        telefono: s.Teléfono || s.telefono || '',
+                        plan: s.Plan || s.plan || '',
+                        formaPago: s.FormaPago || s.formaPago || '',
+                        estado: s.Estado || s.estado || '',
+                        fechaSuscripcion: s.FechaSuscripcion || s.fechaSuscripcion || '',
+                        fechaUltimoPago: s.FechaUltimoPago || s.fechaUltimoPago || null,
+                        pagos: parseInt(s.Pagos || s.pagos) || 0,
+                        comprobanteData: s.Comprobante || s.comprobanteData || null
                     }));
                     
                     // Combinar con datos locales
@@ -877,11 +878,24 @@
         // ============================================================
         async function guardarEnNube(socio) {
             try {
+                const socioParaNube = {
+                    id: socio.id,
+                    Nombre: socio.nombre,
+                    Teléfono: socio.telefono,
+                    Plan: socio.plan,
+                    FormaPago: socio.formaPago,
+                    Estado: socio.estado,
+                    FechaSuscripcion: socio.fechaSuscripcion,
+                    FechaUltimoPago: socio.fechaUltimoPago || '',
+                    Pagos: socio.pagos || 0,
+                    Comprobante: socio.comprobanteData || ''
+                };
+                
                 const response = await fetch(API_URL, {
                     method: 'POST',
                     mode: 'no-cors',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(socio)
+                    body: JSON.stringify(socioParaNube)
                 });
                 return { success: true };
             } catch (error) {
@@ -1051,7 +1065,7 @@
         }
 
         // ============================================================
-        //  RENDER TABLA (CORREGIDO - NOMBRES VISIBLES)
+        //  🔥 RENDER TABLA (CORREGIDO)
         // ============================================================
         function renderTabla() {
             const tbody = document.getElementById('tablaBody');
@@ -1108,19 +1122,29 @@
                         </button>
                     `;
 
-                    const badgeClass = socio.estado === 'inactivo' ? 'inactivo' : socio.estado;
-                    const formaPagoLabel = socio.formaPago === 'efectivo' ? '💵 Efectivo' : '🏦 Transferencia';
-                    const formaPagoClass = socio.formaPago === 'efectivo' ? 'efectivo' : 'transferencia';
-                    const fechaRegistro = socio.fechaSuscripcion || 'N/A';
+                    // 🔥 OBTENER DATOS CORRECTAMENTE
+                    const nombreSocio = socio.nombre || socio.Nombre || 'Sin nombre';
+                    const telefonoSocio = socio.telefono || socio.Teléfono || 'N/A';
+                    const planSocio = socio.plan || socio.Plan || 'N/A';
+                    const formaPagoSocio = socio.formaPago || socio.FormaPago || 'N/A';
+                    const estadoSocio = socio.estado || socio.Estado || 'N/A';
+                    const fechaSuscripcion = socio.fechaSuscripcion || socio.FechaSuscripcion || 'N/A';
+
+                    const badgeClass = estadoSocio === 'inactivo' ? 'inactivo' : 
+                                      estadoSocio === 'pendiente' ? 'pendiente' : 
+                                      estadoSocio === 'activo' ? 'activo' : 'moroso';
+                    
+                    const formaPagoLabel = formaPagoSocio === 'efectivo' || formaPagoSocio === 'Efectivo' ? '💵 Efectivo' : '🏦 Transferencia';
+                    const formaPagoClass = formaPagoSocio === 'efectivo' || formaPagoSocio === 'Efectivo' ? 'efectivo' : 'transferencia';
                     
                     tr.innerHTML = `
                         <td>${realIndex + 1}</td>
-                        <td><strong>${socio.nombre || 'Sin nombre'}</strong></td>
-                        <td>${socio.telefono || 'N/A'}</td>
-                        <td>${socio.plan || 'N/A'}</td>
+                        <td><strong>${nombreSocio}</strong></td>
+                        <td>${telefonoSocio}</td>
+                        <td>${planSocio}</td>
                         <td><span class="badge-forma-pago ${formaPagoClass}">${formaPagoLabel}</span></td>
-                        <td><span class="badge-status ${badgeClass}">${socio.estado || 'N/A'}</span></td>
-                        <td style="font-size: 11px; white-space: nowrap;">${fechaRegistro}</td>
+                        <td><span class="badge-status ${badgeClass}">${estadoSocio}</span></td>
+                        <td style="font-size: 11px; white-space: nowrap;">${fechaSuscripcion}</td>
                         <td style="text-align: center; white-space: nowrap;">
                             ${acciones}
                         </td>
@@ -1131,10 +1155,10 @@
 
             // Stats
             const totalSocios = socios.length;
-            const activos = socios.filter(s => s.estado === 'activo').length;
-            const inactivos = socios.filter(s => s.estado === 'inactivo').length;
-            const pendientes = socios.filter(s => s.estado === 'pendiente').length;
-            const transferencia = socios.filter(s => s.formaPago === 'transferencia').length;
+            const activos = socios.filter(s => (s.estado === 'activo' || s.Estado === 'activo')).length;
+            const inactivos = socios.filter(s => (s.estado === 'inactivo' || s.Estado === 'inactivo')).length;
+            const pendientes = socios.filter(s => (s.estado === 'pendiente' || s.Estado === 'pendiente')).length;
+            const transferencia = socios.filter(s => (s.formaPago === 'transferencia' || s.FormaPago === 'transferencia')).length;
 
             document.getElementById('totalSocios').textContent = totalSocios;
             document.getElementById('activosSocios').textContent = activos;
