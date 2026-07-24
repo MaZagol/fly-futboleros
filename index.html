@@ -153,6 +153,7 @@
             clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 12px) 100%, 0 100%);
             z-index: 50;
             box-shadow: 0 4px 30px rgba(0, 229, 255, 0.08);
+            border-radius: 12px;
         }
 
         .logo-container {
@@ -305,6 +306,7 @@
             z-index: 100;
             max-height: 80vh;
             overflow-y: auto;
+            border-radius: 0 0 12px 12px;
         }
         .mobile-menu.active { display: block; animation: slideDown 0.3s ease; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
@@ -1415,7 +1417,7 @@
         }
 
         // ============================================================
-        //  🔥 FUNCIÓN PARA GUARDAR EN SUPABASE (DESDE INDEX)
+        //  🔥 FUNCIÓN PARA GUARDAR EN SUPABASE (SIN mode: 'no-cors')
         // ============================================================
         async function guardarSocioEnSupabase(socio) {
             try {
@@ -1610,7 +1612,7 @@
         });
 
         // ============================================================
-        //  🔥 SUSCRIPCIÓN (CON CI Y CORRECCIÓN DE TRANSFERENCIA)
+        //  🔥 SUSCRIPCIÓN (CORREGIDO PARA MÓVIL)
         // ============================================================
         document.getElementById('btnSuscribir').addEventListener('click', async function() {
             const nombre = document.getElementById('socioNombre');
@@ -1666,9 +1668,9 @@
             btn.disabled = true;
 
             try {
+                // Primero guardar en localStorage (para respaldo)
                 let socios = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
                 
-                // Verificar duplicados por nombre
                 const existe = socios.some(s => 
                     s.nombre.toLowerCase() === nombre.value.trim().toLowerCase()
                 );
@@ -1698,7 +1700,6 @@
                 venc.setMonth(venc.getMonth() + 1);
                 const fechaVenc = venc.toISOString().slice(0, 10);
                 
-                // 🔥 CREAR SOCIO CON TODOS LOS CAMPOS (INCLUYE CI)
                 const nuevoSocio = {
                     id: Date.now(),
                     nombre: nombre.value.trim(),
@@ -1724,30 +1725,34 @@
                 socios.push(nuevoSocio);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 
-                // 🔥 GUARDAR EN SUPABASE
-                await guardarSocioEnSupabase(nuevoSocio);
-
-                const formaPagoTexto = formaPagoSeleccionada === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo';
-                const estadoTexto = formaPagoSeleccionada === 'efectivo' ? '¡activado inmediatamente!' : 'enviado para verificación.';
+                // 🔥 GUARDAR EN SUPABASE (sin mode: 'no-cors')
+                const resultado = await guardarSocioEnSupabase(nuevoSocio);
                 
-                showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, 
-                          formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
-                
-                formSuscripcion.classList.remove('visible');
-                document.getElementById('socioNombre').value = '';
-                document.getElementById('socioCI').value = '';
-                document.getElementById('socioTelefono').value = '';
-                document.getElementById('socioPosicion').value = '';
-                document.getElementById('socioComprobante').value = '';
-                document.getElementById('socioTerminos').checked = false;
-                seleccionarFormaPago('transferencia');
+                if (resultado.success) {
+                    const formaPagoTexto = formaPagoSeleccionada === 'transferencia' ? 'Transferencia bancaria' : 'Efectivo';
+                    const estadoTexto = formaPagoSeleccionada === 'efectivo' ? '¡activado inmediatamente!' : 'enviado para verificación.';
+                    
+                    showToast(`✅ ¡Registro exitoso! ${nombre.value.trim()} - ${formaPagoTexto} - ${estadoTexto}`, 
+                              formaPagoSeleccionada === 'efectivo' ? 'success' : 'pending');
+                    
+                    formSuscripcion.classList.remove('visible');
+                    document.getElementById('socioNombre').value = '';
+                    document.getElementById('socioCI').value = '';
+                    document.getElementById('socioTelefono').value = '';
+                    document.getElementById('socioPosicion').value = '';
+                    document.getElementById('socioComprobante').value = '';
+                    document.getElementById('socioTerminos').checked = false;
+                    seleccionarFormaPago('transferencia');
+                } else {
+                    showToast('❌ Error al guardar en la base de datos. Intentá nuevamente.', 'error');
+                }
                 
                 btn.classList.remove('loading');
                 btn.disabled = false;
 
             } catch (e) {
                 console.error('Error en suscripción:', e);
-                showToast('Error al procesar la suscripción', 'error');
+                showToast('Error al procesar la suscripción. Verificá tu conexión.', 'error');
                 btn.classList.remove('loading');
                 btn.disabled = false;
             }
