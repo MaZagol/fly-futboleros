@@ -17,9 +17,6 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
     <style>
-        /* ============================================================
-           TODOS LOS ESTILOS (los mismos que ya tenías)
-           ============================================================ */
         :root {
             --bg-dark: #0a0a0e;
             --card-bg: #12121a;
@@ -36,6 +33,7 @@
             --efectivo: #ff9100;
             --transferencia: #00a859;
             --ueno: #00b894;
+            --neon-glow: 0 0 30px rgba(0, 229, 255, 0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -77,7 +75,9 @@
 
         .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 
-        /* TOAST */
+        /* ============================================================
+           TOAST
+           ============================================================ */
         .toast-container {
             position: fixed;
             top: 20px;
@@ -92,8 +92,8 @@
             padding: 15px 25px;
             background: var(--card-bg);
             border-left: 4px solid var(--accent-cyan);
-            border-radius: 4px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8), var(--neon-glow);
             animation: slideInRight 0.3s ease;
             display: flex;
             align-items: center;
@@ -125,7 +125,9 @@
             to { transform: translateX(100%); opacity: 0; }
         }
 
-        /* PATRONES DECORATIVOS */
+        /* ============================================================
+           PATRONES DECORATIVOS
+           ============================================================ */
         .pattern-dots {
             display: grid;
             grid-template-columns: repeat(5, 6px);
@@ -134,7 +136,9 @@
         }
         .pattern-dots div { width: 4px; height: 4px; background-color: var(--accent-cyan); border-radius: 50%; }
 
-        /* NAVEGACIÓN */
+        /* ============================================================
+           NAVEGACIÓN
+           ============================================================ */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -159,16 +163,68 @@
         }
 
         .logo-badge {
-            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-shrink: 0;
         }
+
         .logo-badge .icono {
-            width: 36px; height: 36px; background: var(--accent-cyan); color: var(--bg-dark); display: flex; align-items: center; justify-content: center; font-size: 18px; clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%); position: relative; z-index: 2; box-shadow: 0 0 30px rgba(0, 229, 255, 0.3); transition: all 0.3s ease;
+            width: 36px;
+            height: 36px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            clip-path: polygon(20% 0%, 100% 0%, 80% 100%, 0% 100%);
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 0 30px rgba(0, 229, 255, 0.3);
+            transition: all 0.3s ease;
         }
+
         .logo-badge .icono i { filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0.3)); }
-        .logo-ring-1 { position: absolute; inset: -4px; border: 2px solid var(--accent-cyan); border-radius: 50%; animation: spin-ring 4s linear infinite; opacity: 0.5; pointer-events: none; }
-        .logo-ring-2 { position: absolute; inset: -8px; border: 1.5px solid rgba(0, 229, 255, 0.25); border-radius: 50%; animation: spin-ring 6s linear infinite reverse; pointer-events: none; }
-        .logo-ring-3 { position: absolute; inset: 0px; border: 1px solid rgba(0, 229, 255, 0.15); border-radius: 50%; animation: spin-ring 3s linear infinite; pointer-events: none; border-left-color: transparent; }
-        .logo-particle { position: absolute; width: 3px; height: 3px; background: var(--accent-cyan); border-radius: 50%; pointer-events: none; animation: particle-float 3s ease-in-out infinite; }
+        .logo-ring-1 {
+            position: absolute;
+            inset: -4px;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin-ring 4s linear infinite;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .logo-ring-2 {
+            position: absolute;
+            inset: -8px;
+            border: 1.5px solid rgba(0, 229, 255, 0.25);
+            border-radius: 50%;
+            animation: spin-ring 6s linear infinite reverse;
+            pointer-events: none;
+        }
+        .logo-ring-3 {
+            position: absolute;
+            inset: 0px;
+            border: 1px solid rgba(0, 229, 255, 0.15);
+            border-radius: 50%;
+            animation: spin-ring 3s linear infinite;
+            pointer-events: none;
+            border-left-color: transparent;
+        }
+
+        .logo-particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 3s ease-in-out infinite;
+        }
         .logo-particle:nth-child(4) { top: -6px; left: 50%; animation-delay: 0s; }
         .logo-particle:nth-child(5) { bottom: -6px; left: 30%; animation-delay: 1s; }
         .logo-particle:nth-child(6) { top: 50%; right: -6px; animation-delay: 2s; }
@@ -182,28 +238,95 @@
         .logo-text { font-size: 20px; font-weight: 900; letter-spacing: -0.5px; text-transform: uppercase; }
         .logo-text span { color: var(--accent-cyan); }
 
-        .desktop-nav { display: flex; align-items: center; gap: 16px; list-style: none; }
-        .desktop-nav a { color: var(--text-light); text-decoration: none; font-weight: 700; font-size: 12px; text-transform: uppercase; transition: color 0.3s ease; position: relative; padding: 4px 0; }
-        .desktop-nav a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 2px; background: var(--accent-cyan); transition: width 0.3s ease; box-shadow: 0 0 10px rgba(0, 229, 255, 0.3); }
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            list-style: none;
+        }
+        .desktop-nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+            padding: 4px 0;
+        }
+        .desktop-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+        }
         .desktop-nav a:hover::after { width: 100%; }
         .desktop-nav a:hover { color: var(--accent-cyan); }
 
-        .btn-nav-whatsapp { border: 2px solid var(--whatsapp) !important; padding: 5px 14px !important; color: var(--whatsapp) !important; transition: all 0.3s ease !important; }
+        .btn-nav-whatsapp {
+            border: 2px solid var(--whatsapp) !important;
+            padding: 5px 14px !important;
+            color: var(--whatsapp) !important;
+            transition: all 0.3s ease !important;
+        }
         .btn-nav-whatsapp::after { display: none !important; }
         .btn-nav-whatsapp:hover { background: var(--whatsapp) !important; color: #fff !important; box-shadow: 0 0 20px rgba(37, 211, 102, 0.3); }
 
-        /* MENÚ HAMBURGUESA */
-        .hamburger-btn { display: none; background: transparent; border: none; color: var(--accent-cyan); font-size: 28px; cursor: pointer; padding: 8px 12px; z-index: 60; position: relative; }
-        .mobile-menu { display: none; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(18, 18, 26, 0.98); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 2px solid var(--accent-cyan); box-shadow: 0 20px 40px rgba(0,0,0,0.9); z-index: 100; max-height: 80vh; overflow-y: auto; }
+        /* ============================================================
+           MENÚ HAMBURGUESA
+           ============================================================ */
+        .hamburger-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--accent-cyan);
+            font-size: 28px;
+            cursor: pointer;
+            padding: 8px 12px;
+            z-index: 60;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(18, 18, 26, 0.98);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 2px solid var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9);
+            z-index: 100;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
         .mobile-menu.active { display: block; animation: slideDown 0.3s ease; }
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         .mobile-menu ul { list-style: none; padding: 8px 0; }
-        .mobile-menu ul li a { display: block; padding: 14px 20px; color: var(--text-light); text-decoration: none; font-weight: 700; text-transform: uppercase; font-size: 13px; border-bottom: 1px solid rgba(255,255,255,0.03); transition: all 0.3s ease; }
+        .mobile-menu ul li a {
+            display: block;
+            padding: 14px 20px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            transition: all 0.3s ease;
+        }
         .mobile-menu ul li a:hover { background: rgba(0, 229, 255, 0.08); color: var(--accent-cyan); padding-left: 28px; }
         .mobile-menu ul li a.whatsapp-link { color: var(--whatsapp); }
         .mobile-menu ul li a.whatsapp-link:hover { background: rgba(37, 211, 102, 0.12); color: var(--whatsapp); }
 
-        /* MAIN CARD */
+        /* ============================================================
+           MAIN CARD
+           ============================================================ */
         .main-card {
             background: rgba(18, 18, 26, 0.85);
             backdrop-filter: blur(12px);
@@ -215,29 +338,85 @@
             margin-bottom: 24px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+            border-radius: 16px;
         }
         .main-card:hover { box-shadow: 0 8px 40px rgba(0, 229, 255, 0.05); }
-        .main-card::before { content: ""; position: absolute; top: 0; right: 0; width: 0; height: 0; border-style: solid; border-width: 0 100px 100px 0; border-color: transparent var(--accent-cyan) transparent transparent; opacity: 0.06; pointer-events: none; }
+        .main-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 100px 100px 0;
+            border-color: transparent var(--accent-cyan) transparent transparent;
+            opacity: 0.06;
+            pointer-events: none;
+        }
 
-        /* HERO */
+        /* ============================================================
+           HERO
+           ============================================================ */
         .hero-layout { display: grid; grid-template-columns: 1fr 320px; gap: 30px; align-items: center; }
         .hero-content { position: relative; z-index: 2; }
         .titulo-principal { font-size: 44px; font-weight: 900; line-height: 1; text-transform: uppercase; letter-spacing: -1px; margin-bottom: 12px; }
         .titulo-principal .accent { color: var(--accent-cyan); display: block; text-shadow: 0 0 30px rgba(0, 229, 255, 0.2); }
         .subtitulo { color: var(--text-gray); font-size: 14px; margin-bottom: 24px; line-height: 1.7; max-width: 90%; }
 
+        /* ============================================================
+           IMAGEN
+           ============================================================ */
         .image-frame-wrapper { position: relative; display: flex; justify-content: center; align-items: center; padding: 8px; }
-        .image-frame { position: relative; width: 100%; height: 340px; background: linear-gradient(180deg, rgba(10, 10, 14, 0.2) 0%, rgba(10, 10, 14, 0.8) 100%), url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=900&auto=format&fit=crop') center/cover no-repeat; clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%); border: 2px solid var(--accent-cyan); filter: contrast(115%) brightness(95%); transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.15), 0 0 40px rgba(0, 229, 255, 0.05); will-change: transform, filter; }
-        .image-frame-wrapper::before { content: ""; position: absolute; inset: 0px; border: 2px solid var(--accent-cyan); clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%); opacity: 0.2; transform: translate(-6px, 6px); pointer-events: none; transition: all 0.4s ease; }
-        .image-frame-wrapper:hover .image-frame { filter: contrast(125%) brightness(110%); transform: scale(1.02); box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.25), 0 0 60px rgba(0, 229, 255, 0.1); }
+        .image-frame {
+            position: relative;
+            width: 100%;
+            height: 340px;
+            background: linear-gradient(180deg, rgba(10, 10, 14, 0.2) 0%, rgba(10, 10, 14, 0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=900&auto=format&fit=crop') center/cover no-repeat;
+            clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%);
+            border: 2px solid var(--accent-cyan);
+            filter: contrast(115%) brightness(95%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.15), 0 0 40px rgba(0, 229, 255, 0.05);
+            will-change: transform, filter;
+            border-radius: 4px;
+        }
+        .image-frame-wrapper::before {
+            content: "";
+            position: absolute;
+            inset: 0px;
+            border: 2px solid var(--accent-cyan);
+            clip-path: polygon(12% 0, 100% 0, 100% 88%, 88% 100%, 0 100%, 0 12%);
+            opacity: 0.2;
+            transform: translate(-6px, 6px);
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+        .image-frame-wrapper:hover .image-frame {
+            filter: contrast(125%) brightness(110%);
+            transform: scale(1.02);
+            box-shadow: inset 0 0 30px rgba(0, 229, 255, 0.25), 0 0 60px rgba(0, 229, 255, 0.1);
+        }
         .image-frame-wrapper:hover::before { opacity: 0.6; transform: translate(-10px, 10px); }
         .image-frame .fallback-text { display: none; position: absolute; inset: 0; align-items: center; justify-content: center; color: var(--text-gray); font-weight: 700; text-align: center; padding: 20px; }
         .image-frame.img-error .fallback-text { display: flex; }
         .image-frame.img-error { background: var(--bg-dark); }
 
-        /* PLANES */
+        /* ============================================================
+           PLANES
+           ============================================================ */
         .planes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 24px; }
-        .plan-card { background: rgba(10, 10, 14, 0.8); border: 2px solid var(--border-color); padding: 14px 16px; cursor: pointer; transition: all 0.3s ease; position: relative; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%); }
+        .plan-card {
+            background: rgba(10, 10, 14, 0.8);
+            border: 2px solid var(--border-color);
+            padding: 14px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%);
+            border-radius: 8px;
+        }
         .plan-card:hover { transform: translateY(-2px); border-color: rgba(0, 229, 255, 0.3); }
         .plan-card.active { border-color: var(--accent-cyan); background: rgba(0, 229, 255, 0.06); box-shadow: 0 0 30px rgba(0, 229, 255, 0.08); }
         .plan-card .check-mark { display: none; position: absolute; top: 6px; right: 10px; color: var(--accent-cyan); font-size: 14px; }
@@ -249,7 +428,9 @@
         .plan-desc { font-size: 11px; color: var(--text-gray); line-height: 1.4; }
         .plan-radio { display: none; }
 
-        /* FORMULARIO */
+        /* ============================================================
+           FORMULARIO
+           ============================================================ */
         .form-suscripcion {
             background: rgba(10, 10, 14, 0.9);
             border: 1px solid var(--border-color);
@@ -257,52 +438,171 @@
             margin-top: 18px;
             display: none;
             animation: slideDown 0.4s ease;
-            border-radius: 2px;
+            border-radius: 12px;
         }
         .form-suscripcion.visible { display: block; }
-        .form-suscripcion h3 { color: var(--accent-cyan); font-size: 15px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .form-suscripcion .plan-selected { display: inline-block; background: rgba(0, 229, 255, 0.12); color: var(--accent-cyan); padding: 3px 12px; font-weight: 700; font-size: 12px; border-radius: 2px; }
-        .form-suscripcion .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
-        .form-suscripcion .form-group { display: flex; flex-direction: column; gap: 3px; }
-        .form-suscripcion .form-group label { font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--text-gray); letter-spacing: 0.5px; }
+        .form-suscripcion h3 {
+            color: var(--accent-cyan);
+            font-size: 15px;
+            text-transform: uppercase;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .form-suscripcion .plan-selected {
+            display: inline-block;
+            background: rgba(0, 229, 255, 0.12);
+            color: var(--accent-cyan);
+            padding: 3px 12px;
+            font-weight: 700;
+            font-size: 12px;
+            border-radius: 4px;
+        }
+        .form-suscripcion .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .form-suscripcion .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+        .form-suscripcion .form-group label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-gray);
+            letter-spacing: 0.5px;
+        }
         .form-suscripcion .form-group input,
-        .form-suscripcion .form-group select { background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: #fff; padding: 9px 12px; font-family: inherit; font-size: 13px; transition: border-color 0.3s ease; border-radius: 2px; }
+        .form-suscripcion .form-group select {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 9px 12px;
+            font-family: inherit;
+            font-size: 13px;
+            transition: border-color 0.3s ease;
+            border-radius: 8px;
+        }
         .form-suscripcion .form-group input:focus,
-        .form-suscripcion .form-group select:focus { outline: none; border-color: var(--accent-cyan); box-shadow: 0 0 20px rgba(0, 229, 255, 0.05); }
+        .form-suscripcion .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.05);
+        }
         .form-suscripcion .form-group input.error { border-color: var(--error); }
-        .form-suscripcion .form-group input[type="file"] { padding: 6px 8px; background: rgba(0,0,0,0.4); }
-        .form-suscripcion .form-group input[type="file"]::file-selector-button { background: var(--accent-cyan); color: var(--bg-dark); border: none; padding: 5px 12px; font-weight: 700; cursor: pointer; font-family: inherit; font-size: 11px; transition: background 0.3s; border-radius: 2px; }
+        .form-suscripcion .form-group input[type="file"] {
+            padding: 6px 8px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 8px;
+        }
+        .form-suscripcion .form-group input[type="file"]::file-selector-button {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            border: none;
+            padding: 5px 12px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 11px;
+            transition: background 0.3s;
+            border-radius: 6px;
+        }
         .form-suscripcion .form-group input[type="file"]::file-selector-button:hover { background: #5cffff; }
-        .form-suscripcion .plan-info { background: rgba(0, 229, 255, 0.04); border: 1px solid var(--border-color); padding: 10px 14px; margin-bottom: 14px; font-size: 13px; color: var(--text-gray); border-radius: 2px; }
+        .form-suscripcion .plan-info {
+            background: rgba(0, 229, 255, 0.04);
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            font-size: 13px;
+            color: var(--text-gray);
+            border-radius: 8px;
+        }
         .form-suscripcion .plan-info strong { color: var(--accent-cyan); }
 
-        /* DATOS BANCARIOS - UENO BANK */
+        /* ============================================================
+           DATOS BANCARIOS - UENO BANK
+           ============================================================ */
         .datos-bancarios {
             background: rgba(0, 229, 255, 0.04);
             border: 2px solid rgba(0, 184, 148, 0.3);
             padding: 14px;
             margin-bottom: 14px;
-            border-radius: 2px;
+            border-radius: 10px;
         }
         .datos-bancarios .banco-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .datos-bancarios .banco-header .banco-logo { background: var(--ueno); color: #fff; padding: 4px 12px; border-radius: 4px; font-weight: 900; font-size: 14px; letter-spacing: 1px; }
+        .datos-bancarios .banco-header .banco-logo {
+            background: var(--ueno);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-weight: 900;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
         .datos-bancarios h4 { color: var(--accent-cyan); font-size: 12px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
-        .datos-bancarios .banco-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+        .datos-bancarios .banco-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 3px 0;
+            font-size: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
         .datos-bancarios .banco-row .label { color: var(--text-gray); }
         .datos-bancarios .banco-row .value { color: var(--text-light); font-weight: 600; }
-        .datos-bancarios .copy-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-gray); padding: 2px 8px; border-radius: 2px; cursor: pointer; font-size: 10px; transition: all 0.3s; margin-left: 6px; }
+        .datos-bancarios .copy-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+            transition: all 0.3s;
+            margin-left: 6px;
+        }
         .datos-bancarios .copy-btn:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); }
-        .datos-bancarios .alias-box { background: rgba(0, 184, 148, 0.08); border: 1px solid rgba(0, 184, 148, 0.2); padding: 8px 12px; margin-top: 6px; border-radius: 2px; display: flex; justify-content: space-between; align-items: center; }
+        .datos-bancarios .alias-box {
+            background: rgba(0, 184, 148, 0.08);
+            border: 1px solid rgba(0, 184, 148, 0.2);
+            padding: 8px 12px;
+            margin-top: 6px;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         .datos-bancarios .alias-box .alias-label { font-size: 10px; color: var(--text-gray); text-transform: uppercase; }
         .datos-bancarios .alias-box .alias-value { font-size: 14px; font-weight: 700; color: var(--ueno); }
         .datos-bancarios .alias-box .copy-btn { margin-left: 10px; }
 
-        /* FORMA DE PAGO */
+        /* ============================================================
+           FORMA DE PAGO
+           ============================================================ */
         .forma-pago-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-        .forma-pago-option { background: rgba(0,0,0,0.3); border: 2px solid var(--border-color); padding: 10px 12px; cursor: pointer; text-align: center; transition: all 0.3s ease; border-radius: 2px; }
+        .forma-pago-option {
+            background: rgba(0,0,0,0.3);
+            border: 2px solid var(--border-color);
+            padding: 10px 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
         .forma-pago-option:hover { border-color: var(--text-gray); }
-        .forma-pago-option.active-efectivo { border-color: var(--efectivo); background: rgba(255, 145, 0, 0.08); }
-        .forma-pago-option.active-transferencia { border-color: var(--transferencia); background: rgba(0, 168, 89, 0.08); }
+        .forma-pago-option.active-efectivo {
+            border-color: var(--efectivo);
+            background: rgba(255, 145, 0, 0.08);
+        }
+        .forma-pago-option.active-transferencia {
+            border-color: var(--transferencia);
+            background: rgba(0, 168, 89, 0.08);
+        }
         .forma-pago-option i { font-size: 20px; display: block; margin-bottom: 2px; }
         .forma-pago-option .label { font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .forma-pago-option .sub { font-size: 9px; color: var(--text-gray); }
@@ -316,16 +616,65 @@
         .campo-comprobante .comprobante-info { font-size: 11px; color: var(--text-gray); margin-top: 4px; }
         .campo-comprobante .comprobante-info i { margin-right: 4px; }
 
-        .form-suscripcion .btn-suscribir { width: 100%; padding: 14px; margin-top: 4px; background: var(--accent-cyan); color: var(--bg-dark); }
-        .form-suscripcion .btn-suscribir:hover { background: #5cffff; }
+        .form-suscripcion .btn-suscribir {
+            width: 100%;
+            padding: 14px;
+            margin-top: 4px;
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            border-radius: 8px;
+        }
+        .form-suscripcion .btn-suscribir:hover { background: #5cffff; box-shadow: var(--neon-glow); }
         .form-suscripcion .btn-suscribir.efectivo { background: var(--efectivo); }
         .form-suscripcion .btn-suscribir.efectivo:hover { background: #ffa726; }
         .form-suscripcion .btn-suscribir.transferencia { background: var(--transferencia); }
         .form-suscripcion .btn-suscribir.transferencia:hover { background: #00c96e; }
-        .form-suscripcion .btn-cancelar { background: transparent; border: 1px solid var(--border-color); color: var(--text-gray); padding: 10px; cursor: pointer; font-weight: 700; font-size: 11px; text-transform: uppercase; transition: all 0.3s ease; margin-top: 6px; width: 100%; border-radius: 2px; }
+        .form-suscripcion .btn-cancelar {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-gray);
+            padding: 10px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 11px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            margin-top: 6px;
+            width: 100%;
+            border-radius: 8px;
+        }
         .form-suscripcion .btn-cancelar:hover { border-color: var(--text-light); color: var(--text-light); }
 
-        /* BOTONES */
+        /* ============================================================
+           SECCIÓN QUIÉNES SOMOS
+           ============================================================ */
+        .about-section { position: relative; z-index: 2; }
+        .section-title {
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .about-box {
+            background: rgba(10, 10, 14, 0.8);
+            border: 1px solid var(--border-color);
+            border-left: 3px solid var(--accent-cyan);
+            padding: 16px 18px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+        .about-box:hover { transform: translateX(4px); border-color: var(--accent-cyan); }
+        .about-box h3 { font-size: 14px; text-transform: uppercase; font-weight: 800; margin-bottom: 6px; color: #fff; }
+        .about-box p { font-size: 12px; color: var(--text-gray); line-height: 1.6; }
+
+        /* ============================================================
+           BOTONES
+           ============================================================ */
         .btn-cyan {
             display: inline-block;
             width: 100%;
@@ -344,20 +693,55 @@
             letter-spacing: 0.5px;
             position: relative;
             overflow: hidden;
+            border-radius: 8px;
         }
-        .btn-cyan::after { content: ''; position: absolute; inset: 0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%); transform: translateX(-100%); transition: transform 0.6s ease; }
+        .btn-cyan::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
         .btn-cyan:hover::after { transform: translateX(100%); }
-        .btn-cyan:hover { background: #5cffff; transform: translateX(4px); }
+        .btn-cyan:hover { background: #5cffff; transform: translateX(4px); box-shadow: var(--neon-glow); }
         .btn-cyan:active { transform: scale(0.98); }
         .btn-cyan:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-        .btn-cyan .spinner { display: none; width: 20px; height: 20px; border: 3px solid var(--bg-dark); border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite; margin: 0 auto; }
+        .btn-cyan .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--bg-dark);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
         .btn-cyan.loading .spinner { display: block; }
         .btn-cyan.loading .btn-text { display: none; }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .btn-outline { display: inline-block; width: 100%; padding: 10px; background: transparent; color: var(--text-light); border: 1px solid var(--border-color); font-weight: 700; font-size: 12px; text-transform: uppercase; text-align: center; cursor: pointer; margin-top: 8px; transition: all 0.3s ease; border-radius: 2px; }
+        .btn-outline {
+            display: inline-block;
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
         .btn-outline:hover { border-color: var(--accent-cyan); color: var(--accent-cyan); background: rgba(0, 229, 255, 0.05); }
 
+        /* ============================================================
+           WHATSAPP FLOTANTE
+           ============================================================ */
         .btn-whatsapp-float {
             position: fixed;
             bottom: 24px;
@@ -378,18 +762,48 @@
             animation: pulse-whatsapp 2.5s infinite;
         }
         .btn-whatsapp-float:hover { transform: scale(1.08); box-shadow: 0 6px 40px rgba(37, 211, 102, 0.5); }
-        @keyframes pulse-whatsapp { 0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.3); } 70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); } 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); } }
+        @keyframes pulse-whatsapp {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.3); }
+            70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
 
-        /* MODAL */
-        .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.88); z-index: 1000; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+        /* ============================================================
+           MODAL
+           ============================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
         .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .modal-content { background: var(--card-bg); border: 2px solid var(--accent-cyan); max-width: 500px; width: 100%; padding: 28px; max-height: 80vh; overflow-y: auto; animation: slideUp 0.3s ease; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+        .modal-content {
+            background: var(--card-bg);
+            border: 2px solid var(--accent-cyan);
+            max-width: 500px;
+            width: 100%;
+            padding: 28px;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+            border-radius: 16px;
+        }
         @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .modal-content h3 { color: var(--accent-cyan); text-transform: uppercase; font-size: 18px; margin-bottom: 12px; }
         .modal-content p { font-size: 13px; color: var(--text-gray); margin-bottom: 8px; line-height: 1.6; }
 
-        /* FOOTER */
+        /* ============================================================
+           FOOTER
+           ============================================================ */
         .footer {
             background: rgba(18, 18, 26, 0.85);
             backdrop-filter: blur(12px);
@@ -398,6 +812,7 @@
             padding: 20px 16px;
             margin-top: 32px;
             text-align: center;
+            border-radius: 16px;
         }
         .footer p { font-size: 11px; color: var(--text-gray); margin-bottom: 4px; }
         .footer span { color: var(--accent-cyan); font-weight: 700; }
@@ -406,7 +821,9 @@
         .footer .social-links a:hover { color: var(--accent-cyan); transform: translateY(-3px); }
         .footer .social-links a.whatsapp-icon:hover { color: var(--whatsapp); }
 
-        /* RESPONSIVE */
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 1024px) {
             .hero-layout { grid-template-columns: 1fr 280px; gap: 20px; }
             .titulo-principal { font-size: 38px; }
@@ -515,16 +932,20 @@
 
         ::-webkit-scrollbar { width: 6px; height: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan-dark); }
     </style>
 </head>
 <body>
 
-    <!-- TOAST CONTAINER -->
+    <!-- ============================================================
+       TOAST CONTAINER
+       ============================================================ -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
+    <!-- ============================================================
+       BOTÓN FLOTANTE DE WHATSAPP
+       ============================================================ -->
     <a href="https://chat.whatsapp.com/HBYb4qKhBEo0Poy0DtB5fY?s=cl&p=i&ilr=1" 
        class="btn-whatsapp-float" 
        target="_blank" 
@@ -535,7 +956,9 @@
 
     <div class="container">
 
-        <!-- BARRA DE NAVEGACIÓN -->
+        <!-- ============================================================
+           BARRA DE NAVEGACIÓN
+           ============================================================ -->
         <header class="navbar">
             <div class="logo-container">
                 <div class="logo-badge">
@@ -590,7 +1013,9 @@
             </nav>
         </header>
 
-        <!-- HERO -->
+        <!-- ============================================================
+           HERO
+           ============================================================ -->
         <main class="main-card" id="inicio" data-aos="fade-up" data-aos-duration="800">
             
             <div style="position: absolute; bottom: 16px; left: 30%;" class="pattern-dots">
@@ -609,6 +1034,7 @@
                         Sumate a la comunidad de futboleros. Elegí tu modalidad, asegurá tu lugar en la cancha y jugá todos los fines de semana.
                     </p>
 
+                    <!-- PLANES -->
                     <div class="planes-grid" id="planes">
                         <label class="plan-card active" data-plan="Sábatero" data-price="20.000">
                             <input type="radio" name="plan" class="plan-radio" checked>
@@ -638,7 +1064,9 @@
                         📋 Ver Reglas del Grupo
                     </button>
 
-                    <!-- FORMULARIO -->
+                    <!-- ================================================
+                       FORMULARIO DE SUSCRIPCIÓN (CON CI)
+                       ================================================ -->
                     <div class="form-suscripcion" id="formSuscripcion">
                         <h3>
                             <i class="fas fa-pen-fancy"></i> 
@@ -704,17 +1132,22 @@
                             </div>
                         </div>
                         
+                        <!-- 🔥 CAMPOS DEL FORMULARIO (CON CI) -->
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="socioNombre">Nombre completo *</label>
                                 <input type="text" id="socioNombre" placeholder="Ej: Juan Pérez" />
                             </div>
                             <div class="form-group">
-                                <label for="socioTelefono">Teléfono *</label>
-                                <input type="tel" id="socioTelefono" placeholder="0981 123 456" />
+                                <label for="socioCI">Cédula *</label>
+                                <input type="text" id="socioCI" placeholder="Ej: 1234567-8" />
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="form-group">
+                                <label for="socioTelefono">Teléfono *</label>
+                                <input type="tel" id="socioTelefono" placeholder="0981 123 456" />
+                            </div>
                             <div class="form-group">
                                 <label for="socioPosicion">Posición preferida</label>
                                 <select id="socioPosicion">
@@ -726,6 +1159,8 @@
                                     <option value="Comodin">🔄 Comodín (todas)</option>
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-row">
                             <div class="form-group campo-comprobante" id="campoComprobante">
                                 <label for="socioComprobante">Comprobante de transferencia *</label>
                                 <input type="file" id="socioComprobante" accept="image/*,.pdf" />
@@ -734,7 +1169,7 @@
                                 </div>
                             </div>
                             <div class="form-group" id="mensajeEfectivo" style="display: none;">
-                                <div style="background: rgba(255, 145, 0, 0.08); border: 1px solid var(--efectivo); padding: 10px 12px; border-radius: 2px; color: var(--text-gray); font-size: 13px;">
+                                <div style="background: rgba(255, 145, 0, 0.08); border: 1px solid var(--efectivo); padding: 10px 12px; border-radius: 8px; color: var(--text-gray); font-size: 13px;">
                                     <i class="fas fa-check-circle" style="color: var(--efectivo);"></i>
                                     <strong style="color: var(--text-light);">Pago en efectivo</strong><br />
                                     No necesitas adjuntar comprobante. El registro se realizará automáticamente.
@@ -774,7 +1209,9 @@
             </div>
         </main>
 
-        <!-- QUIÉNES SOMOS -->
+        <!-- ============================================================
+           QUIÉNES SOMOS
+           ============================================================ -->
         <section class="main-card about-section" id="quienes-somos" data-aos="fade-up" data-aos-delay="200">
             <h2 class="section-title">
                 <i class="fas fa-users-line"></i> Quiénes Somos
@@ -795,7 +1232,9 @@
             </div>
         </section>
 
-        <!-- CONTACTO -->
+        <!-- ============================================================
+           CONTACTO
+           ============================================================ -->
         <section class="main-card" id="contacto" style="text-align: center;">
             <h2 style="text-transform: uppercase; font-weight: 900; margin-bottom: 10px; color: var(--accent-cyan);">
                 <i class="fab fa-whatsapp" style="color: var(--whatsapp);"></i> Unite al Grupo
@@ -814,7 +1253,9 @@
 
     </div>
 
-    <!-- MODAL REGLAS -->
+    <!-- ============================================================
+       MODAL REGLAS
+       ============================================================ -->
     <div class="modal-overlay" id="modalReglas">
         <div class="modal-content">
             <h3>📋 Reglas del Grupo</h3>
@@ -827,7 +1268,9 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
+    <!-- ============================================================
+       FOOTER
+       ============================================================ -->
     <footer class="footer">
         <p>&copy; 2026 <span>FLY FUTBOLEROS</span>. Todos los derechos reservados.</p>
         <p>Asociación Amateur de Fútbol 6 vs 6 · Desde 2012</p>
@@ -845,7 +1288,9 @@
         </div>
     </footer>
 
-    <!-- SCRIPTS -->
+    <!-- ============================================================
+       SCRIPTS
+       ============================================================ -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ============================================================
@@ -925,52 +1370,6 @@
         }
 
         // ============================================================
-        //  🔥 FUNCIÓN PARA GUARDAR EN SUPABASE (DESDE INDEX)
-        // ============================================================
-        async function guardarSocioEnSupabase(socio) {
-            try {
-                const socioParaNube = {
-                    id: socio.id,
-                    nombre: socio.nombre,
-                    ci: socio.ci || '',
-                    telefono: socio.telefono,
-                    posicion: socio.posicion || '',
-                    plan: socio.plan,
-                    forma_pago: socio.formaPago,
-                    estado: socio.estado,
-                    fecha_suscripcion: socio.fechaSuscripcion,
-                    fecha_vencimiento: socio.fechaVencimiento || '',
-                    fecha_ultimo_pago: socio.fechaUltimoPago || '',
-                    pagos: socio.pagos || 0,
-                    total_aportado: socio.totalAportado || 0,
-                    foto: socio.foto || '',
-                    comprobante_data: socio.comprobanteData || '',
-                    comprobante_nombre: socio.comprobanteNombre || ''
-                };
-                
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/socios`, {
-                    method: 'POST',
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(socioParaNube)
-                });
-                
-                if (!response.ok) {
-                    const error = await response.text();
-                    throw new Error(`Error ${response.status}: ${error}`);
-                }
-                
-                return { success: true };
-            } catch (error) {
-                console.error('❌ Error guardando en Supabase:', error);
-                return { success: false, error: error.toString() };
-            }
-        }
-
-        // ============================================================
         //  SELECCIÓN DE FORMA DE PAGO
         // ============================================================
         function seleccionarFormaPago(tipo) {
@@ -1012,6 +1411,51 @@
                 `;
                 document.getElementById('socioComprobante').required = false;
                 document.getElementById('socioComprobante').value = '';
+            }
+        }
+
+        // ============================================================
+        //  🔥 FUNCIÓN PARA GUARDAR EN SUPABASE (DESDE INDEX)
+        // ============================================================
+        async function guardarSocioEnSupabase(socio) {
+            try {
+                const socioParaNube = {
+                    id: socio.id,
+                    Nombre: socio.nombre,
+                    CI: socio.ci || '',
+                    Teléfono: socio.telefono,
+                    Posicion: socio.posicion || '',
+                    Plan: socio.plan,
+                    FormaPago: socio.formaPago,
+                    Estado: socio.estado,
+                    FechaSuscripcion: socio.fechaSuscripcion,
+                    FechaVencimiento: socio.fechaVencimiento || '',
+                    FechaUltimoPago: socio.fechaUltimoPago || '',
+                    Pagos: socio.pagos || 0,
+                    TotalAportado: socio.totalAportado || 0,
+                    Foto: socio.foto || '',
+                    Comprobante: socio.comprobanteData || ''
+                };
+                
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/socios`, {
+                    method: 'POST',
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(socioParaNube)
+                });
+                
+                if (!response.ok) {
+                    const error = await response.text();
+                    throw new Error(`Error ${response.status}: ${error}`);
+                }
+                
+                return { success: true };
+            } catch (error) {
+                console.error('❌ Error guardando en Supabase:', error);
+                return { success: false, error: error.toString() };
             }
         }
 
@@ -1156,6 +1600,7 @@
         btnCancelarSuscripcion.addEventListener('click', () => {
             formSuscripcion.classList.remove('visible');
             document.getElementById('socioNombre').value = '';
+            document.getElementById('socioCI').value = '';
             document.getElementById('socioTelefono').value = '';
             document.getElementById('socioPosicion').value = '';
             document.getElementById('socioComprobante').value = '';
@@ -1165,10 +1610,11 @@
         });
 
         // ============================================================
-        //  🔥 SUSCRIPCIÓN (CON SUPABASE)
+        //  🔥 SUSCRIPCIÓN (CON CI Y CORRECCIÓN DE TRANSFERENCIA)
         // ============================================================
         document.getElementById('btnSuscribir').addEventListener('click', async function() {
             const nombre = document.getElementById('socioNombre');
+            const ci = document.getElementById('socioCI');
             const telefono = document.getElementById('socioTelefono');
             const posicion = document.getElementById('socioPosicion');
             const comprobante = document.getElementById('socioComprobante');
@@ -1176,18 +1622,27 @@
 
             let hasError = false;
 
-            [nombre, telefono].forEach(field => field.classList.remove('error'));
+            [nombre, ci, telefono].forEach(field => field.classList.remove('error'));
 
+            // Validar nombre
             if (!nombre.value.trim() || nombre.value.trim().length < 2) {
                 nombre.classList.add('error');
                 hasError = true;
             }
 
+            // Validar CI
+            if (!ci.value.trim() || ci.value.trim().length < 4) {
+                ci.classList.add('error');
+                hasError = true;
+            }
+
+            // Validar teléfono
             if (!telefono.value.trim() || telefono.value.trim().length < 6) {
                 telefono.classList.add('error');
                 hasError = true;
             }
 
+            // Validar comprobante solo si es transferencia
             if (formaPagoSeleccionada === 'transferencia' && comprobante.files.length === 0) {
                 showToast('⚠️ Debes adjuntar el comprobante de transferencia', 'warning');
                 hasError = true;
@@ -1213,6 +1668,7 @@
             try {
                 let socios = JSON.parse(localStorage.getItem('fly_socios_v2')) || [];
                 
+                // Verificar duplicados por nombre
                 const existe = socios.some(s => 
                     s.nombre.toLowerCase() === nombre.value.trim().toLowerCase()
                 );
@@ -1242,9 +1698,11 @@
                 venc.setMonth(venc.getMonth() + 1);
                 const fechaVenc = venc.toISOString().slice(0, 10);
                 
+                // 🔥 CREAR SOCIO CON TODOS LOS CAMPOS (INCLUYE CI)
                 const nuevoSocio = {
                     id: Date.now(),
                     nombre: nombre.value.trim(),
+                    ci: ci.value.trim(),
                     telefono: telefono.value.trim(),
                     posicion: posicion.value || 'No especificada',
                     plan: plan,
@@ -1259,10 +1717,10 @@
                     fechaUltimoPago: formaPagoSeleccionada === 'efectivo' ? hoy : null,
                     pagos: formaPagoSeleccionada === 'efectivo' ? 1 : 0,
                     totalAportado: formaPagoSeleccionada === 'efectivo' ? (plan === 'Sábatero' ? 20000 : 5000) : 0,
-                    ci: '',
                     foto: null
                 };
 
+                // Guardar en localStorage
                 socios.push(nuevoSocio);
                 localStorage.setItem('fly_socios_v2', JSON.stringify(socios));
                 
@@ -1277,6 +1735,7 @@
                 
                 formSuscripcion.classList.remove('visible');
                 document.getElementById('socioNombre').value = '';
+                document.getElementById('socioCI').value = '';
                 document.getElementById('socioTelefono').value = '';
                 document.getElementById('socioPosicion').value = '';
                 document.getElementById('socioComprobante').value = '';
